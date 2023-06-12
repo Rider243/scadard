@@ -2,22 +2,21 @@
  {
     width: 100%;
     height: 100%;
-    
- }
-
- body
- {
-    
+    display: flex;
+    flex-wrap: wrap;
  }
  
  .container
  {
-    position: absolute;
     width: 50%;
-    height: 50%;
+    height: 100%;
     top: 8%;
-     
-
+ }
+ .container_chart{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
  }
 
  .gauges
@@ -31,6 +30,8 @@
  .row1
  {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
  }
 
  .row2
@@ -48,20 +49,25 @@
     font-weight: bold;
     left: 25%;
  }
-
+#Baocao{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
  
 /*//////////////Hiển thị dữ liệu bảng 1 - Start/////////////////*/
 #div_table_info {
 
     background-color: rgb(242, 242, 248);
-    position: absolute; 
+    /* position: absolute;  */
     margin: auto auto;
     top: 10%; 
     left: 40%;
-    width: 55%;
-    margin: 0 3%;
+    width: 100%;
     text-align: center;
-    height:40% ;
+    height:100% ;
     overflow-y: scroll;
     text-align:center;
     border: 1px  ;
@@ -71,7 +77,7 @@
  #table_info {
      border: 1px  ; 
      background-color:  lavender;
-     position: absolute;  
+     /* position: absolute;   */
      width:100%;
      text-align:center;
  }
@@ -97,14 +103,15 @@
     color: rgb(26, 24, 24);   
     font-size: 24px; 
     font-weight: normal;
-    position: absolute; 
+    /* position: absolute;  */
     left: 48%;
      top: 5%;
+     min-width: 12%;
 }
 /*Chọn ngày tháng bắt đầu*/
 #dtpk_Search_Start {
     text-align: left; 
-    position: absolute; 
+    /* position: absolute;  */
     left: 50%; 
     top:  4%;
     padding: 10px;
@@ -118,14 +125,16 @@
     color: rgb(26, 24, 24);  
     font-size: 24px; 
     font-weight: normal;
-    position: absolute; 
+    /* position: absolute;  */
     left:63%; 
     top: 5%;
+    min-width: 12%;
+    margin: 0 10px;
 }
 /*Chọn ngày tháng kết thúc*/
 #dtpk_Search_End {
-    text-align: left; 
-    position: absolute; 
+    text-align: left;
+    /* position: absolute;  */
     left: 65.5%; 
     top:  4%;
     padding: 10px;
@@ -143,13 +152,18 @@
     font-size: 11px; 
     font-weight: bold;
     cursor: pointer;
-    position: absolute; 
+    /* position: absolute;  */
     width: 130px;
     height: 37px; 
     left: 77%; 
     top:  4.2%;
 }
-
+.input_item{
+    width: calc(100% / 4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /*Nút Xuaast Excel*/
 #btt_Excel {
@@ -161,29 +175,69 @@
     font-size: 11px; 
     font-weight: bold;
     cursor: pointer;
-    position: absolute; 
+    /* position: absolute;  */
     width: 130px; 
     height: 37px; 
     left: 84%; 
     top:  4.2%;
 }
-
+.content{
+    width: 100%;
+    height: 50%;
+}
 /* ///////biểu đồ */
 
 #chart_detail{
-    position: absolute;
-    left: 43%;
-    top: 50%;
-    width: 55%;
-    height: 47%;
+    width: 100%;
+    height: 50%;
  
 }
 
 .title{
-position: absolute;
-top: 1%;
-left: 13%;
 color: rgb(19, 23, 241);
-   
-    
+text-align: center;
+width: 100%;
     }
+.input_item_btn{
+    width: calc(100% / 4);
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width:1550px) {
+    .container{
+        width: 100%;
+    }
+    .container_chart{
+        width: 100%;
+    }
+    .input_item{
+        width: 100%;
+    }
+    .input_item_btn{
+        width: 50%;
+    }
+    #lb_Search_End{
+        margin: 0;
+    }
+}
+
+@media (max-device-width:1550px) {
+    .container{
+        width: 100%;
+    }
+    .container_chart{
+        width: 100%;
+    }
+    .input_item{
+        width: 100%;
+        justify-content: unset;
+        margin: 10px 0;
+    }
+    .input_item_btn{
+        width: 50%;
+    }
+    #lb_Search_End{
+        margin: 0;
+    }
+}
