@@ -105,24 +105,23 @@ function read_tcpip()
             const values =resp.response._body._valuesAsArray;
       
             dataArrip[i]=values[0];
+
+            
           
 
         }).catch((err)=>{
             console.log(err);
         })
-         
-    }
-    console.log("dữ liệu tcp-ip"+dataArrip); 
-
-
 
  
-
+         
+    }
+console.log(dataArrip);
 }
 
  setInterval(() => {
     read_tcpip()
- }, 500);
+ }, 200);
 
 
 
@@ -214,10 +213,10 @@ function fn_sql_insert(){
             if (err) {
                 console.log(err);
              } else {
-                console.log("SQL - Ghi dữ liệu thành công"+sql_write_str1);
+                // console.log("SQL - Ghi dữ liệu thành công"+sql_write_str1);
               } 
 			});
-             dataArrip=[0,0,0,0,0,0,0,0,0];
+            //  dataArrip=[0,0,0,0,0,0,0,0,0];
   
 }
 
@@ -241,27 +240,16 @@ function fn_sql_read(){
     // ///////////GỬI DỮ LIỆU BẢNG TAG ĐẾN CLIENT (TRÌNH DUYỆT)///////////
     io.on("connection", function(socket){
         socket.on("Client-send-data", function(data){
-            var sqltable_Name = "dpm680_data";
-            var queryy1 = "SELECT * FROM " + sqltable_Name + " ORDER BY date_time DESC LIMIT 1;" 
-            sqlcon.query(queryy1, function(err, results, fields) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    const objectifyRawPacket = row => ({...row});
-                    const convertedResponse = results.map(objectifyRawPacket);   
-                    // console.log(convertedResponse);
-                    socket.emit("date_time",convertedResponse[0].date_time)
-                    socket.emit("L1_line",convertedResponse[0].L1_line)
-                    socket.emit("L2_line",convertedResponse[0].L2_line)
-                    socket.emit("L3_line",convertedResponse[0].L3_line)
-                    socket.emit("L1_phase",convertedResponse[0].L1_phase)
-                    socket.emit("L2_phase",convertedResponse[0].L2_phase)
-                    socket.emit("L3_phase",convertedResponse[0].L3_phase)
-                    socket.emit("L1_phase_cr",convertedResponse[0].L1_phase_cr)
-                    socket.emit("L2_phase_cr",convertedResponse[0].L2_phase_cr)
-                    socket.emit("L3_phase_cr",convertedResponse[0].L3_phase_cr)
-                } 
-            });
+            socket.emit("L1_line",dataArrip[0]*0.1);
+            socket.emit("L2_line",dataArrip[1]*0.1);
+            socket.emit("L3_line",dataArrip[2]*0.1);
+            socket.emit("L1_phase",dataArrip[3]*0.1);
+            socket.emit("L2_phase",dataArrip[4]*0.1);
+            socket.emit("L3_phase",dataArrip[5]*0.1);
+            socket.emit("L1_phase_cr",dataArrip[6]*0.001);
+            socket.emit("L2_phase_cr",dataArrip[7]*0.001);
+            socket.emit("L3_phase_cr",dataArrip[8]*0.001);
+           
     });});
 
 
@@ -395,7 +383,7 @@ function fn_SQLSearch_bytime()
         
                       SQL_Excel = convertedResponse; // Xuất báo cáo Excel
                   
-                    console.log(convertedResponse);
+                    // console.log(convertedResponse);
 
                     socket.emit('SQL_ByTime', convertedResponse);
 
