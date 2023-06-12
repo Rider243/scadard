@@ -71,6 +71,7 @@
     overflow-y: scroll;
     text-align:center;
     border: 1px  ;
+    max-height: 400px;
     
  }
  /*Table*/

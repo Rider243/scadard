@@ -121,25 +121,18 @@ function read_tcpip()
             const values =resp.response._body._valuesAsArray;
       
             dataArrip[i]=values[0];
-
             
-          
-
         }).catch((err)=>{
             console.log(err);
         })
 
     }
-    client1.readHoldingRegisters(0x0FB9,1).then((resp)=>
+    
+    if (dataArrip[8]<=10) 
     {
-        const values =resp.response._body._valuesAsArray;
-  
-        var data1=values[0];
-        console.log(data1);
-
-    }).catch((err)=>{
-        console.log(err);
-    })
+        dataArrip[8]=dataArrip[7]
+    }
+ 
      
 
 
