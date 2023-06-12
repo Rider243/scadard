@@ -71,6 +71,22 @@ app.get("/", function(req, res){
 // }
 
 
+// create an empty modbus client
+// const ModbusRTU = require("modbus-serial");
+// const client = new ModbusRTU();
+
+// // open connection to a tcp line
+// client.connectTCP("10.14.12.240", { port: 502 });
+// client.setID(1);
+
+// // read the values of 10 registers starting at address 0
+// // on device number 1. and log the values to the console.
+// setInterval(function() {
+//     client.readHoldingRegisters(0, 4025, function(err, data) {
+//         console.log(data);
+//     });
+// }, 1000);
+
 ////////////////////////////////////////
 const Modbus = require('jsmodbus');
 const net = require('net');
@@ -113,15 +129,43 @@ function read_tcpip()
             console.log(err);
         })
 
- 
-         
     }
+    client1.readHoldingRegisters(0x0FB9,1).then((resp)=>
+    {
+        const values =resp.response._body._valuesAsArray;
+  
+        var data1=values[0];
+        console.log(data1);
+
+    }).catch((err)=>{
+        console.log(err);
+    })
+     
+
+
 console.log(dataArrip);
 }
 
  setInterval(() => {
     read_tcpip()
  }, 200);
+
+
+     // ///////////GỬI DỮ LIỆU BẢNG TAG ĐẾN CLIENT (TRÌNH DUYỆT)///////////
+     io.on("connection", function(socket){
+        socket.on("Client-send-data", function(data){
+            socket.emit("L1_line",dataArrip[0]*0.1);
+            socket.emit("L2_line",dataArrip[1]*0.1);
+            socket.emit("L3_line",dataArrip[2]*0.1);
+            socket.emit("L1_phase",dataArrip[3]*0.1);
+            socket.emit("L2_phase",dataArrip[4]*0.1);
+            socket.emit("L3_phase",dataArrip[5]*0.1);
+            socket.emit("L1_phase_cr",dataArrip[6]*0.001);
+            socket.emit("L2_phase_cr",dataArrip[7]*0.001);
+            socket.emit("L3_phase_cr",dataArrip[8]*0.001);
+           
+    });});
+
 
 
 
@@ -237,20 +281,6 @@ function fn_sql_read(){
     
     
    
-    // ///////////GỬI DỮ LIỆU BẢNG TAG ĐẾN CLIENT (TRÌNH DUYỆT)///////////
-    io.on("connection", function(socket){
-        socket.on("Client-send-data", function(data){
-            socket.emit("L1_line",dataArrip[0]*0.1);
-            socket.emit("L2_line",dataArrip[1]*0.1);
-            socket.emit("L3_line",dataArrip[2]*0.1);
-            socket.emit("L1_phase",dataArrip[3]*0.1);
-            socket.emit("L2_phase",dataArrip[4]*0.1);
-            socket.emit("L3_phase",dataArrip[5]*0.1);
-            socket.emit("L1_phase_cr",dataArrip[6]*0.001);
-            socket.emit("L2_phase_cr",dataArrip[7]*0.001);
-            socket.emit("L3_phase_cr",dataArrip[8]*0.001);
-           
-    });});
 
 
 
