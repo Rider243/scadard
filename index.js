@@ -16,59 +16,59 @@ app.get("/", function(req, res){
 
 
 
-const ModbusRTU = require('modbus-serial');
-const client = new ModbusRTU();
-const serialPort = 'COM6'; // Cổng COM RS485
-const options = {
-  baudRate: 9600, // Tốc độ truyền dữ liệu
-  dataBits: 8,    // Số bit dữ liệu
-  stopBits: 1,    // Số bit dừng
-  parity: 'none'  // Kiểu kiểm tra lỗi
-};
+// const ModbusRTU = require('modbus-serial');
+// const client = new ModbusRTU();
+// const serialPort = 'COM6'; // Cổng COM RS485
+// const options = {
+//   baudRate: 9600, // Tốc độ truyền dữ liệu
+//   dataBits: 8,    // Số bit dữ liệu
+//   stopBits: 1,    // Số bit dừng
+//   parity: 'none'  // Kiểu kiểm tra lỗi
+// };
 
-// Kết nối với thiết bị Modbus qua cổng COM
-client.connectRTU(serialPort, options, connected);
-var dataArr = []; // Mảng chung để lưu trữ giá trị
-// Mảng xuất dữ liệu report Excel
-var SQL_Excel = [];  // Dữ liệu nhập kho
+// // Kết nối với thiết bị Modbus qua cổng COM
+// client.connectRTU(serialPort, options, connected);
+// var dataArr = []; // Mảng chung để lưu trữ giá trị
+// // Mảng xuất dữ liệu report Excel
+// var SQL_Excel = [];  // Dữ liệu nhập kho
 
-async function connected() {
-    console.log('Đã kết nối với thiết bị Modbus qua cổng COM');
-    const unitId = 1; // Địa chỉ thiết bị Modbus
-    const addresses = [4029, 4031, 4033, 4035, 4037, 4039, 4021, 4023, 4025];
-    const quantity = 1; // Số lượng thanh ghi cần đọc
+// async function connected() {
+//     console.log('Đã kết nối với thiết bị Modbus qua cổng COM');
+//     const unitId = 1; // Địa chỉ thiết bị Modbus
+//     const addresses = [4029, 4031, 4033, 4035, 4037, 4039, 4021, 4023, 4025];
+//     const quantity = 1; // Số lượng thanh ghi cần đọc
 
-    client.setID(unitId);
+//     client.setID(unitId);
 
-    for (let i = 0; i < addresses.length; i++) {
-        const startAddress = addresses[i];
-        try {
-            const data = await readdata(startAddress, quantity);
-            dataArr[i] = data;
-        } catch (err) {
-            console.error('Lỗi khi đọc dữ liệu Modbus là:', err);
-        }
-    }
+//     for (let i = 0; i < addresses.length; i++) {
+//         const startAddress = addresses[i];
+//         try {
+//             const data = await readdata(startAddress, quantity);
+//             dataArr[i] = data;
+//         } catch (err) {
+//             console.error('Lỗi khi đọc dữ liệu Modbus là:', err);
+//         }
+//     }
 
-    console.log('Dữ liệu Modbus:', dataArr);
+//     console.log('Dữ liệu Modbus:', dataArr);
     
-}
+// }
 
-setInterval(() => {
-    connected();
-}, 500);
+// setInterval(() => {
+//     connected();
+// }, 500);
 
-function readdata(startAddress, quantity) {
-    return new Promise((resolve, reject) => {
-        client.readHoldingRegisters(startAddress, quantity)
-            .then(data => {
-                resolve(data.data[0]);
-            })
-            .catch(err => {
-                reject(err);
-            });
-    });
-}
+// function readdata(startAddress, quantity) {
+//     return new Promise((resolve, reject) => {
+//         client.readHoldingRegisters(startAddress, quantity)
+//             .then(data => {
+//                 resolve(data.data[0]);
+//             })
+//             .catch(err => {
+//                 reject(err);
+//             });
+//     });
+// }
 
 
 ////////////////////////////////////////
@@ -80,7 +80,7 @@ const client1 = new Modbus.client.TCP(socket, 1);
 
 // Cấu hình địa chỉ IP và cổng của DPM680
 const options1 = {
-    'host': '10.14.12.230',
+    'host': '10.14.12.240',
     'port': 502
 };
 
@@ -89,6 +89,8 @@ const options1 = {
 
 socket.connect(options1);
 
+
+
 var dataArrip = [];
 
 function read_tcpip()
@@ -96,7 +98,6 @@ function read_tcpip()
 
     const addresses = [0x0FBD,0x0FBF,0x0FC1,0x0FC3,0x0FC5,0x0FC7,0x0FB5,0x0FB7,0x0FB9];
     
-
     for (let i = 0; i < addresses.length; i++) {
         const address=addresses[i]
         client1.readHoldingRegisters(address,1).then((resp)=>
@@ -109,43 +110,13 @@ function read_tcpip()
         }).catch((err)=>{
             console.log(err);
         })
-     
-        
+         
     }
     console.log("dữ liệu tcp-ip"+dataArrip); 
 
 
 
-
-
-    // Đọc giá trị điện áp từ DPM680
-    client1.readInputRegisters(0x0FBD, 1).then((resp) => 
-    {
-        constvalues = resp.response._body._valuesAsArray;
-        const voltage = values[0] / 10; // chia cho 10 để đổi về đơn vị V
-        console.log(`Voltage Line12: ${voltage} V`);
-    }).
-    catch((err) => {
-        console.log("lộc"+err);
-    });
-
-    // Đọc giá trị dòng điện từ DPM680
-    client1.readInputRegisters(0x0fc1, 1).then((resp) => {
-        const values = resp.response._body._valuesAsArray;
-        const voltage = values[0] / 10; // chia cho 1000 để đổi về đơn vị A
-        console.log(`Voltage Line13: ${voltage} V`);
-    }).catch((err) => {
-        console.log("lộc"+err);
-    });
-
-    // Đọc giá trị nhiệt độ từ DPM680
-    client1.readInputRegisters(0x0fc3, 1).then((resp) => {
-        const values = resp.response._body._valuesAsArray;
-        const voltage = values[0] / 10; // chia cho 10 để đổi về đơn vị độ C
-        console.log(`Voltage phase AN: ${voltage} V`);
-    }).catch((err) => {
-        console.log("lộc"+err);
-    });
+ 
 
 }
 
@@ -202,9 +173,9 @@ function fn_sql_insert(){
     L1_phase = dataArrip[3] * 0.1;
     L2_phase = dataArrip[4] * 0.1;
     L3_phase = dataArrip[5] * 0.1;
-    L1_phase_cr = dataArrip[6] * 0.1;
-    L2_phase_cr = dataArrip[7] * 0.1;
-    L3_phase_cr = dataArrip[8] * 0.1;
+    L1_phase_cr = dataArrip[6] * 0.001;
+    L2_phase_cr = dataArrip[7] * 0.001;
+    L3_phase_cr = dataArrip[8] * 0.001;
 
     // Lấy thời gian hiện tại
     var tzoffset = (new Date()).getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
@@ -289,8 +260,6 @@ function fn_sql_read(){
                     socket.emit("L1_phase_cr",convertedResponse[0].L1_phase_cr)
                     socket.emit("L2_phase_cr",convertedResponse[0].L2_phase_cr)
                     socket.emit("L3_phase_cr",convertedResponse[0].L3_phase_cr)
-                  
-
                 } 
             });
     });});
@@ -452,7 +421,9 @@ const Excel = require('exceljs');
 
 const { CONNREFUSED } = require('dns');
 function fn_excelExport(){
-    // =====================CÁC THUỘC TÍNH CHUNG=====================
+    console.log('2'); 
+
+      // =====================CÁC THUỘC TÍNH CHUNG=====================
         // Lấy ngày tháng hiện tại
         let date_ob = new Date();
         let date = ("0" + date_ob.getDate()).slice(-2);
@@ -473,7 +444,7 @@ function fn_excelExport(){
         else{};
     // Tạo và khai báo Excel
     let workbook = new Excel.Workbook()
-    let worksheet =  workbook.addWorksheet('Báo cáo sản xuất', {
+    let worksheet =  workbook.addWorksheet('Báo cáo điện phòng RD', {
       pageSetup:{paperSize: 9, orientation:'landscape'},
       properties:{tabColor:{argb:'FFC0000'}},
     });
@@ -621,6 +592,8 @@ function fn_excelExport(){
      
      
     // =====================THỰC HIỆN XUẤT DỮ LIỆU EXCEL=====================
+
+    console.log('3'); 
     // Export Link
     var currentTime = year + "_" + month + "_" + date + "_" + hours + "h" + minutes + "m" + seconds + "s";
     var saveasDirect = "Report/Report_" + currentTime + ".xlsx";
@@ -630,7 +603,7 @@ function fn_excelExport(){
     var Bookname = "Report_" + currentTime + ".xlsx";
     // Write book name
     workbook.xlsx.writeFile(booknameLink)
-     
+    console.log('4'); 
     // Return
     return [SaveAslink, Bookname]
      
@@ -643,251 +616,15 @@ function fn_Require_ExcelExport(){
     io.on("connection", function(socket){
         socket.on("msg_Excel_Report", function(data)
         {
+            console.log('1');
             const [SaveAslink1, Bookname] = fn_excelExport();
+          
             var data = [SaveAslink1, Bookname]; 
             socket.emit('send_Excel_Report', data);
+         
         });
     });
 }
 
 
-
-
-
-///////////////////xuất excel bất đồng bộ
-const Excel = require('exceljs');
-const { CONNREFUSED } = require('dns');
-
-// Hàm xuất Excel bất đồng bộ
-// async function exportExcelAsync() {
-//   try {
-//     // Tạo workbook và worksheet
  
-//         // =====================CÁC THUỘC TÍNH CHUNG=====================
-//         // Lấy ngày tháng hiện tại
-//         let date_ob = new Date();
-//         let date = ("0" + date_ob.getDate()).slice(-2);
-//         let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-//         let year = date_ob.getFullYear();
-//         let hours = date_ob.getHours();
-//         let minutes = date_ob.getMinutes();
-//         let seconds = date_ob.getSeconds();
-//         let day = date_ob.getDay();
-//         var dayName = '';
-//         if(day == 0){dayName = 'Chủ nhật,'}
-//         else if(day == 1){dayName = 'Thứ hai,'}
-//         else if(day == 2){dayName = 'Thứ ba,'}
-//         else if(day == 3){dayName = 'Thứ tư,'}
-//         else if(day == 4){dayName = 'Thứ năm,'}
-//         else if(day == 5){dayName = 'Thứ sáu,'}
-//         else if(day == 6){dayName = 'Thứ bảy,'}
-//         else{};
-//     // Tạo và khai báo Excel
-//     let workbook = new Excel.Workbook()
-//     let worksheet =  workbook.addWorksheet('Báo cáo sản xuất', {
-//       pageSetup:{paperSize: 9, orientation:'landscape'},
-//       properties:{tabColor:{argb:'FFC0000'}},
-//     });
-//     // Page setup (cài đặt trang)
-//     worksheet.properties.defaultRowHeight = 20;
-//     worksheet.pageSetup.margins = {
-//       left: 0.3, right: 0.25,
-//       top: 0.75, bottom: 0.75,
-//       header: 0.3, footer: 0.3
-//     };
-//     // =====================THẾT KẾ HEADER=====================
-//     // Logo công ty
-//     const imageId1 = workbook.addImage({
-//         filename: 'public/images/Logo.jpg',
-//         extension: 'png',
-//       });
-//     worksheet.addImage(imageId1, 'A1:A3');
-//     // Thông tin công ty
-//     worksheet.getCell('B1').value = 'Công ty tổ hợp cơ khí THACO Chu Lai';
-//     worksheet.getCell('B1').style = { font:{bold: true,size: 14},alignment: {vertical: 'middle'}} ;
-//     worksheet.getCell('B2').value = 'Địa chỉ: Tam Hiệp, Tam Kì, Núi Thành, Quảng Nam';
-//     worksheet.getCell('B3').value = 'Hotline:  0348 620 063';
-//     // Tên báo cáo
-//     worksheet.getCell('A5').value = 'BÁO CÁO SẢN XUẤT';
-//     worksheet.mergeCells('A5:H5');
-//     worksheet.getCell('A5').style = { font:{name: 'Times New Roman', bold: true,size: 16},alignment: {horizontal:'center',vertical: 'middle'}} ;
-//     // Ngày in biểu
-//     worksheet.getCell('H6').value = "Ngày in biểu: " + dayName + date + "/" + month + "/" + year + " " + hours + ":" + minutes + ":" + seconds;
-//     worksheet.getCell('H6').style = { font:{bold: false, italic: true},alignment: {horizontal:'right',vertical: 'bottom',wrapText: false}} ;
-     
-//     // Tên nhãn các cột
-//     var rowpos = 7;
-//     var collumName = ["STT","Thời gian", "L1-L2", "L2-L3", "L3-L1", "Phase L1-N", "Phase L2-N", "Phase L3-N","Current L1","Current L2","Current L3"]
-//     worksheet.spliceRows(rowpos, 1, collumName);
-     
-//     // =====================XUẤT DỮ LIỆU EXCEL SQL=====================
-//     // Dump all the data into Excel
-//     var rowIndex = 0;
-//     SQL_Excel.forEach((e, index) => {
-//     // row 1 is the header.
-//     rowIndex =  index + rowpos;
-//     // worksheet1 collum
-//     worksheet.columns = [
-//           {key: 'STT'},
-//           {key: 'date_time'},
-//           {key: 'L1_line'},
-//           {key: 'L2_line'},
-//           {key: 'L3_line'},
-//           {key: 'L1_phase'},
-//           {key: 'L2_phase'},
-//           {key: 'L3_phase'},
-//           {key: 'L1_phase_cr'},
-//           {key: 'L2_phase_cr'},
-//           {key: 'L3_phase_cr'}
-//         ]
-//     worksheet.addRow({
-//           STT: {
-//             formula: index + 1
-//           },
-//           ...e
-//         })
-//     })
-//     // Lấy tổng số hàng
-//     const totalNumberOfRows = worksheet.rowCount; 
-//     // Tính tổng
-//     // worksheet.addRow([
-//     //     'Tổng cộng:',
-//     //     '',
-//     //     '',
-//     //   {formula: `=sum(D${rowpos + 1}:D${totalNumberOfRows})`},
-//     //   {formula: `=sum(E${rowpos + 1}:E${totalNumberOfRows})`},
-//     //   {formula: `=sum(F${rowpos + 1}:F${totalNumberOfRows})`},
-//     // ])
-//     // Style cho hàng total (Tổng cộng)
-//     // worksheet.getCell(`A${totalNumberOfRows+1}`).style = { font:{bold: true,size: 12},alignment: {horizontal:'center',}} ;
-//     // Tô màu cho hàng total (Tổng cộng)
-//     // const total_row = ['A','B', 'C', 'D', 'E','F','G','H']
-//     // total_row.forEach((v) => {
-//     //     worksheet.getCell(`${v}${totalNumberOfRows+1}`).fill = {type: 'pattern',pattern:'solid',fgColor:{ argb:'f2ff00' }}
-//     // })
-     
-     
-//     // =====================STYLE CHO CÁC CỘT/HÀNG=====================
-//     // Style các cột nhãn
-//     const HeaderStyle = ['A','B', 'C', 'D', 'E','F','G','H','I','J','K']
-//     HeaderStyle.forEach((v) => {
-//         worksheet.getCell(`${v}${rowpos}`).style = { font:{bold: true},alignment: {horizontal:'center',vertical: 'middle',wrapText: true}} ;
-//         worksheet.getCell(`${v}${rowpos}`).border = {
-//           top: {style:'thin'},
-//           left: {style:'thin'},
-//           bottom: {style:'thin'},
-//           right: {style:'thin'}
-//         }
-//     })
-//     // Cài đặt độ rộng cột
-//     worksheet.columns.forEach((column, index) => {
-//         column.width = 15;
-//     })
-//     // Set width header
-//     worksheet.getColumn(1).width = 12;
-//     worksheet.getColumn(2).width = 30;
-  
-     
-//     // ++++++++++++Style cho các hàng dữ liệu++++++++++++
-//     worksheet.eachRow({ includeEmpty: true }, function (row, rowNumber) {
-//       var datastartrow = rowpos;
-//       var rowindex = rowNumber + datastartrow;
-//       const rowlength = datastartrow + SQL_Excel.length
-//       if(rowindex >= rowlength+1){rowindex = rowlength+1}
-//       const insideColumns = ['A','B', 'C', 'D', 'E','F','G','H','I','J','K']
-//     // Tạo border
-//       insideColumns.forEach((v) => {
-//           // Border
-//         worksheet.getCell(`${v}${rowindex}`).border = {
-//           top: {style: 'thin'},
-//           bottom: {style: 'thin'},
-//           left: {style: 'thin'},
-//           right: {style: 'thin'}
-//         },
-//         // Alignment
-//         worksheet.getCell(`${v}${rowindex}`).alignment = {horizontal:'center',vertical: 'middle',wrapText: true}
-//       })
-//     })
-     
-     
-//     // =====================THẾT KẾ FOOTER=====================
-//     worksheet.getCell(`H${totalNumberOfRows+2}`).value = 'Ngày …………tháng ……………năm 20………';
-//     worksheet.getCell(`H${totalNumberOfRows+2}`).style = { font:{bold: true, italic: false},alignment: {horizontal:'right',vertical: 'middle',wrapText: false}} ;
-     
-//     worksheet.getCell(`A${totalNumberOfRows+3}`).value = 'Giám đốc';
-//     worksheet.getCell(`A${totalNumberOfRows+4}`).value = '(Ký, ghi rõ họ tên)';
-//     worksheet.getCell(`A${totalNumberOfRows+3}`).style = { font:{bold: true, italic: false},alignment: {horizontal:'center',vertical: 'bottom',wrapText: false}} ;
-//     worksheet.getCell(`A${totalNumberOfRows+4}`).style = { font:{bold: false, italic: true},alignment: {horizontal:'center',vertical: 'top',wrapText: false}} ;
-     
-//     worksheet.getCell(`E${totalNumberOfRows+3}`).value = 'Trưởng ca';
-//     worksheet.getCell(`E${totalNumberOfRows+4}`).value = '(Ký, ghi rõ họ tên)';
-//     worksheet.getCell(`E${totalNumberOfRows+3}`).style = { font:{bold: true, italic: false},alignment: {horizontal:'center',vertical: 'bottom',wrapText: false}} ;
-//     worksheet.getCell(`E${totalNumberOfRows+4}`).style = { font:{bold: false, italic: true},alignment: {horizontal:'center',vertical: 'top',wrapText: false}} ;
-     
-//     worksheet.getCell(`H${totalNumberOfRows+3}`).value = 'Người in biểu';
-//     worksheet.getCell(`H${totalNumberOfRows+4}`).value = '(Ký, ghi rõ họ tên)';
-//     worksheet.getCell(`H${totalNumberOfRows+3}`).style = { font:{bold: true, italic: false},alignment: {horizontal:'center',vertical: 'bottom',wrapText: false}} ;
-//     worksheet.getCell(`H${totalNumberOfRows+4}`).style = { font:{bold: false, italic: true},alignment: {horizontal:'center',vertical: 'top',wrapText: false}} ;
-     
-     
-     
-//     // =====================THỰC HIỆN XUẤT DỮ LIỆU EXCEL=====================
-//     // Export Link
-//     var currentTime = year + "_" + month + "_" + date + "_" + hours + "h" + minutes + "m" + seconds + "s";
-//     var saveasDirect = "Report/Report_" + currentTime + ".xlsx";
-//     SaveAslink = saveasDirect; // Send to client
-//     var booknameLink = "public/" + saveasDirect;
-     
-//     var Bookname = "Report_" + currentTime + ".xlsx";
-//     // Write book name
-//     workbook.xlsx.writeFile(booknameLink)
-     
-//     // Return
-//     // return [SaveAslink, Bookname]
-
-//     // Các bước khác để cấu hình workbook và worksheet
-
-//     // Xử lý xuất Excel
-//     await workbook.xlsx.writeFile('path/to/file.xlsx');
-    
-//     // Trả về tên file Excel sau khi xuất
-//     return 'file.xlsx';
-//   } catch (error) {
-//     // Xử lý lỗi nếu có
-//     console.error(error);
-//     throw error;
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-function handleExcelExport(socket) {
-    socket.on('msg_Excel_Report', async function() {
-      try {
-        // Xuất Excel bất đồng bộ
-        const excelFileName = await exportExcelAsync();
-        
-        // Gửi tên file Excel qua socket
-        socket.emit('send_Excel_Report', excelFileName);
-      } catch (error) {
-        // Xử lý lỗi nếu có
-        console.error(error);
-        // Gửi thông báo lỗi qua socket
-        socket.emit('send_Excel_Report', { error: 'Có lỗi xảy ra khi xuất Excel.' });
-      }
-    });
-  }
-  
-  // Sử dụng hàm handleExcelExport trong việc truyền nhận dữ liệu với socket.io
-  io.on('connection', function(socket) {
-    handleExcelExport(socket);
-  });

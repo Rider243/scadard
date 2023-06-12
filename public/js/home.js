@@ -21,7 +21,7 @@ function myTimer()
 //////////////////////////gauge/////////////
   // đồng hồ đo áp suất các thứ
   var value_gauge;
-  function  gauge_temp(id,data_pre,name)
+  function  gauge_temp_1(id,data_pre,name)
    {
  
      
@@ -35,7 +35,7 @@ function myTimer()
       
        
  
-     if (data>=0&&data<=110) {
+     if (data>=0&&data<=350) {
          
            
        gaugePS.update({
@@ -43,7 +43,7 @@ function myTimer()
          });
        
    }
-     else if (data>110&&data<=380) {
+     else if (data>110&&data<=400) {
      
             
        gaugePS.update({
@@ -93,12 +93,12 @@ function myTimer()
          startAngle: 45,
          strokeTicks: true,
          highlights  : [
-             { from : 0,  to : 100, color : 'yellow' },
-             { from : 100,  to : 380, color : '#00FF00' },
-             { from : 380, to : 450, color : 'red' }
+             { from : 0,  to : 350, color : 'yellow' },
+             { from : 350,  to : 410, color : '#00FF00' },
+             { from : 410, to : 450, color : 'red' }
          ],
          valueInt: 1,
-         valueDec: 0,
+         valueDec: 1,
          colorPlate: "#fff",
          colorMajorTicks: "#686868",
          colorMinorTicks: "#686868",
@@ -147,15 +147,235 @@ function myTimer()
          barWidth:10,
          barShadow: 10
  
-         
-       
-         // colorBarProgress: 'red'
-          
-        
-        
      });  
    }
 
+   function  gauge_temp_2(id,data_pre,name)
+   {
+ 
+     
+     socket.on(data_pre, function (data)
+     { 
+ 
+       gaugePS.value=data;  
+ 
+       value_gauge= gaugePS.value;
+     
+      
+       
+ 
+     if (data>=0&&data<=200) {
+         
+           
+       gaugePS.update({
+           colorBarProgress: 'yellow'
+         });
+       
+   }
+     else if (data>200&&data<=240) {
+     
+            
+       gaugePS.update({
+           colorBarProgress: '#00FF00'
+         });
+       
+   }
+       
+ 
+    else   {
+      
+       gaugePS.update({
+           colorBarProgress: 'red'
+         });
+       
+    }
+ 
+    gaugePS.draw(); 
+   
+ 
+ });
+ 
+     
+      
+     var gaugePS = new RadialGauge({
+         renderTo: id,
+         width: 220,
+         height: 220,
+         units: name,
+         minValue: 0,
+         maxValue: 300,
+         value:0,
+         majorTicks: [
+             '0',
+             '50',
+             '100',
+             '150',
+             '200',
+             '250',
+             '300'
+         ],
+         minorTicks: 1,
+         ticksAngle: 270,
+         startAngle: 45,
+         strokeTicks: true,
+         highlights  : [
+             { from : 0,  to : 200, color : 'yellow' },
+             { from : 200,  to : 240, color : '#00FF00' },
+             { from : 240, to : 300, color : 'red' }
+         ],
+         valueInt: 1,
+         valueDec: 1,
+         colorPlate: "#fff",
+         colorMajorTicks: "#686868",
+         colorMinorTicks: "#686868",
+         colorTitle: "#000",
+         colorUnits: "#000",
+         colorNumbers: "#686868",
+         valueBox: true,
+         colorValueText: "#000",
+         colorValueBoxRect: "#fff",
+         colorValueBoxRectEnd: "#fff",
+         colorValueBoxBackground: "#fff",
+         colorValueBoxShadow: false,
+         colorValueTextShadow: false,
+         colorNeedleShadowUp: true,
+         colorNeedleShadowDown: false,
+         colorNeedle: "rgba(200, 50, 50, .75)",
+         colorNeedleEnd: "rgba(200, 50, 50, .75)",
+         colorNeedleCircleOuter: "rgba(200, 200, 200, 1)",
+         colorNeedleCircleOuterEnd: "rgba(200, 200, 200, 1)",
+         borderShadowWidth: 0,
+         borders: true,
+         borderInnerWidth: 0,
+         borderMiddleWidth: 0,
+         borderOuterWidth: 5,
+         colorBorderOuter: "#fafafa",
+         colorBorderOuterEnd: "#cdcdcd",
+         needleType: "arrow",
+         needleWidth: 2,
+         needleCircleSize: 7,
+         needleCircleOuter: true,
+         needleCircleInner: false,
+         animationDuration: 1500,
+         animationRule: "dequint",
+         fontNumbers: "Verdana",
+         fontTitle: "Verdana",
+         fontUnits: "Verdana",
+         fontValue: "Led",
+         fontValueStyle: 'italic',
+         fontNumbersSize: 20,
+         fontNumbersStyle: 'italic',
+         fontNumbersWeight: 'bold',
+         fontTitleSize: 24,
+         fontUnitsSize: 30,
+         fontValueSize: 50,
+         animatedValue: true, 
+         barWidth:10,
+         barShadow: 10
+ 
+     });  
+   }
+   function  gauge_temp_3(id,data_pre,name)
+   {
+ 
+     
+     socket.on(data_pre, function (data)
+     { 
+ 
+       gaugePS.value=data;  
+ 
+       value_gauge= gaugePS.value;
+     
+       gaugePS.update({
+        colorBarProgress: '#00FF00'
+      });
+
+ 
+    gaugePS.draw(); 
+   
+ 
+ });
+ 
+     
+      
+     var gaugePS = new RadialGauge({
+         renderTo: id,
+         width: 220,
+         height: 220,
+         units: name,
+         minValue: 0,
+         maxValue: 100,
+         value:0,
+         majorTicks: [
+             '0',
+             '10',
+             '20',
+             '30',
+             '40',
+             '50',
+             '60',
+             '70',
+             '80',
+             '90', 
+             '100'
+         ],
+         minorTicks: 1,
+         ticksAngle: 270,
+         startAngle: 45,
+         strokeTicks: true,
+      
+         valueInt: 1,
+         valueDec: 1,
+         colorPlate: "#fff",
+         colorMajorTicks: "#686868",
+         colorMinorTicks: "#686868",
+         colorTitle: "#000",
+         colorUnits: "#000",
+         colorNumbers: "#686868",
+         valueBox: true,
+         colorValueText: "#000",
+         colorValueBoxRect: "#fff",
+         colorValueBoxRectEnd: "#fff",
+         colorValueBoxBackground: "#fff",
+         colorValueBoxShadow: false,
+         colorValueTextShadow: false,
+         colorNeedleShadowUp: true,
+         colorNeedleShadowDown: false,
+         colorNeedle: "rgba(200, 50, 50, .75)",
+         colorNeedleEnd: "rgba(200, 50, 50, .75)",
+         colorNeedleCircleOuter: "rgba(200, 200, 200, 1)",
+         colorNeedleCircleOuterEnd: "rgba(200, 200, 200, 1)",
+         borderShadowWidth: 0,
+         borders: true,
+         borderInnerWidth: 0,
+         borderMiddleWidth: 0,
+         borderOuterWidth: 5,
+         colorBorderOuter: "#fafafa",
+         colorBorderOuterEnd: "#cdcdcd",
+         needleType: "arrow",
+         needleWidth: 2,
+         needleCircleSize: 7,
+         needleCircleOuter: true,
+         needleCircleInner: false,
+         animationDuration: 1500,
+         animationRule: "dequint",
+         fontNumbers: "Verdana",
+         fontTitle: "Verdana",
+         fontUnits: "Verdana",
+         fontValue: "Led",
+         fontValueStyle: 'italic',
+         fontNumbersSize: 20,
+         fontNumbersStyle: 'italic',
+         fontNumbersWeight: 'bold',
+         fontTitleSize: 24,
+         fontUnitsSize: 30,
+         fontValueSize: 50,
+         animatedValue: true, 
+         barWidth:10,
+         barShadow: 10
+ 
+     });  
+   }
 
    var info_l1_line=[];
    var info_l2_line=[];
@@ -278,7 +498,7 @@ function fn_excel_display()
 function Draw_Chart_detail()
 {
 
-        //  console.log("lần 1");
+        // console.log("lần 1");
       
      
         // Generate values

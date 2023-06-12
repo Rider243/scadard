@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Giám sát điện</title>
     
 </head>
 
@@ -42,13 +42,14 @@
 
   
 <script>
-    var socket = io("10.14.12.72:8080")  
+    var socket = io("10.14.12.42:8080")  
 </script>
 
-<body onclick="
+<body onload="
  
- 
+//  fn_SQL_By_Time();
 
+// fn_SQL_By_Time_display();
 
 ">
   
@@ -84,26 +85,27 @@
     <br /><br />  -->
 <div class="home-screen">
         <div class="container">
+         
             <div class="row1">
                 <div class="gauges"    >
                     <canvas id="gauge_L1_lines"></canvas>
                     <p class="infogauge">Line L1-L2</p>
                 </div>
                 
-                <script>gauge_temp('gauge_L1_lines','L1_line','V');</script>
+                <script>gauge_temp_1('gauge_L1_lines','L1_line','V');</script>
     
     
                 <div class="gauges"    >
                     <canvas id="gauge_L2_lines"></canvas>
                     <p class="infogauge">Line L2-L3</p>
                 </div>
-                <script>gauge_temp('gauge_L2_lines','L2_line','V');</script>
+                <script>gauge_temp_1('gauge_L2_lines','L2_line','V');</script>
     
                 <div class="gauges"    >
                     <canvas id="gauge_L3_lines"></canvas>
                     <p class="infogauge">Line L3-L1</p>
                 </div>
-                <script>gauge_temp('gauge_L3_lines','L3_line','V');</script>
+                <script>gauge_temp_1('gauge_L3_lines','L3_line','V');</script>
     
             </div>
 
@@ -112,7 +114,7 @@
                     <canvas id="gauge_L1_phases"></canvas>
                     <p class="infogauge">Phase L1</p>
                 </div>
-                <script>gauge_temp('gauge_L1_phases','L1_phase','V');</script>
+                <script>gauge_temp_2('gauge_L1_phases','L1_phase','V');</script>
                 <!-- <p>
                     Điện áp tối đa hôm nay là
                     <p id="infor1"></p>
@@ -124,14 +126,14 @@
                     <canvas id="gauge_L2_phases"></canvas>
                     <p class="infogauge">Phase L2</p>
                 </div>
-                <script>gauge_temp('gauge_L2_phases','L2_phase','V');</script>
+                <script>gauge_temp_2('gauge_L2_phases','L2_phase','V');</script>
     
                     
                 <div class="gauges"   >
                     <canvas id="gauge_L3_phases"></canvas>
                     <p class="infogauge">Phase L3</p>
                 </div>
-                <script>gauge_temp('gauge_L3_phases','L3_phase','V');</script>
+                <script>gauge_temp_2('gauge_L3_phases','L3_phase','V');</script>
             </div>
 
             <div class="row3">
@@ -139,7 +141,7 @@
                     <canvas id="gauge_L1_phases_cr"></canvas>
                     <p class="infogauge">Current L1</p>
                 </div>
-                <script>gauge_temp('gauge_L1_phases_cr','L1_phase_cr','A');</script>
+                <script>gauge_temp_3('gauge_L1_phases_cr','L1_phase_cr','A');</script>
                 <!-- <p>
                     Điện áp tối đa hôm nay là
                     <p id="infor1"></p>
@@ -151,14 +153,14 @@
                     <canvas id="gauge_L2_phases_cr"></canvas>
                     <p class="infogauge">Current L2</p>
                 </div>
-                <script>gauge_temp('gauge_L2_phases_cr','L2_phase_cr','A');</script>
+                <script>gauge_temp_3('gauge_L2_phases_cr','L2_phase_cr','A');</script>
     
                     
                 <div class="gauges"   >
                     <canvas id="gauge_L3_phases_cr"></canvas>
                     <p class="infogauge">Current L3</p>
                 </div>
-                <script>gauge_temp('gauge_L3_phases_cr','L3_phase_cr','A');</script>
+                <script>gauge_temp_3('gauge_L3_phases_cr','L3_phase_cr','A');</script>
             </div>
 
 
@@ -226,7 +228,7 @@
               </div>
           
             
-            
+  <h1 class="title">Đồng hồ điện phòng R&D</h1>          
            
 </div>
 
