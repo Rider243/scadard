@@ -1,5 +1,5 @@
 ////////////// YÊU CẦU DỮ LIỆU TỪ SERVER- REQUEST DATA //////////////
-var myVar = setInterval(myTimer, 100);
+var myVar = setInterval(myTimer, 200);
 function myTimer()
 {
     socket.emit("Client-send-data", "Request data client");
@@ -20,11 +20,10 @@ function myTimer()
 
 //////////////////////////gauge/////////////
   // đồng hồ đo áp suất các thứ
-  var value_gauge;
+  var  value_gauge=0;
   function  gauge_temp_1(id,data_pre,name)
    {
- 
-     
+
      socket.on(data_pre, function (data)
      { 
  
