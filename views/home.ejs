@@ -85,7 +85,7 @@
     <br /><br />  -->
 <div class="home-screen">
         <div class="container">
-         
+            <h1 class="title">Đồng hồ điện phòng R&D</h1>          
             <div class="row1">
                 <div class="gauges"    >
                     <canvas id="gauge_L1_lines"></canvas>
@@ -107,9 +107,7 @@
                 </div>
                 <script>gauge_temp_1('gauge_L3_lines','L3_line','V');</script>
     
-            </div>
 
-            <div class="row2">
                 <div class="gauges"     >
                     <canvas id="gauge_L1_phases"></canvas>
                     <p class="infogauge">Phase L1</p>
@@ -134,9 +132,6 @@
                     <p class="infogauge">Phase L3</p>
                 </div>
                 <script>gauge_temp_2('gauge_L3_phases','L3_phase','V');</script>
-            </div>
-
-            <div class="row3">
                 <div class="gauges"     >
                     <canvas id="gauge_L1_phases_cr"></canvas>
                     <p class="infogauge">Current L1</p>
@@ -168,67 +163,78 @@
 
 
 
-       <div id="Baocao">
-           <!--Date time piker-->
-           <label id="lb_Search_Start">Từ:</label>
-           <input id="dtpk_Search_Start" type="datetime-local">
-           <label id="lb_Search_End">Đến:</label>
-           <input id="dtpk_Search_End" type="datetime-local">
-           <!--Nút tìm kiếm-->
-           <button id="btt_Search" class="btn" onclick="fn_SQL_By_Time();
-           "></i> TÌM KIẾM</button>
-           <script>fn_SQL_By_Time_display()</script>
+<div class="container_chart">
+    <div class="content">
+        <div id="Baocao">
+            <!--Date time piker-->
+            <div class="input_item"> 
+                <label id="lb_Search_Start">Từ:</label>
+                <input id="dtpk_Search_Start" type="datetime-local">
+            </div>
+            <div class="input_item">
+                <label id="lb_Search_End">Đến:</label>
+                <input id="dtpk_Search_End" type="datetime-local">
+            </div>
+            <!--Nút tìm kiếm-->
+           <div class="input_item_btn">
+            <button id="btt_Search" class="btn" onclick="fn_SQL_By_Time();
+            "></i> TÌM KIẾM</button>
+            <script>fn_SQL_By_Time_display()</script>
+           </div>
+    
+             <!--Nút Xuất Excel-->
+             <div class="input_item_btn">
+                <button id="btt_Excel" class="btn" onclick="fn_excel();
+                "></i> BÁO CÁO</button>
+                <script>fn_excel_display()</script>
+             </div>
+        </div>
+       
+       
+    
+    
+    
+              <!--Table display-->
+              <div id = "div_table_info">
+                 <table id="table_info" >
+                     <thead>
+                     <tr >
+    
+                         <th >Thời gian</th>
+                 
+                         <th >L1-L2</th>
+    
+                         <th >L2-L3</th>
+    
+                         <th >L3-L1</th>
+    
+                         <th >Phase L1-N</th>
+                         
+                         <th >Phase L2-N</th>
+    
+                         <th >Phase L3-N</th>
+    
+                         <th >Current L1</th>
+                         
+                         <th >Current L2</th>
+    
+                         <th >Current L3</th>
+                         
+    
+    
+    
+                     </tr>
+                     </thead>
+                 </table>
+               </div>
+    </div>
 
-            <!--Nút Xuất Excel-->
-            <button id="btt_Excel" class="btn" onclick="fn_excel();
-            "></i> BÁO CÁO</button>
-            <script>fn_excel_display()</script>
-       </div>
-      
-      
-
-
-
-             <!--Table display-->
-             <div id = "div_table_info">
-                <table id="table_info" >
-                    <thead>
-                    <tr >
-  
-                        <th >Thời gian</th>
-                
-                        <th >L1-L2</th>
-
-                        <th >L2-L3</th>
-
-                        <th >L3-L1</th>
-
-                        <th >Phase L1-N</th>
-                        
-                        <th >Phase L2-N</th>
-
-                        <th >Phase L3-N</th>
-
-                        <th >Current L1</th>
-                        
-                        <th >Current L2</th>
-
-                        <th >Current L3</th>
-                        
-   
-  
-  
-                    </tr>
-                    </thead>
-                </table>
-              </div>
-
-              <div id="chart_detail" class="chart"></div>
-              <script>Draw_Chart_detail();  </script>
-              </div>
+           <div id="chart_detail" class="chart"></div>
+           <script>Draw_Chart_detail();  </script>
+           </div>
+</div>
           
             
-  <h1 class="title">Đồng hồ điện phòng R&D</h1>          
            
 </div>
 
