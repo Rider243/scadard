@@ -1,5 +1,5 @@
 ////////////// YÊU CẦU DỮ LIỆU TỪ SERVER- REQUEST DATA //////////////
-var myVar = setInterval(myTimer, 200);
+var myVar = setInterval(myTimer, 500);
 function myTimer()
 {
     socket.emit("Client-send-data", "Request data client");
