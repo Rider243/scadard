@@ -144,32 +144,63 @@ function read_tcpip()
 {
   
 
-    const addresses = [0x0FBC,0x0FBD,0X0FBE,0x0FBF,0X0FC0,0x0FC1,0X0FC2,0x0FC3,0X0FC4,0x0FC5,0X0FC6,0x0FC7,0x0FB4,0x0FB5,0x0FB6,0x0FB7,0x0FB8,0x0FB9];
+    // const addresses = [0x0FBC,0x0FBD,0X0FBE,0x0FBF,0X0FC0,0x0FC1,0X0FC2,0x0FC3,0X0FC4,0x0FC5,0X0FC6,0x0FC7,0x0FB4,0x0FB5,0x0FB6,0x0FB7,0x0FB8,0x0FB9];
      
-    for (let i = 0; i < addresses.length; i++) {
-        const address=addresses[i]
-        client1.readHoldingRegisters(address,1).then((resp)=>
-        {
-            const values =resp.response._body._valuesAsArray;
+    // for (let i = 0; i < addresses.length; i++) {
+    //     const address=addresses[i]
+    //     client1.readHoldingRegisters(address,1).then((resp)=>
+    //     {
+    //         const values =resp.response._body._valuesAsArray;
 
-      if (i%2==1) 
-      {
-        dataArrip[i]=values[0]+dataArrip[i-1]*65535;
-      }
-      else
-      {
-        dataArrip[i]=values[0];
-      }
+    //   if (i%2==1) 
+    //   {
+    //     dataArrip[i]=values[0]+dataArrip[i-1]*65535;
+    //   }
+    //   else
+    //   {
+    //     dataArrip[i]=values[0];
+    //   }
       
-        }).catch((err)=>{
-            console.log(err);
-        })
+    //     }).catch((err)=>{
+    //         console.log(err);
+    //     })
           
-    }
+    // }
+
+     
+// console.log(dataArrip);
 
  
+    const addresses = [0x0FBC, 0x0FBD, 0x0FBE, 0x0FBF, 0x0FC0, 0x0FC1, 0x0FC2, 0x0FC3, 0x0FC4, 0x0FC5, 0x0FC6, 0x0FC7, 0x0FB4, 0x0FB5, 0x0FB6, 0x0FB7, 0x0FB8, 0x0FB9];
 
-console.log(dataArrip);
+    const readPromises = addresses.map((address) => {
+    return client1.readHoldingRegisters(address, 1)
+        .then((resp) => {
+        const values = resp.response._body._valuesAsArray;
+        return { address, value: values[0] };
+        })
+        .catch((err) => {
+        console.log(err);
+        });
+    });
+
+    Promise.all(readPromises)
+    .then((results) => {
+        const sortedData = results.sort((a, b) => a.address - b.address);
+        // const dataArrip = [];
+
+        for (let i = 0; i < sortedData.length; i++) {
+        if (i % 2 === 1) {
+            dataArrip[i] = sortedData[i].value + dataArrip[i - 1] * 65535;
+        } else {
+            dataArrip[i] = sortedData[i].value;
+        }
+        }
+
+        console.log('Sorted Data:', dataArrip);
+    });
+
+
 }
 
  setInterval(() => {
@@ -179,16 +210,16 @@ console.log(dataArrip);
  
  io.on("connection", function(socket){
     socket.on("Client-send-data", function(data){
-        socket.emit("L1_line",dataArrip[1]*0.1);
-        socket.emit("L2_line",dataArrip[3]*0.1);
-        socket.emit("L3_line",dataArrip[5]*0.1);
-        socket.emit("L1_phase",dataArrip[7]*0.1);
-        socket.emit("L2_phase",dataArrip[9]*0.1);
-        socket.emit("L3_phase",dataArrip[11]*0.1);
-        socket.emit("L1_phase_cr",dataArrip[13]*0.001);
-        socket.emit("L2_phase_cr",dataArrip[15]*0.001);
-        socket.emit("L3_phase_cr",dataArrip[17]*0.001);
-        console.log("giá trị la:" +dataArrip);      
+        socket.emit("L1_line",dataArrip[7]*0.1);
+        socket.emit("L2_line",dataArrip[9]*0.1);
+        socket.emit("L3_line",dataArrip[11]*0.1);
+        socket.emit("L1_phase",dataArrip[13]*0.1);
+        socket.emit("L2_phase",dataArrip[15]*0.1);
+        socket.emit("L3_phase",dataArrip[17]*0.1);
+        socket.emit("L1_phase_cr",dataArrip[1]*0.001);
+        socket.emit("L2_phase_cr",dataArrip[3]*0.001);
+        socket.emit("L3_phase_cr",dataArrip[5]*0.001);
+          
 });});
 
 
@@ -227,15 +258,15 @@ function fn_sql_insert(){
     // console.log("dât là:"+dataArr[3]);
 
     var sqltable_Name = "dpm680_data";
-    L1_line = dataArrip[1] * 0.1;
-    L2_line = dataArrip[3] * 0.1;
-    L3_line = dataArrip[5] * 0.1;
-    L1_phase = dataArrip[7] * 0.1;
-    L2_phase = dataArrip[9] * 0.1;
-    L3_phase = dataArrip[11] * 0.1;
-    L1_phase_cr = dataArrip[13] * 0.001;
-    L2_phase_cr = dataArrip[15] * 0.001;
-    L3_phase_cr = dataArrip[17] * 0.001;
+    L1_line = dataArrip[7] * 0.1;
+    L2_line = dataArrip[9] * 0.1;
+    L3_line = dataArrip[11] * 0.1;
+    L1_phase = dataArrip[13] * 0.1;
+    L2_phase = dataArrip[15] * 0.1;
+    L3_phase = dataArrip[17] * 0.1;
+    L1_phase_cr = dataArrip[1] * 0.001;
+    L2_phase_cr = dataArrip[3] * 0.001;
+    L3_phase_cr = dataArrip[5] * 0.001;
 
     // Lấy thời gian hiện tại
     var tzoffset = (new Date()).getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
