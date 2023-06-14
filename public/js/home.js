@@ -572,6 +572,11 @@ function Draw_Chart_detail()
 
         var layout = {
             title: "Biểu đồ hệ thống điện RD",
+            paper_bgcolor : 'rgb(22, 56, 83)',
+            plot_bgcolor: 'rgb(22, 56, 83)',
+            font: {
+              color: 'white' // Màu chữ trên biểu đồ
+            },
             yaxis:
          {
            
