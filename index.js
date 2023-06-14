@@ -71,155 +71,142 @@ app.get("/", function(req, res){
 // }
 
 
+var dataArrip = [];
+
 // create an empty modbus client
-// const Modbus2 = require('modbus-serial');
+const Modbus2 = require('modbus-serial');
 
-// // Tạo một đối tượng Modbus
-// const client2 = new Modbus2();
+// Tạo một đối tượng Modbus
+const client2 = new Modbus2();
 
-// // Thiết lập kết nối TCP/IP đến thiết bị Modbus
-// client2.connectTCP("10.14.12.240", { port:502 })
-//     .then(setClient)
-//     .then(function() {
-//         console.log("Connected"); })
-//     .catch(function(e) {
-//         console.log(e.message); });
+// Thiết lập kết nối TCP/IP đến thiết bị Modbus
+client2.connectTCP("10.14.12.240", { port:502 })
+    .then(setClient)
+    .then(function() {
+        console.log("Connected"); })
+    .catch(function(e) {
+        console.log(e.message); });
 
-// function setClient() {
-//     // set the client's unit id
-//     // set a timout for requests default is null (no timeout)
-//     client2.setID(1);
-//     client2.setTimeout(1000);
+function setClient() {
+    // set the client's unit id
+    // set a timout for requests default is null (no timeout)
+    client2.setID(1);
+    client2.setTimeout(1000);
 
-//     // run program
-//     run();
-// }
+    // run program
+    run();
+}
 
-// setInterval(() => {
-//     setClient();
-// }, 200);
+setInterval(() => {
+    setClient();
+}, 500);
 
 
-// function run() {
-//     // read the 4 registers starting at address 5
-//     client2.readHoldingRegisters(4020,10)
-//         .then(function(d) {
-//             console.log("Receive:", d.data);
-//         })
-//         .catch(function(e) {
-//             console.log(e.message);
-//         })
-//         // .then(close);
-// }
+function run() {
+    // read the 4 registers starting at address 5
+    client2.readHoldingRegisters(4020,20)
+        .then(function(d) {
+            console.log("Receive:", d.data);
+           var datad =d.data;
 
-// function close() {
-//     client2.close();
-// }
+           for(var i=0;i<datad.length;i++)
+           {
+
+            if (i%2==1) {
+                dataArrip[i]=datad[i]+datad[i-1]*65535; 
+            }
+            else
+            {
+                dataArrip[i]=datad[i];
+            }
+
+           }
+
+
+        })
+        .catch(function(e) {
+            console.log(e.message);
+        })
+        // .then(close);
+}
+
+function close() {
+    client2.close();
+}
 
 
 
 ////////////////////////////////////////
-const Modbus = require('jsmodbus');
-const net = require('net');
+// const Modbus = require('jsmodbus');
+// const net = require('net');
 
-const socket = new net.Socket();
-const client1 = new Modbus.client.TCP(socket, 1);
+// const socket = new net.Socket();
+// const client1 = new Modbus.client.TCP(socket, 1);
 
-// Cấu hình địa chỉ IP và cổng của DPM680
-const options1 = {
-    'host': '10.14.12.240',
-    'port': 502
-};
+// // Cấu hình địa chỉ IP và cổng của DPM680
+// const options1 = {
+//     'host': '10.14.12.240',
+//     'port': 502
+// };
 
-// Kết nối với DPM680
+// // Kết nối với DPM680
  
 
-socket.connect(options1);
+// socket.connect(options1);
 
 
 
-var dataArrip = [];
+//
 
-function read_tcpip()
-{
+// function read_tcpip()
+// {
   
 
-    // const addresses = [0x0FBC,0x0FBD,0X0FBE,0x0FBF,0X0FC0,0x0FC1,0X0FC2,0x0FC3,0X0FC4,0x0FC5,0X0FC6,0x0FC7,0x0FB4,0x0FB5,0x0FB6,0x0FB7,0x0FB8,0x0FB9];
+//     const addresses = [0x0FBC,0x0FBD,0X0FBE,0x0FBF,0X0FC0,0x0FC1,0X0FC2,0x0FC3,0X0FC4,0x0FC5,0X0FC6,0x0FC7,0x0FB4,0x0FB5,0x0FB6,0x0FB7,0x0FB8,0x0FB9];
      
-    // for (let i = 0; i < addresses.length; i++) {
-    //     const address=addresses[i]
-    //     client1.readHoldingRegisters(address,1).then((resp)=>
-    //     {
-    //         const values =resp.response._body._valuesAsArray;
+//     for (let i = 0; i < addresses.length; i++) {
+//         const address=addresses[i]
+//         client1.readHoldingRegisters(address,1).then((resp)=>
+//         {
+//             const values =resp.response._body._valuesAsArray;
 
-    //   if (i%2==1) 
-    //   {
-    //     dataArrip[i]=values[0]+dataArrip[i-1]*65535;
-    //   }
-    //   else
-    //   {
-    //     dataArrip[i]=values[0];
-    //   }
+//       if (i%2==1) 
+//       {
+//         dataArrip[i]=values[0]+dataArrip[i-1]*65535;
+//       }
+//       else
+//       {
+//         dataArrip[i]=values[0];
+//       }
       
-    //     }).catch((err)=>{
-    //         console.log(err);
-    //     })
+//         }).catch((err)=>{
+//             console.log(err);
+//         })
           
-    // }
-
-     
-// console.log(dataArrip);
+//     }
 
  
-    const addresses = [0x0FBC, 0x0FBD, 0x0FBE, 0x0FBF, 0x0FC0, 0x0FC1, 0x0FC2, 0x0FC3, 0x0FC4, 0x0FC5, 0x0FC6, 0x0FC7, 0x0FB4, 0x0FB5, 0x0FB6, 0x0FB7, 0x0FB8, 0x0FB9];
 
-    const readPromises = addresses.map((address) => {
-    return client1.readHoldingRegisters(address, 1)
-        .then((resp) => {
-        const values = resp.response._body._valuesAsArray;
-        return { address, value: values[0] };
-        })
-        .catch((err) => {
-        console.log(err);
-        });
-    });
+// console.log(dataArrip);
+// }
 
-    Promise.all(readPromises)
-    .then((results) => {
-        const sortedData = results.sort((a, b) => a.address - b.address);
-        // const dataArrip = [];
-
-        for (let i = 0; i < sortedData.length; i++) {
-        if (i % 2 === 1) {
-            dataArrip[i] = sortedData[i].value + dataArrip[i - 1] * 65535;
-        } else {
-            dataArrip[i] = sortedData[i].value;
-        }
-        }
-
-        console.log('Sorted Data:', dataArrip);
-    });
-
-
-}
-
- setInterval(() => {
-    read_tcpip()
- }, 500);
+//  setInterval(() => {
+//      read_tcpip()
+//  }, 500);
 
  
  io.on("connection", function(socket){
     socket.on("Client-send-data", function(data){
-        socket.emit("L1_line",dataArrip[7]*0.1);
-        socket.emit("L2_line",dataArrip[9]*0.1);
-        socket.emit("L3_line",dataArrip[11]*0.1);
-        socket.emit("L1_phase",dataArrip[13]*0.1);
-        socket.emit("L2_phase",dataArrip[15]*0.1);
-        socket.emit("L3_phase",dataArrip[17]*0.1);
+        socket.emit("L1_line",dataArrip[9]*0.1);
+        socket.emit("L2_line",dataArrip[11]*0.1);
+        socket.emit("L3_line",dataArrip[13]*0.1);
+        socket.emit("L1_phase",dataArrip[15]*0.1);
+        socket.emit("L2_phase",dataArrip[17]*0.1);
+        socket.emit("L3_phase",dataArrip[19]*0.1);
         socket.emit("L1_phase_cr",dataArrip[1]*0.001);
         socket.emit("L2_phase_cr",dataArrip[3]*0.001);
         socket.emit("L3_phase_cr",dataArrip[5]*0.001);
-          
+        console.log("giá trị la:" +dataArrip);      
 });});
 
 
@@ -258,12 +245,12 @@ function fn_sql_insert(){
     // console.log("dât là:"+dataArr[3]);
 
     var sqltable_Name = "dpm680_data";
-    L1_line = dataArrip[7] * 0.1;
-    L2_line = dataArrip[9] * 0.1;
-    L3_line = dataArrip[11] * 0.1;
-    L1_phase = dataArrip[13] * 0.1;
-    L2_phase = dataArrip[15] * 0.1;
-    L3_phase = dataArrip[17] * 0.1;
+    L1_line = dataArrip[9] * 0.1;
+    L2_line = dataArrip[11] * 0.1;
+    L3_line = dataArrip[13] * 0.1;
+    L1_phase = dataArrip[15] * 0.1;
+    L2_phase = dataArrip[17] * 0.1;
+    L3_phase = dataArrip[19] * 0.1;
     L1_phase_cr = dataArrip[1] * 0.001;
     L2_phase_cr = dataArrip[3] * 0.001;
     L3_phase_cr = dataArrip[5] * 0.001;
