@@ -19,6 +19,9 @@ app.get("/header", function(req, res){
 app.get("/export", function(req, res){
     res.render("export")
 });
+app.get("/giamsat", function(req, res){
+    res.render("giamsat")
+});
 
 
 // const ModbusRTU = require('modbus-serial');

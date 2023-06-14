@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Giám sát điện</title>
+        <link rel="stylesheet"   href="/css/giamsat.css">
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="/css/header.css">
+        <script src = "js/home.js"></script>
+<script src = "socket.io/socket.io.js"></script>
+
+<!-- <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.7/all/gauge.min.js"></script> -->
+<script src = "js/gauge.min.js"></script>
+
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<script src = "js/jquery-3.6.0.min.js"></script>
+
+
+  <!-- <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script> -->
+  <script src = "js/jquery-ui.min.js"></script>
+  
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> -->
+  
+<script src = "js/FileSaver.min.js"></script>
+  
+  <script src = "js/plotly-latest.min.js"></script>
+
+
+  
+
+
+  
+
+
+<link rel="stylesheet"   href="css/home.css">
+
+  
+<script>
+    var socket = io(document.location.host)  
+</script>
+    </head>
+<body>
+    <%- include('header.ejs'); -%>
+    <div class="main">
+        <div class="container_gauges">
+            <h1 class="title">Đồng hồ điện phòng R&D</h1>          
+            <div class="row1" style="border-radius: 10px 10px 0 0;">
+                <div class="gauges"    >
+                    <canvas id="gauge_L1_lines"></canvas>
+                    <p class="infogauge">Line L1-L2</p>
+                </div>
+                
+                <script>gauge_temp_1('gauge_L1_lines','L1_line','V');</script>
+    
+    
+                <div class="gauges"    >
+                    <canvas id="gauge_L2_lines"></canvas>
+                    <p class="infogauge">Line L2-L3</p>
+                </div>
+                <script>gauge_temp_1('gauge_L2_lines','L2_line','V');</script>
+    
+                <div class="gauges"    >
+                    <canvas id="gauge_L3_lines"></canvas>
+                    <p class="infogauge">Line L3-L1</p>
+                </div>
+                <script>gauge_temp_1('gauge_L3_lines','L3_line','V');</script>
+            </div>
+            <div class="row1">
+                <div class="gauges"     >
+                    <canvas id="gauge_L1_phases"></canvas>
+                    <p class="infogauge">Phase L1</p>
+                </div>
+                <script>gauge_temp_2('gauge_L1_phases','L1_phase','V');</script>
+                <!-- <p>
+                    Điện áp tối đa hôm nay là
+                    <p id="infor1"></p>
+                    <script>fn_IOFieldDataShow('L1_phase', 'infor1', 1)</script>
+                </p> -->
+             
+                    
+                <div class="gauges"    >
+                    <canvas id="gauge_L2_phases"></canvas>
+                    <p class="infogauge">Phase L2</p>
+                </div>
+                <script>gauge_temp_2('gauge_L2_phases','L2_phase','V');</script>
+    
+                    
+                <div class="gauges"   >
+                    <canvas id="gauge_L3_phases"></canvas>
+                    <p class="infogauge">Phase L3</p>
+                </div>
+                <script>gauge_temp_2('gauge_L3_phases','L3_phase','V');</script>
+            </div>
+            <div class="row1" style="border-radius: 0 0 10px 10px;">
+
+                <div class="gauges"     >
+                    <canvas id="gauge_L1_phases_cr"></canvas>
+                    <p class="infogauge">Current L1</p>
+                </div>
+                <script>gauge_temp_3('gauge_L1_phases_cr','L1_phase_cr','A');</script>
+                <!-- <p>
+                    Điện áp tối đa hôm nay là
+                    <p id="infor1"></p>
+                    <script>fn_IOFieldDataShow('L1_phase', 'infor1', 1)</script>
+                </p> -->
+             
+               
+                    
+                
+                <div class="gauges"    >
+                    <canvas id="gauge_L2_phases_cr"></canvas>
+                    <p class="infogauge">Current L2</p>
+                </div>
+                <script>gauge_temp_3('gauge_L2_phases_cr','L2_phase_cr','A');</script>
+    
+                    
+                <div class="gauges"   >
+                    <canvas id="gauge_L3_phases_cr"></canvas>
+                    <p class="infogauge">Current L3</p>
+                </div>
+                <script>gauge_temp_3('gauge_L3_phases_cr','L3_phase_cr','A');</script>
+            </div>
+
+
+         </div>
+         <div class="container_chart-gauges">
+            <div class="content_chat"></div>
+            <div class="content_chat"></div>
+            <div class="content_chat"></div>
+         </div>
+    </div>
+</body>
+</html>
