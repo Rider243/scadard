@@ -76,6 +76,8 @@
 .header_title{
     width: 15%;
     height: 100%;
+    display: flex;
+    align-items: center;
 }
 .header_title h2{
     width: 100%;

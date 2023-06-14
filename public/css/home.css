@@ -14,9 +14,8 @@
  }
  .container_chart{
     width: 100%;
-    height: 100%;
+    height: 80%;
     display: flex;
-    flex-direction: column;
  }
 
  .gauges
@@ -71,12 +70,7 @@
     overflow-y: scroll;
     text-align:center;
     border: 1px  ;
-<<<<<<< HEAD
-    max-height: 300px;
-=======
-    max-height: 400px;
->>>>>>> f79dc50c5393606ee4c6513b8bebd25f66df6991
-    
+    max-height: 100%;
  }
  /*Table*/
  #table_info {
@@ -95,8 +89,8 @@
  #table_info thead th { position: sticky; top: 0;  }
  /* Just common table stuff. Really. */
  #table_info  { border-collapse: collapse; width: 100%; }
- #table_info th, td { padding: 8px 16px;   border:1px solid #a3855f; }
- #table_info th     { background:#183853; color: #2bb892;}
+ #table_info th, td { padding: 8px 12px;   border:1px solid #a3855f; }
+ #table_info th     { background:#183853; color: #2bb892; width: 70px;}
 
   /*//////////////TRƯỜNG TÌM KIẾM DỮ LIỆU/////////////////*/
  
@@ -189,15 +183,19 @@
 }
 .content{
     width: 100%;
-    /* height: 100%; */
-    margin-top: 100px;
+    height: 100%;
+    margin-top: 60px;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 /* ///////biểu đồ */
 
 #chart_detail{
     width: 100%;
-    height: 50%;
- 
+    height: 100%;
+    margin-top: 107px;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .title{
@@ -247,4 +245,8 @@ width: 100%;
     #lb_Search_End{
         margin: 0;
     }
+}
+
+.th_time{
+    width: 250px !important;
 }
