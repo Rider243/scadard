@@ -59,7 +59,7 @@
 /*//////////////Hiển thị dữ liệu bảng 1 - Start/////////////////*/
 #div_table_info {
 
-    background-color: #183853;
+    background-color:#234664;
     /* position: absolute;  */
     margin: auto auto;
     top: 10%; 
@@ -69,8 +69,11 @@
     height:100% ;
     overflow-y: scroll;
     text-align:center;
-    border: 1px  ;
+    border:1px solid #a3855f;
     max-height: 100%;
+ }
+ #div_table_info::-webkit-scrollbar{
+    display: none;
  }
  /*Table*/
  #table_info {
@@ -91,6 +94,7 @@
  #table_info  { border-collapse: collapse; width: 100%; }
  #table_info th, td { padding: 8px 12px;   border:1px solid #a3855f; }
  #table_info th     { background:#183853; color: #2bb892; width: 70px;}
+ #table_info td  { background:#03243f; color: #fff; width: 70px;}
 
   /*//////////////TRƯỜNG TÌM KIẾM DỮ LIỆU/////////////////*/
  
@@ -106,6 +110,7 @@
     left: 48%;
      top: 5%;
      min-width: 12%;
+     margin-right: 10px;
 }
 /*Chọn ngày tháng bắt đầu*/
 #dtpk_Search_Start {
@@ -187,13 +192,19 @@
     margin-top: 60px;
     margin-left: 8px;
     margin-right: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #173752;
+    padding: 16px;
+    border-radius: 10px;
 }
 /* ///////biểu đồ */
 
 #chart_detail{
     width: 100%;
     height: 100%;
-    margin-top: 107px;
+    margin-top: 60px;
     margin-left: 8px;
     margin-right: 8px;
 }
