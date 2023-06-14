@@ -13,7 +13,7 @@
     top: 8%;
  }
  .container_chart{
-    width: 50%;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -60,7 +60,7 @@
 /*//////////////Hiển thị dữ liệu bảng 1 - Start/////////////////*/
 #div_table_info {
 
-    background-color: rgb(242, 242, 248);
+    background-color: #183853;
     /* position: absolute;  */
     margin: auto auto;
     top: 10%; 
@@ -71,6 +71,7 @@
     overflow-y: scroll;
     text-align:center;
     border: 1px  ;
+    max-height: 300px;
     
  }
  /*Table*/
@@ -90,8 +91,8 @@
  #table_info thead th { position: sticky; top: 0;  }
  /* Just common table stuff. Really. */
  #table_info  { border-collapse: collapse; width: 100%; }
- #table_info th, td { padding: 8px 16px;   border:1px solid black; }
- #table_info th     { background:rgb(238, 238, 238); }
+ #table_info th, td { padding: 8px 16px;   border:1px solid #a3855f; }
+ #table_info th     { background:#183853; color: #2bb892;}
 
   /*//////////////TRƯỜNG TÌM KIẾM DỮ LIỆU/////////////////*/
  
@@ -100,7 +101,7 @@
 
 /*Lable tìm kiếm từ*/
 #lb_Search_Start {
-    color: rgb(26, 24, 24);   
+    color: #3de36f;   
     font-size: 24px; 
     font-weight: normal;
     /* position: absolute;  */
@@ -114,7 +115,7 @@
     /* position: absolute;  */
     left: 50%; 
     top:  4%;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid rgb(173, 168, 168);
     border-radius: 10px;
     height:20px;
@@ -122,7 +123,7 @@
  
 /*Lable tìm kiếm đến*/
 #lb_Search_End {
-    color: rgb(26, 24, 24);  
+    color: #d96464;  
     font-size: 24px; 
     font-weight: normal;
     /* position: absolute;  */
@@ -137,7 +138,7 @@
     /* position: absolute;  */
     left: 65.5%; 
     top:  4%;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid rgb(173, 168, 168);
     border-radius: 10px;
     height:20px;
@@ -145,8 +146,8 @@
 /*Nút tìm kiếm*/
 #btt_Search {
    
-    background-color: DodgerBlue; 
-    color: rgb(255, 255, 255);  
+    background-color: #12cff3; 
+    color: #03243f;  
     text-align: center; 
     display: inline-block;
     font-size: 11px; 
@@ -157,6 +158,7 @@
     height: 37px; 
     left: 77%; 
     top:  4.2%;
+    border-radius: 4px;
 }
 .input_item{
     width: calc(100% / 4);
@@ -167,9 +169,9 @@
 
 /*Nút Xuaast Excel*/
 #btt_Excel {
-  
+  border-radius: 4px;
     background-color: rgb(14, 199, 153); 
-    color: rgb(255, 255, 255);  
+    color: #03243f;  
     text-align: center; 
     display: inline-block;
     font-size: 11px; 
@@ -183,7 +185,8 @@
 }
 .content{
     width: 100%;
-    height: 50%;
+    /* height: 100%; */
+    margin-top: 100px;
 }
 /* ///////biểu đồ */
 

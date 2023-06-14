@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giám sát điện</title>
+    <link rel="stylesheet"   href="css/home.css">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+<body>
+    <div class="header">
+        <img src="/images/logo/cropped-logo-thaco-industries.png" alt="logo thaco" class="header_img">
+        <div class="header_content">
+            <div class="header_content-item">
+                <div class="time">
+                    <h4>Thời gian hôm nay:</h4>
+                    <p id="noti__title-time"></p>
+                    <p id="noti__title-day"></p>
+                </div>
+            </div>
+            <div class="header_content-item">
+                <h2 class="header_content-title">Trích xuất</h2>
+            </div>
+            <div class="header_content-item"></div>
+        </div>
+        <div class="header_title">
+            <h2>Hệ Thống Giám Sát Điện R&D</h2>
+        </div>
+    </div>
+    <div class="sub_menu">
+        <a href="#">Đồng hồ giám sát</a>
+        <a href="http://localhost:8080/export">Trích xuất</a>
+        <a href="#">Điện năng tiêu thụ</a>
+    </div>
+</body>
+
+<script>
+    const updateTime = () =>{
+        const noti = document.querySelector('#noti__title-day');
+        const noti_time = document.querySelector('#noti__title-time');
+        const d = new Date().getDate();
+        var m = new Date().getMonth();
+        m = m + 1;
+        const y = new Date().getFullYear();
+        const h = new Date().getHours();
+        const p = new Date().getMinutes();
+        const s = new Date().getSeconds();
+        noti.innerHTML = `Số liệu ngày: ${d}/${m}/${y}`;
+        noti_time.innerHTML = `Thời gian: ${h}h:${p}p:${s}`;
+    }
+    setInterval(updateTime, 1000);
+</script>
+</html>

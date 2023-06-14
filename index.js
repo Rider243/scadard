@@ -13,7 +13,12 @@ server.listen(8080);
 app.get("/", function(req, res){
     res.render("home")
 });
-
+app.get("/header", function(req, res){
+    res.render("header")
+});
+app.get("/export", function(req, res){
+    res.render("export")
+});
 
 
 // const ModbusRTU = require('modbus-serial');
