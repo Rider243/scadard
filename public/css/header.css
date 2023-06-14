@@ -108,3 +108,10 @@
     font-weight: 700;
     color: #fff;
 }
+.header_content-vol{
+    width: 100%;
+    font-size: 30px;
+    color: #cf6e67;
+    text-align: center;
+    text-transform: uppercase;
+}

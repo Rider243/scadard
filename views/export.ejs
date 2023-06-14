@@ -6,12 +6,33 @@
     <title>Giám sát điện</title>
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/header.css">
+    <script src = "js/home.js"></script>
+    <script src = "socket.io/socket.io.js"></script>
+
+<!-- <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.7/all/gauge.min.js"></script> -->
+    <script src = "js/gauge.min.js"></script>
+
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+    <script src = "js/jquery-3.6.0.min.js"></script>
+
+
+  <!-- <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script> -->
+     <script src = "js/jquery-ui.min.js"></script>
+  
+
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> -->
+  
+    <script src = "js/FileSaver.min.js"></script>
+  
+  <script src = "js/plotly-latest.min.js"></script>
 </head>
 <body>
     <%- include('header.ejs'); -%>
     <div class="main">
         <div class="container_chart">
-            <div class="content">
+                            <div class="content">
                 <div id="Baocao">
                     <!--Date time piker-->
                     <div class="input_item"> 
@@ -69,31 +90,10 @@
                        </div>
             </div>
         
-                   <div id="chart_detail" class="chart"></div>
-                   </div>
+            <div id="chart_detail" class="chart"></div>
+            <script>Draw_Chart_detail();  </script>
+
+        </div>
     </div>
 </body>
-<script src = "js/home.js"></script>
-<script src = "socket.io/socket.io.js"></script>
-
-<!-- <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.7/all/gauge.min.js"></script> -->
-<script src = "js/gauge.min.js"></script>
-
-
-
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
-<script src = "js/jquery-3.6.0.min.js"></script>
-
-
-  <!-- <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script> -->
-  <script src = "js/jquery-ui.min.js"></script>
-  
-
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> -->
-  
-<script src = "js/FileSaver.min.js"></script>
-  
-  <script src = "js/plotly-latest.min.js"></script>
-  <script>Draw_Chart_detail();  </script>
-
 </html>

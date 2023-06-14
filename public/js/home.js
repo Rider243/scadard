@@ -570,19 +570,25 @@ function Draw_Chart_detail()
         //Define Layout
        // var layout = {title: "Biểu đồ thông số quạt"};
 
-        var layout = {
-            title: "Biểu đồ hệ thống điện RD",
-            yaxis:
-         {
-           
-            // showline: true,
-            // fixedrange: true,
-            range: [0, 400],
-            autotick: false,
-            tick0: 0,
-            dtick:100,
+       var layout = {
+        title: "Biểu đồ hệ thống điện RD",
+        paper_bgcolor : 'rgb(22, 56, 83)',
+        plot_bgcolor: 'rgb(22, 56, 83)',
+        borderRadius: '10px',
+        font: {
+          color: 'white' // Màu chữ trên biểu đồ
         },
-          };
+        yaxis:
+     {
+       
+        // showline: true,
+        // fixedrange: true,
+        range: [0, 400],
+        autotick: false,
+        tick0: 0,
+        dtick:100,
+    },
+      };
 
         // Display using Plotly
         Plotly.newPlot("chart_detail", data, layout);
