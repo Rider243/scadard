@@ -71,7 +71,11 @@
     overflow-y: scroll;
     text-align:center;
     border: 1px  ;
+<<<<<<< HEAD
     max-height: 300px;
+=======
+    max-height: 400px;
+>>>>>>> f79dc50c5393606ee4c6513b8bebd25f66df6991
     
  }
  /*Table*/
