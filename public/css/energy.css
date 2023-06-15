@@ -1,0 +1,72 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+}
+.energy_content{
+    width: 70%;
+    background-color: #173752;
+    margin-top: 60px;
+    margin-left: 8px;
+    margin-right: 8px;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.energy_content-gauges{
+    width: 100%;
+    height: 40%;
+    border-radius: 10px;
+    display: flex;
+}
+
+.energy_content-item{
+    width: calc(100% / 3);
+    height: 100%;
+    background-color: #03243f;
+    border-radius: 10px;
+    border: 1px solid #2bb892;
+}
+.energy_content-item:not(:first-child){
+    margin-left: 16px;
+}
+.energy_content-chart{
+    width: 100%;
+    height: 60%;
+    margin-top: 16px;
+    border-radius: 10px;
+    background-color: #03243f;
+    border: 1px solid #2bb892;
+}
+
+.energy_container{
+    width: 30%;
+    background-color: #173752;
+    margin-top: 60px;
+    margin-left: 8px;
+    margin-right: 8px;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+.energy_container-gauges{
+    width: 100%;
+    height: 40%;
+    border-radius: 10px;
+    background-color: #03243f;
+    border: 1px solid #2bb892;
+}
+
+.energy_container-chart{
+    width: 100%;
+    height: 60%;
+    border-radius: 10px;
+    background-color: #03243f;
+    margin-top: 16px;
+    border: 1px solid #2bb892;
+}

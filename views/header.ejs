@@ -7,10 +7,13 @@
     <link rel="stylesheet"   href="css/home.css">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/responsive.css">
 </head>
 <body>
     <div class="header">
-        <img src="/images/logo/cropped-logo-thaco-industries.png" alt="logo thaco" class="header_img">
+        <div class="header_img">
+            <img src="/images/logo/cropped-logo-thaco-industries.png" alt="logo thaco">
+        </div>
         <div class="header_content">
             <div class="header_content-item">
                 <div class="time">
@@ -24,7 +27,7 @@
             </div>
             <div class="header_content-item">
                 <h2 class="header_content-vol">
-                Tổng điện tiêu thụ
+                Tổng điện tiêu thụ : 123456
                 </h2>
             </div>
         </div>
@@ -44,7 +47,7 @@
         const noti = document.querySelector('#noti__title-day');
         const noti_time = document.querySelector('#noti__title-time');
         const d = new Date().getDate();
-        var m = new Date().getMonth();
+        let m = new Date().getMonth();
         m = m + 1;
         const y = new Date().getFullYear();
         const h = new Date().getHours();
