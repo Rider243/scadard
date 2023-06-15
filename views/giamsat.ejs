@@ -38,7 +38,9 @@
 </script>
     </head>
 <body onload="
-chart_realtime('chart_line_voltage','gauge_L1_lines','gauge_L2_lines','gauge_L3_lines');
+chart_realtime('chart_line_voltage','L1_line','L2_line','L3_line','Line L1-L2','Line L2-L3','Line L3-L1');
+chart_realtime('chart_phase_voltage','L1_phase','L2_phase','L3_phase','L1 Phase','L2 Phase','L3 Phase');
+chart_realtime('chart_current','L1_phase_cr','L2_phase_cr','L3_phase_cr','L1 Current','L2 Current','L3 Current');
 
 ">
     <%- include('header.ejs'); -%>
@@ -121,9 +123,9 @@ chart_realtime('chart_line_voltage','gauge_L1_lines','gauge_L2_lines','gauge_L3_
 
             <div id="chart_line_voltage" class="content_chat"></div>
 
-            <div class="content_chat"></div>
+            <div id="chart_phase_voltage" class="content_chat"></div>
 
-            <div class="content_chat"></div>
+            <div id="chart_current" class="content_chat"></div>
             
          </div>
     </div>

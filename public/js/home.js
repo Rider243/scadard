@@ -295,7 +295,7 @@ function gauge_temp_3(idg,data_pre) {
 }
 
 
-function chart_realtime(id,data1,data2,data3)
+function chart_realtime(id,data1,data2,data3,name1,name2,name3)
 {
     var dataPoints1 = [];
     var dataPoints2 = [];
@@ -303,12 +303,10 @@ function chart_realtime(id,data1,data2,data3)
     var data1;
     var data2;
     var data3;
+    var yValue1 ; 
+    var yValue2  ;
+    var yValue3  ;
 
-    console.log('123');
-
-
-
-   
     
     var chart = new CanvasJS.Chart(id,
     {
@@ -332,7 +330,8 @@ function chart_realtime(id,data1,data2,data3)
             xValueFormatString: "hh:mm:ss TT",
             showInLegend: true,
             name: "Min",
-            dataPoints: dataPoints1
+            dataPoints: dataPoints1,
+            interpolationType: "smooth" // Loại hiệu ứng mượt
             },
             {				
                 type: "line",
@@ -340,7 +339,8 @@ function chart_realtime(id,data1,data2,data3)
                 yValueFormatString: "$####.00",
                 showInLegend: true,
                 name: "Max" ,
-                dataPoints: dataPoints2
+                dataPoints: dataPoints2,
+                interpolationType: "smooth" // Loại hiệu ứng mượt
             },
             {				
                 type: "line",
@@ -348,11 +348,14 @@ function chart_realtime(id,data1,data2,data3)
                 yValueFormatString: "$####.00",
                 showInLegend: true,
                 name: "Tốc độ" ,
-                dataPoints: dataPoints3
+                dataPoints: dataPoints3,
+                interpolationType: "smooth" // Loại hiệu ứng mượt
             }
             
         ]
     });
+
+     
     
     function toggleDataSeries(e) {
         if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -366,11 +369,19 @@ function chart_realtime(id,data1,data2,data3)
     
     var updateInterval = 1000
     // initial value
-    var yValue1=0  ; 
-    var yValue2  ;
-    var yValue3  ;
+ 
 
 
+  
+    console.log(yValue1);
+    console.log(data1);
+    
+  
+    
+ 
+    function updateChart( ) {
+
+      
     socket.on(data1, function (data)
     { 
 
@@ -389,21 +400,14 @@ function chart_realtime(id,data1,data2,data3)
 
     });
 
-    socket.on(data2, function (data)
+    socket.on(data3, function (data)
     { 
 
       yValue3=data;  
  
      
-
+    console.log('789');
     });
-
-    console.log(yValue1);
-    
-  
-    
- 
-    function updateChart( ) {
 
         var time = new Date;
         // starting at 9.30 am
@@ -450,9 +454,9 @@ function chart_realtime(id,data1,data2,data3)
        
     
         // updating legend text with  updated with y Value 
-        chart.options.data[0].legendText = " Min" + yValue1;
-        chart.options.data[1].legendText = " Max  " + yValue2; 
-        chart.options.data[2].legendText = " Tốc độ  " + yValue3; 
+        chart.options.data[0].legendText = name1 ;
+        chart.options.data[1].legendText =name2 ; 
+        chart.options.data[2].legendText = name3  ; 
         chart.render();
     }
     // generates first set of dataPoints 
