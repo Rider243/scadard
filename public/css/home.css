@@ -76,11 +76,9 @@
     left: 40%;
     width: 100%;
     text-align: center;
-    height:100% ;
     overflow-y: scroll;
     text-align:center;
     border:1px solid #a3855f;
-    max-height: 100%;
  }
  #div_table_info::-webkit-scrollbar{
     display: none;
@@ -199,7 +197,7 @@
 .content{
     width: 50%;
     max-height: 800px;
-    margin-top: 60px;
+    margin-top: 70px;
     margin-left: 8px;
     margin-right: 8px;
     display: flex;
@@ -213,7 +211,7 @@
 
 #chart_detail{
     width: 50%;
-    margin-top: 60px;
+    margin-top: 70px;
     margin-left: 8px;
     margin-right: 8px;
 }
