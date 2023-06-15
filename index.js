@@ -10,7 +10,7 @@ var server = require("http").Server(app);
 var io = require("socket.io")(server);
 server.listen(8080);
 // Home calling
-app.get("/", function(req, res){
+app.get("/home", function(req, res){
     res.render("home")
 });
 app.get("/header", function(req, res){
@@ -19,8 +19,11 @@ app.get("/header", function(req, res){
 app.get("/export", function(req, res){
     res.render("export")
 });
-app.get("/giamsat", function(req, res){
+app.get("/", function(req, res){
     res.render("giamsat")
+});
+app.get("/energy", function(req, res){
+    res.render("energy")
 });
 
 

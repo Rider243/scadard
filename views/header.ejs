@@ -33,9 +33,9 @@
         </div>
     </div>
     <div class="sub_menu">
-        <a href="http://localhost:8080/giamsat">Đồng hồ giám sát</a>
+        <a href="http://localhost:8080/">Đồng hồ giám sát</a>
         <a href="http://localhost:8080/export">Trích xuất</a>
-        <a href="#">Điện năng tiêu thụ</a>
+        <a href="http://localhost:8080/energy">Điện năng tiêu thụ</a>
     </div>
 </body>
 
@@ -58,8 +58,17 @@
 		const tachchuoi = url.split('/'); // tách đường dẫn thành các đoạn
 		const value = tachchuoi[1]; // lấy giá trị ở đoạn thứ 2
         const title = document.querySelector('.header_content-title');
-        if(value == "giamsat"){
+        const href = document.querySelectorAll('.sub_menu a');
+        if(value == ""){
             title.innerHTML = "Đồng hồ giám sát"
+            href[0].classList.add('active')
+        }
+        else if(value == "export"){
+            href[1].classList.add('active')
+        }
+        else{
+            title.innerHTML = "Điện năng tiêu thụ"
+            href[2].classList.add('active')
         }
 </script>
 </html>
