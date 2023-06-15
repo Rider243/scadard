@@ -25,26 +25,24 @@
     margin-right: 20px; /* Đặt giá trị cho cạnh phải */
     margin-bottom: 10px; /* Đặt giá trị cho cạnh dưới */
     margin-left: 20px; /* Đặt giá trị cho cạnh trái */
-    
+
     max-width: 200px;
-    height: 242px;
+    height: 200px;
     margin: 0px auto
- 
+
  }
 
-
- 
- 
  .row1
  {
     
     display: flex;
     justify-content: center;
-    background-color: #173752;
     padding-bottom: 15px;
     margin-left: 8px;
     margin-right: 8px;
-    
+    background-color: #173752;
+    border: 1px solid #2bb892;
+    border-radius: 10px;
  }
  .row2
  {
@@ -65,9 +63,8 @@
 #Baocao{
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
     margin-bottom: 10px;
+    align-items: center;
 }
  
 /*//////////////Hiển thị dữ liệu bảng 1 - Start/////////////////*/
@@ -75,7 +72,6 @@
 
     background-color:#234664;
     /* position: absolute;  */
-    margin: auto auto;
     top: 10%; 
     left: 40%;
     width: 100%;
@@ -201,8 +197,8 @@
     top:  4.2%;
 }
 .content{
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    min-height: 800px;
     margin-top: 60px;
     margin-left: 8px;
     margin-right: 8px;
@@ -216,8 +212,7 @@
 /* ///////biểu đồ */
 
 #chart_detail{
-    width: 100%;
-    height: 100%;
+    width: 50%;
     margin-top: 60px;
     margin-left: 8px;
     margin-right: 8px;

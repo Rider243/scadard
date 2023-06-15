@@ -6,6 +6,9 @@
     }
     .header_img{
         width: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
     }
     .header .header_title{
         display: none;
@@ -16,6 +19,7 @@
     .content{
         margin-left: 0;
         margin-right: 0;
+        padding: 0;
     }
     #Baocao{
         overflow-x: scroll;
@@ -34,6 +38,31 @@
         display: none;
     }
     /* end header  */
+
+    /* giam sat */
+
+    .content_chat{
+        min-height: 240px;
+    }
+    .container_chart-gauges{
+        margin-top: 16px;
+    }
+    .main{
+        flex-direction: column;
+    }
+    .container_gauges{
+        width: 100%;
+    }
+    /* end giam sat */
+
+    /* export */
+    #chart_detail{
+        width: 100%;
+    }
+    .content{
+        width: 100%;
+    }
+    /* end export */
 }
 
 /* >= Tablet */
@@ -42,7 +71,21 @@
     .header_content .header_content-item:nth-child(2){
         display: none;
     }
-
+    #Baocao{
+        overflow: scroll;
+    }
+    .header_content{
+        display: none;
+    }
+    .header_img{
+        width: 35%;
+    }
+    .header_title{
+        width: 40%;
+    }
+    .header{
+        justify-content: space-around;
+    }
     /* end header  */
 }
 
