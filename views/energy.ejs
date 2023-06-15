@@ -18,7 +18,7 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> -->
     <script src = "js/FileSaver.min.js"></script>
     <script src = "js/plotly-latest.min.js"></script>
-    <link rel="stylesheet"   href="css/home.css">
+    <link rel="stylesheet"   href="/css/energy.css">
 
 <script>
 var socket = io(document.location.host)  
@@ -26,6 +26,19 @@ var socket = io(document.location.host)
 </head>
 <body>
     <%- include('header.ejs'); -%>
-    <div class="main"></div>
+    <div class="main">
+        <div class="energy_content">
+            <div class="energy_content-gauges">
+                <div class="energy_content-item">Đồng hồ 1</div>
+                <div class="energy_content-item">Đồng hồ 2</div>
+                <div class="energy_content-item">Đồng hồ 3</div>
+            </div>
+            <div class="energy_content-chart">Biểu đồ</div>
+        </div>
+        <div class="energy_container">
+            <div class="energy_container-gauges">Đồng hồ tổng</div>
+            <div class="energy_container-chart">Biểu đồ tổng</div>
+        </div>
+    </div>
 </body>
 </html>
