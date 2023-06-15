@@ -23,6 +23,9 @@
     <script type="text/javascript" src="https://code.jscharting.com/latest/modules/types.js"></script>
 
     <script src = "js/plotly-latest.min.js"></script>
+    
+    <script src="/js/canvasjs.min.js"></script>
+
     <link rel="stylesheet"   href="/css/energy.css">
 
 <script>
@@ -63,7 +66,9 @@ var socket = io(document.location.host)
                 <script>gauge_power_total('gauge_Total_power','Total_power');</script>
             </div>
             </div>
-            <div class="energy_content-chart">Biểu đồ</div>
+            <div  class="energy_content-chart">Biểu đồ
+
+            </div>
         </div>
         <div class="energy_container">
             <div class="energy_container-gauges">
