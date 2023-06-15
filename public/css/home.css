@@ -55,9 +55,8 @@
  }
  .infogauge
  {
-    position: relative;
     font-weight: bold;
-    left: 25%;
+    text-align: center;
     color: #0bdedf;
  }
 #Baocao{
