@@ -112,7 +112,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    overflow: scroll;
 }
 .sub_menu a{
     text-transform: uppercase;
