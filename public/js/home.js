@@ -27,7 +27,7 @@ function gauge_temp_1(idg,data_pre) {
         value_gauge=data;  
       
        var a =value_gauge.toFixed(1);
-       value_gauge=parseFloat(a);
+      //  value_gauge=parseFloat(a);
        
 
       });
@@ -129,7 +129,7 @@ function gauge_temp_2(idg,data_pre) {
         value_gauge=data;  
       
        var a =value_gauge.toFixed(1);
-       value_gauge=parseFloat(a);
+      //  value_gauge=parseFloat(a);
        
 
       });
@@ -219,7 +219,7 @@ function gauge_temp_3(idg,data_pre) {
       
        var a =value_gauge.toFixed(1);
        value_gauge=parseFloat(a);
-       console.log(value_gauge);
+      //  console.log(value_gauge);
        
 
       });
@@ -303,19 +303,12 @@ function chart_realtime(id,data1,data2,data3)
     var data1;
     var data2;
     var data3;
-    
+
+    console.log('123');
 
 
-    socket.on(data_pre, function (data)
-    { 
 
-      value_gauge=data;  
-    
-     var a =value_gauge.toFixed(1);
-     value_gauge=parseFloat(a);
-     
-
-    });
+   
     
     var chart = new CanvasJS.Chart(id,
     {
@@ -373,9 +366,39 @@ function chart_realtime(id,data1,data2,data3)
     
     var updateInterval = 1000
     // initial value
-    var yValue1  ; 
+    var yValue1=0  ; 
     var yValue2  ;
     var yValue3  ;
+
+
+    socket.on(data1, function (data)
+    { 
+
+      yValue1=data;  
+ 
+     
+
+    });
+
+    socket.on(data2, function (data)
+    { 
+
+      yValue2=data;  
+ 
+     
+
+    });
+
+    socket.on(data2, function (data)
+    { 
+
+      yValue3=data;  
+ 
+     
+
+    });
+
+    console.log(yValue1);
     
   
     
@@ -394,9 +417,7 @@ function chart_realtime(id,data1,data2,data3)
      
     
         // adding random value and rounding it to two digits. 
-        yValue1 = data1;
-        yValue2 = data2;
-        yValue3 = data3;
+   
     
         // pushing the new values
         dataPoints1.push({
