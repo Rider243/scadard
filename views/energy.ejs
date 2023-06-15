@@ -17,6 +17,11 @@
     <script src = "js/jquery-ui.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> -->
     <script src = "js/FileSaver.min.js"></script>
+    <script src = "js/energy.js"></script>
+
+    <script src = "js/code.jscharting.com_latest_jscharting.js"></script>
+    <script type="text/javascript" src="https://code.jscharting.com/latest/modules/types.js"></script>
+
     <script src = "js/plotly-latest.min.js"></script>
     <link rel="stylesheet"   href="/css/energy.css">
 
@@ -28,10 +33,37 @@ var socket = io(document.location.host)
     <%- include('header.ejs'); -%>
     <div class="main">
         <div class="energy_content">
-            <div class="energy_content-gauges">
-                <div class="energy_content-item">Đồng hồ 1</div>
-                <div class="energy_content-item">Đồng hồ 2</div>
-                <div class="energy_content-item">Đồng hồ 3</div>
+                    <div class="gauges"     >
+                        <div id="gauge_energy1"></div>
+                        <p class="infogauge">Power L1</p>
+                    </div>
+                    <script>gauge_power('gauge_energy1','L1_power');</script>
+                
+                    <div class="gauges"     >
+                        <div id="gauge_energy2" ></div>
+                        <p class="infogauge">Power L2</p>
+                    </div>
+                    <script>gauge_power('gauge_energy2','L2_power');</script>
+
+                    <div class="gauges"     >
+                        <div id="gauge_energy3"></div>
+                        <p class="infogauge">Power L3</p>
+                    </div>
+                    <script>gauge_power('gauge_energy3','L3_power');</script>
+
+                    <div class="gauges"     >
+                        <div id="gauge_Total_power"></div>
+                        <p class="infogauge">Total power real time</p>
+                    </div>
+                    <script>gauge_power_total('gauge_Total_power','Total_power');</script>
+
+                    <div class="gauges"     >
+                        <div id="gauge_Total_energy"></div>
+                        <p class="infogauge">Total power real time</p>
+                    </div>
+                    <script>gauge_energy_total('gauge_Total_energy','Total_Energy');</script>
+
+
             </div>
             <div class="energy_content-chart">Biểu đồ</div>
         </div>
