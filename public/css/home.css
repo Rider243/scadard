@@ -14,7 +14,7 @@
  }
  .container_chart{
     width: 100%;
-    height: 80%;
+    max-height: 700px;
     display: flex;
  }
 
@@ -53,9 +53,9 @@
 #Baocao{
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-bottom: 10px;
+    height: 100px;
+    align-items: center;
+    padding: 10px;
 }
  
 /*//////////////Hiển thị dữ liệu bảng 1 - Start/////////////////*/
