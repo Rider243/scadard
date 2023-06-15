@@ -281,17 +281,20 @@ function gauge_power(idg,data_pre) {
   }
 
 
-  function chart_realtime(id,data1,data2,data3,name1,name2,name3)
+  function chart_realtime(id,data1,data2,data3,data4,name1,name2,name3,name4)
 {
     var dataPoints1 = [];
     var dataPoints2 = [];
     var dataPoints3 = [];
+    var dataPoints4 = [];
     var data1;
     var data2;
     var data3;
+    var data4;
     var yValue1 ; 
     var yValue2  ;
     var yValue3  ;
+    var yValue4  ;
 
     
     var chart = new CanvasJS.Chart(id,
@@ -362,8 +365,6 @@ function gauge_power(idg,data_pre) {
     console.log(yValue1);
     console.log(data1);
     
-  
-    
  
     function updateChart( ) {
 
@@ -392,7 +393,16 @@ function gauge_power(idg,data_pre) {
       yValue3=data;  
  
      
-    console.log('789');
+     
+    });
+
+    socket.on(data4, function (data)
+    { 
+
+      yValue4=data;  
+ 
+     
+     
     });
 
         var time = new Date;
@@ -423,6 +433,10 @@ function gauge_power(idg,data_pre) {
             x: time.getTime(),
             y: yValue3
         });
+        dataPoints4.push({
+            x: time.getTime(),
+            y: yValue4
+        });
         
         
         
@@ -433,6 +447,7 @@ function gauge_power(idg,data_pre) {
                     dataPoints1.shift();
                     dataPoints2.shift();
                     dataPoints3.shift();
+                    dataPoints4.shift();
                 }
             }
          
@@ -442,7 +457,8 @@ function gauge_power(idg,data_pre) {
         // updating legend text with  updated with y Value 
         chart.options.data[0].legendText = name1 ;
         chart.options.data[1].legendText =name2 ; 
-        chart.options.data[2].legendText = name3  ; 
+        chart.options.data[2].legendText = name3  ;
+        chart.options.data[3].legendText = name4  ; 
         chart.render();
     }
     // generates first set of dataPoints 
