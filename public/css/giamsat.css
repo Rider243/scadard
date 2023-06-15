@@ -8,8 +8,8 @@
 .container_gauges
 {
    width: 41%;
-   height: 100%;
-   margin-top: 40px;
+   height: 90%;
+   margin-top: 75px;
 }
 .container_chart-gauges {
     flex: 1;
@@ -26,7 +26,7 @@
 
 .content_chat{
     width: 100%;
-    background-color: #fff;
+    background-color:  #173752;
     height: calc(100% / 3);
 }
 .content_chat:not(:first-child){

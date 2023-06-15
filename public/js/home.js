@@ -16,367 +16,432 @@ function myTimer()
     });
 }
 
-
-
-//////////////////////////gauge/////////////
-  // đồng hồ đo áp suất các thứ
+ 
+function gauge_temp_1(idg,data_pre) {
   var  value_gauge=0;
-  function  gauge_temp_1(id,data_pre,name)
-   {
+ 
+  
+     socket.on(data_pre, function (data)
+      { 
+ 
+        value_gauge=data;  
+      
+       var a =value_gauge.toFixed(1);
+       value_gauge=parseFloat(a);
+       
 
-     socket.on(data_pre, function (data)
-     { 
- 
-       gaugePS.value=data;  
- 
-       value_gauge= gaugePS.value;
-     
-      
-       
- 
-     if (data>=0&&data<=350) {
-         
-           
-       gaugePS.update({
-           colorBarProgress: 'yellow'
-         });
-       
-   }
-     else if (data>110&&data<=400) {
-     
-            
-       gaugePS.update({
-           colorBarProgress: '#00FF00'
-         });
-       
-   }
-       
- 
-    else   {
-      
-       gaugePS.update({
-           colorBarProgress: 'red'
-         });
-       
-    }
- 
-    gaugePS.draw(); 
-   
- 
- });
- 
-     
-      
-     var gaugePS = new RadialGauge({
-         renderTo: id,
-         width: 220,
-         height: 220,
-         units: name,
-         minValue: 0,
-         maxValue: 450,
-         value:0,
-         majorTicks: [
-             '0',
-             '50',
-             '100',
-             '150',
-             '200',
-             '250',
-             '300',
-             '350',
-             '400',
-             '450'
-         ],
-         minorTicks: 1,
-         ticksAngle: 270,
-         startAngle: 45,
-         strokeTicks: true,
-         highlights  : [
-             { from : 0,  to : 350, color : 'yellow' },
-             { from : 350,  to : 410, color : '#00FF00' },
-             { from : 410, to : 450, color : 'red' }
-         ],
-         valueInt: 1,
-         valueDec: 1,
-         colorPlate: "#fff",
-         colorMajorTicks: "#686868",
-         colorMinorTicks: "#686868",
-         colorTitle: "#000",
-         colorUnits: "#000",
-         colorNumbers: "#686868",
-         valueBox: true,
-         colorValueText: "#000",
-         colorValueBoxRect: "#fff",
-         colorValueBoxRectEnd: "#fff",
-         colorValueBoxBackground: "#fff",
-         colorValueBoxShadow: false,
-         colorValueTextShadow: false,
-         colorNeedleShadowUp: true,
-         colorNeedleShadowDown: false,
-         colorNeedle: "rgba(200, 50, 50, .75)",
-         colorNeedleEnd: "rgba(200, 50, 50, .75)",
-         colorNeedleCircleOuter: "rgba(200, 200, 200, 1)",
-         colorNeedleCircleOuterEnd: "rgba(200, 200, 200, 1)",
-         borderShadowWidth: 0,
-         borders: true,
-         borderInnerWidth: 0,
-         borderMiddleWidth: 0,
-         borderOuterWidth: 5,
-         colorBorderOuter: "#fafafa",
-         colorBorderOuterEnd: "#cdcdcd",
-         needleType: "arrow",
-         needleWidth: 2,
-         needleCircleSize: 7,
-         needleCircleOuter: true,
-         needleCircleInner: false,
-         animationDuration: 1500,
-         animationRule: "dequint",
-         fontNumbers: "Verdana",
-         fontTitle: "Verdana",
-         fontUnits: "Verdana",
-         fontValue: "Led",
-         fontValueStyle: 'italic',
-         fontNumbersSize: 20,
-         fontNumbersStyle: 'italic',
-         fontNumbersWeight: 'bold',
-         fontTitleSize: 24,
-         fontUnitsSize: 30,
-         fontValueSize: 50,
-         animatedValue: true, 
-         barWidth:10,
-         barShadow: 10,
-        
- 
-     });  
-      
-   }
-
-   function  gauge_temp_2(id,data_pre,name)
-   {
- 
-     
-     socket.on(data_pre, function (data)
-     { 
- 
-       gaugePS.value=data;  
- 
-       value_gauge= gaugePS.value;
-     
-      
-       
- 
-     if (data>=0&&data<=200) {
-         
-           
-       gaugePS.update({
-           colorBarProgress: 'yellow'
-         });
-       
-   }
-     else if (data>200&&data<=240) {
-     
-            
-       gaugePS.update({
-           colorBarProgress: '#00FF00'
-         });
-       
-   }
-       
- 
-    else   {
-      
-       gaugePS.update({
-           colorBarProgress: 'red'
-         });
-       
-    }
- 
-    gaugePS.draw(); 
-   
- 
- });
- 
-     
-      
-     var gaugePS = new RadialGauge({
-         renderTo: id,
-         width: 220,
-         height: 220,
-         units: name,
-         minValue: 0,
-         maxValue: 300,
-         value:0,
-         majorTicks: [
-             '0',
-             '50',
-             '100',
-             '150',
-             '200',
-             '250',
-             '300'
-         ],
-         minorTicks: 1,
-         ticksAngle: 270,
-         startAngle: 45,
-         strokeTicks: true,
-         highlights  : [
-             { from : 0,  to : 200, color : 'yellow' },
-             { from : 200,  to : 240, color : '#00FF00' },
-             { from : 240, to : 300, color : 'red' }
-         ],
-         valueInt: 1,
-         valueDec: 1,
-         colorPlate: "#fff",
-         colorMajorTicks: "#686868",
-         colorMinorTicks: "#686868",
-         colorTitle: "#000",
-         colorUnits: "#000",
-         colorNumbers: "#686868",
-         valueBox: true,
-         colorValueText: "#000",
-         colorValueBoxRect: "#fff",
-         colorValueBoxRectEnd: "#fff",
-         colorValueBoxBackground: "#fff",
-         colorValueBoxShadow: false,
-         colorValueTextShadow: false,
-         colorNeedleShadowUp: true,
-         colorNeedleShadowDown: false,
-         colorNeedle: "rgba(200, 50, 50, .75)",
-         colorNeedleEnd: "rgba(200, 50, 50, .75)",
-         colorNeedleCircleOuter: "rgba(200, 200, 200, 1)",
-         colorNeedleCircleOuterEnd: "rgba(200, 200, 200, 1)",
-         borderShadowWidth: 0,
-         borders: true,
-         borderInnerWidth: 0,
-         borderMiddleWidth: 0,
-         borderOuterWidth: 5,
-         colorBorderOuter: "#fafafa",
-         colorBorderOuterEnd: "#cdcdcd",
-         needleType: "arrow",
-         needleWidth: 2,
-         needleCircleSize: 7,
-         needleCircleOuter: true,
-         needleCircleInner: false,
-         animationDuration: 1500,
-         animationRule: "dequint",
-         fontNumbers: "Verdana",
-         fontTitle: "Verdana",
-         fontUnits: "Verdana",
-         fontValue: "Led",
-         fontValueStyle: 'italic',
-         fontNumbersSize: 20,
-         fontNumbersStyle: 'italic',
-         fontNumbersWeight: 'bold',
-         fontTitleSize: 24,
-         fontUnitsSize: 30,
-         fontValueSize: 50,
-         animatedValue: true, 
-         barWidth:10,
-         barShadow: 10
- 
-     });  
-   }
-   function  gauge_temp_3(id,data_pre,name)
-   {
- 
-     
-     socket.on(data_pre, function (data)
-     { 
- 
-       gaugePS.value=data;  
- 
-       value_gauge= gaugePS.value;
-     
-       gaugePS.update({
-        colorBarProgress: '#00FF00'
       });
+  var chart = JSC.chart(idg, 
+
+    {
+      debug: true,
+ 
+      legend_visible: false,
+      defaultTooltip_enabled: false,
+      xAxis_spacingPercentage: 0.4,
+      yAxis: [
+        {
+          id: 'ax1',
+          defaultTick: { padding: 10, enabled: false },
+          customTicks: [300, 350, 400, 450],
+    
+          line: {
+            width: 5,
+            /*Defining the option will enable it.*/
+            breaks: {},   
+            /*Palette is defined at series level with an ID referenced here.*/
+            color: 'smartPalette:pal1'
+          },
+          scale_range: [300, 450]
+        },
+      ],
+      
+      defaultSeries: {
+        type: 'gauge column roundcaps',
+        shape: {
+         
+          label: {
+            text: '%max',
+            align: 'center',
+            verticalAlign: 'middle',
+            style_fontSize: 12,
+            color:"white"
+          }
+        }
+      },
+  
+      series: [
+        {
+          type: 'column roundcaps',
+          name: 'Temperatures',
+          yAxis: 'ax1',
+          
+          palette: {
+            
+            id: 'pal1',
+            pointValue: '%yValue',
+            ranges: [
+              { value: 300, color: '#FFD221' },
+              { value: 350, color: '#21D683' }, 
+
+              { value: [400, 450], color: '#FF5353' }
+            ]
+          },
+          fill: ['red', true] // Disable shading effect and set solid color
+        },
+      ]
+    });
+
+    
+    
+    var  INTERVAL_ID = setInterval(function() { 
+      chart.options({ 
+     
+        series: [
+          {
+            
+            palette: {
+       
+              pointValue: '%yValue',
+              ranges: [
+                { value: 300, color: '#FFD221' },
+                { value: 350, color: '#21D683' }, 
+  
+                { value: [400, 450], color: '#FF5353' }
+              ]
+            },
+            points: [['x', [300, value_gauge]]]
+          },
+        ]
+        }); 
+      }, 500);  
+
+}
+
+
+function gauge_temp_2(idg,data_pre) {
+  var  value_gauge=0;
+ 
+  
+     socket.on(data_pre, function (data)
+      { 
+ 
+        value_gauge=data;  
+      
+       var a =value_gauge.toFixed(1);
+       value_gauge=parseFloat(a);
+       
+
+      });
+  var chart = JSC.chart(idg, 
+
+    {
+      debug: true,
+      legend_visible: false,
+      defaultTooltip_enabled: false,
+      xAxis_spacingPercentage: 0.4,
+      yAxis: [
+        {
+          id: 'ax1',
+          defaultTick: { padding: 10, enabled: false },
+          customTicks: [160, 200, 240, 280],
+          line: {
+            width: 5,
+            /*Defining the option will enable it.*/
+            breaks: {},   
+            /*Palette is defined at series level with an ID referenced here.*/
+            color: 'smartPalette:pal1'
+          },
+          scale_range: [160, 280]
+        },
+      ],
+      defaultSeries: {
+        type: 'gauge column roundcaps',
+        shape: {
+          label: {
+            text: '%max',
+            align: 'center',
+            verticalAlign: 'middle',
+            style_fontSize: 12,
+            color:"white"
+          }
+        }
+      },
+      series: [
+        {
+          type: 'column roundcaps',
+          name: 'Temperatures',
+          yAxis: 'ax1',
+          palette: {
+            id: 'pal1',
+            pointValue: '%yValue',
+            ranges: [
+              { value: 160, color: '#FFD221' },
+              { value: 200, color: '#21D683' }, 
+
+              { value: [240, 280], color: '#FF5353' }
+            ]
+          },
+        },
+      ]
+    });
+    
+    var  INTERVAL_ID = setInterval(function() { 
+      chart.options({ 
+        series: [
+          {
+            palette: {
+
+              pointValue: '%yValue',
+              ranges: [
+                { value: 160, color: '#FFD221' },
+                { value: 200, color: '#21D683' }, 
+  
+                { value: [240, 280], color: '#FF5353' }
+              ]
+            },
+            points: [['x', [160, value_gauge]]]
+          },
+        ]
+        }); 
+      }, 500);  
+
+}
+
+function gauge_temp_3(idg,data_pre) {
+  var  value_gauge=0;
+ 
+  
+     socket.on(data_pre, function (data)
+      { 
+ 
+        value_gauge=data;  
+      
+       var a =value_gauge.toFixed(1);
+       value_gauge=parseFloat(a);
+       console.log(value_gauge);
+       
+
+      });
+  var chart = JSC.chart(idg, 
+
+    {
+      debug: true,
+      legend_visible: false,
+      defaultTooltip_enabled: false,
+      xAxis_spacingPercentage: 0.4,
+      yAxis: [
+        {
+          id: 'ax1',
+          defaultTick: { padding: 10, enabled: false },
+          customTicks: [0, 40, 80,120],
+          line: {
+            width: 5,
+            /*Defining the option will enable it.*/
+            breaks: {},   
+            /*Palette is defined at series level with an ID referenced here.*/
+            color: 'smartPalette:pal1'
+          },
+          scale_range: [0, 120]
+        },
+      ],
+      defaultSeries: {
+        type: 'gauge column roundcaps',
+        shape: {
+          label: {
+            text: '%max',
+            align: 'center',
+            verticalAlign: 'middle',
+            style_fontSize: 12,
+            color:"white"
+          }
+        }
+      },
+      series: [
+        {
+          type: 'column roundcaps',
+          name: 'Temperatures',
+          yAxis: 'ax1',
+          palette: {
+            id: 'pal1',
+            pointValue: '%yValue',
+            ranges: [
+
+              { value: [0, 120], color: '#21D683' }
+            ]
+          },
+        },
+      ]
+    });
+    
+    var  INTERVAL_ID = setInterval(function() { 
+      chart.options({ 
+        series: [
+          {
+            palette: {
+
+              pointValue: '%yValue',
+              ranges: [
+  
+                { value: [0, 120], color: '#21D683' }
+              ]
+            },
+            points: [['x', [0, value_gauge]]]
+          },
+        ]
+        }); 
+      }, 500);  
+
+}
+
+
+function chart_realtime(id,data1,data2,data3)
+{
+    var dataPoints1 = [];
+    var dataPoints2 = [];
+    var dataPoints3 = [];
+    var data1;
+    var data2;
+    var data3;
+    
+
+
+    socket.on(data_pre, function (data)
+    { 
+
+      value_gauge=data;  
+    
+     var a =value_gauge.toFixed(1);
+     value_gauge=parseFloat(a);
+     
+
+    });
+    
+    var chart = new CanvasJS.Chart(id,
+    {
+        zoomEnabled: true,
+
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor:"pointer",
+            verticalAlign: "top",
+            fontSize: 22,
+            fontColor: "dimGrey",
+            itemclick : toggleDataSeries
+        },
+        data: [
+            { 
+            type: "line",
+            xValueType: "dateTime",
+            yValueFormatString: "$####.00",
+            xValueFormatString: "hh:mm:ss TT",
+            showInLegend: true,
+            name: "Min",
+            dataPoints: dataPoints1
+            },
+            {				
+                type: "line",
+                xValueType: "dateTime",
+                yValueFormatString: "$####.00",
+                showInLegend: true,
+                name: "Max" ,
+                dataPoints: dataPoints2
+            },
+            {				
+                type: "line",
+                xValueType: "dateTime",
+                yValueFormatString: "$####.00",
+                showInLegend: true,
+                name: "Tốc độ" ,
+                dataPoints: dataPoints3
+            }
+            
+        ]
+    });
+    
+    function toggleDataSeries(e) {
+        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+            e.dataSeries.visible = false;
+        }
+        else {
+            e.dataSeries.visible = true;
+        }
+        chart.render();
+    }
+    
+    var updateInterval = 1000
+    // initial value
+    var yValue1  ; 
+    var yValue2  ;
+    var yValue3  ;
+    
+  
+    
+ 
+    function updateChart( ) {
+
+        var time = new Date;
+        // starting at 9.30 am
+        
+        time.getHours();
+        time.getMinutes();
+        time.getSeconds();
+        time.getMilliseconds();
+         
+        time.setTime(time.getTime());
+     
+    
+        // adding random value and rounding it to two digits. 
+        yValue1 = data1;
+        yValue2 = data2;
+        yValue3 = data3;
+    
+        // pushing the new values
+        dataPoints1.push({
+            x: time.getTime(),
+            y: yValue1
+        });
+        dataPoints2.push({
+            x: time.getTime(),
+            y: yValue2
+        });
+        
+        dataPoints3.push({
+            x: time.getTime(),
+            y: yValue3
+        });
+        
+        
+        
+         if (dataPoints1.length >= 200) 
+            {
+                for (var i = 0; i < 1; i++) 
+                {                    
+                    dataPoints1.shift();
+                    dataPoints2.shift();
+                    dataPoints3.shift();
+                }
+            }
+         
+         
+       
+    
+        // updating legend text with  updated with y Value 
+        chart.options.data[0].legendText = " Min" + yValue1;
+        chart.options.data[1].legendText = " Max  " + yValue2; 
+        chart.options.data[2].legendText = " Tốc độ  " + yValue3; 
+        chart.render();
+    }
+    // generates first set of dataPoints 
+    updateChart(100);	
+    setInterval(function(){updateChart()}, updateInterval);
+    
+}
 
  
-    gaugePS.draw(); 
-   
  
- });
- 
-     
-      
-     var gaugePS = new RadialGauge({
-         renderTo: id,
-         width: 220,
-         height: 220,
-         units: name,
-         minValue: 0,
-         maxValue: 100,
-         value:0,
-         majorTicks: [
-             '0',
-             '10',
-             '20',
-             '30',
-             '40',
-             '50',
-             '60',
-             '70',
-             '80',
-             '90', 
-             '100'
-         ],
-         minorTicks: 1,
-         ticksAngle: 270,
-         startAngle: 45,
-         strokeTicks: true,
-      
-         valueInt: 1,
-         valueDec: 1,
-         colorPlate: "#fff",
-         colorMajorTicks: "#686868",
-         colorMinorTicks: "#686868",
-         colorTitle: "#000",
-         colorUnits: "#000",
-         colorNumbers: "#686868",
-         valueBox: true,
-         colorValueText: "#000",
-         colorValueBoxRect: "#fff",
-         colorValueBoxRectEnd: "#fff",
-         colorValueBoxBackground: "#fff",
-         colorValueBoxShadow: false,
-         colorValueTextShadow: false,
-         colorNeedleShadowUp: true,
-         colorNeedleShadowDown: false,
-         colorNeedle: "rgba(200, 50, 50, .75)",
-         colorNeedleEnd: "rgba(200, 50, 50, .75)",
-         colorNeedleCircleOuter: "rgba(200, 200, 200, 1)",
-         colorNeedleCircleOuterEnd: "rgba(200, 200, 200, 1)",
-         borderShadowWidth: 0,
-         borders: true,
-         borderInnerWidth: 0,
-         borderMiddleWidth: 0,
-         borderOuterWidth: 5,
-         colorBorderOuter: "#fafafa",
-         colorBorderOuterEnd: "#cdcdcd",
-         needleType: "arrow",
-         needleWidth: 2,
-         needleCircleSize: 7,
-         needleCircleOuter: true,
-         needleCircleInner: false,
-         animationDuration: 1500,
-         animationRule: "dequint",
-         fontNumbers: "Verdana",
-         fontTitle: "Verdana",
-         fontUnits: "Verdana",
-         fontValue: "Led",
-         fontValueStyle: 'italic',
-         fontNumbersSize: 20,
-         fontNumbersStyle: 'italic',
-         fontNumbersWeight: 'bold',
-         fontTitleSize: 24,
-         fontUnitsSize: 30,
-         fontValueSize: 50,
-         animatedValue: true, 
-         barWidth:10,
-         barShadow: 10
- 
-     });  
-   }
 
    var info_l1_line=[];
    var info_l2_line=[];

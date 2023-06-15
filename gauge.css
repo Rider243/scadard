@@ -1,0 +1,14 @@
+@media (max-width: 360px) {
+    .chartDiv {
+      width: 100% !important;
+    }
+  }
+  #dashWrapper {
+    font-family: tahoma, geneva, sans-serif;
+    max-width: 460px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 0px auto;
+  }

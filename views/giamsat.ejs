@@ -11,30 +11,24 @@
 <script src = "socket.io/socket.io.js"></script>
 
 <!-- <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.7/all/gauge.min.js"></script> -->
-<script src = "js/gauge.min.js"></script>
-
-
-
+<!-- <script src = "js/gauge.min.js"></script> -->
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
 <script src = "js/jquery-3.6.0.min.js"></script>
-
-
   <!-- <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script> -->
   <script src = "js/jquery-ui.min.js"></script>
-  
-
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> -->
   
-<script src = "js/FileSaver.min.js"></script>
-  
-  <script src = "js/plotly-latest.min.js"></script>
+<!-- <script src = "js/FileSaver.min.js"></script> -->
+ 
 
 
-  
+  <!-- <script type="text/javascript" src="https://code.jscharting.com/latest/jscharting.js"></script> -->
 
+  <script src = "js/code.jscharting.com_latest_jscharting.js"></script>
 
-  
+  <script src="/js/canvasjs.min.js"></script>
 
+  <script type="text/javascript" src="https://code.jscharting.com/latest/modules/types.js"></script>
 
 <link rel="stylesheet"   href="css/home.css">
 
@@ -43,38 +37,40 @@
     var socket = io(document.location.host)  
 </script>
     </head>
-<body>
+<body onload="
+chart_realtime();
+
+">
     <%- include('header.ejs'); -%>
     <div class="main">
-        <div class="container_gauges">
-            
+        <div class="container_gauges">     
             <div class="row1" style="border-radius: 10px 10px 0 0;">
                 <div class="gauges"    >
-                    <canvas id="gauge_L1_lines"></canvas>
+                    <div id="gauge_L1_lines"></div>
                     <p class="infogauge">Line L1-L2</p>
                 </div>
                 
-                <script>gauge_temp_1('gauge_L1_lines','L1_line','V');</script>
+                <script>gauge_temp_1('gauge_L1_lines','L1_line');</script>
     
     
                 <div class="gauges"    >
-                    <canvas id="gauge_L2_lines"></canvas>
+                    <div id="gauge_L2_lines"></div>
                     <p class="infogauge">Line L2-L3</p>
                 </div>
-                <script>gauge_temp_1('gauge_L2_lines','L2_line','V');</script>
+                <script>gauge_temp_1('gauge_L2_lines','L2_line');</script>
     
                 <div class="gauges"    >
-                    <canvas id="gauge_L3_lines"></canvas>
+                    <div id="gauge_L3_lines"></div>
                     <p class="infogauge">Line L3-L1</p>
                 </div>
-                <script>gauge_temp_1('gauge_L3_lines','L3_line','V');</script>
+                <script>gauge_temp_1('gauge_L3_lines','L3_line');</script>
             </div>
             <div class="row1">
                 <div class="gauges"     >
-                    <canvas id="gauge_L1_phases"></canvas>
+                    <div id="gauge_L1_phases"></div>
                     <p class="infogauge">Phase L1</p>
                 </div>
-                <script>gauge_temp_2('gauge_L1_phases','L1_phase','V');</script>
+                <script>gauge_temp_2('gauge_L1_phases','L1_phase');</script>
                 <!-- <p>
                     Điện áp tối đa hôm nay là
                     <p id="infor1"></p>
@@ -83,54 +79,52 @@
              
                     
                 <div class="gauges"    >
-                    <canvas id="gauge_L2_phases"></canvas>
+                    <div id="gauge_L2_phases"></div>
                     <p class="infogauge">Phase L2</p>
                 </div>
-                <script>gauge_temp_2('gauge_L2_phases','L2_phase','V');</script>
+                <script>gauge_temp_2('gauge_L2_phases','L2_phase');</script>
     
                     
                 <div class="gauges"   >
-                    <canvas id="gauge_L3_phases"></canvas>
+                    <div id="gauge_L3_phases"></div>
                     <p class="infogauge">Phase L3</p>
                 </div>
-                <script>gauge_temp_2('gauge_L3_phases','L3_phase','V');</script>
+                <script>gauge_temp_2('gauge_L3_phases','L3_phase');</script>
             </div>
             <div class="row1" style="border-radius: 0 0 10px 10px;">
 
                 <div class="gauges"     >
-                    <canvas id="gauge_L1_phases_cr"></canvas>
+                    <div id="gauge_L1_phases_cr"></div>
                     <p class="infogauge">Current L1</p>
                 </div>
                 <script>gauge_temp_3('gauge_L1_phases_cr','L1_phase_cr','A');</script>
-                <!-- <p>
-                    Điện áp tối đa hôm nay là
-                    <p id="infor1"></p>
-                    <script>fn_IOFieldDataShow('L1_phase', 'infor1', 1)</script>
-                </p> -->
+
              
-               
-                    
-                
                 <div class="gauges"    >
-                    <canvas id="gauge_L2_phases_cr"></canvas>
+                    <div id="gauge_L2_phases_cr"></div>
                     <p class="infogauge">Current L2</p>
                 </div>
-                <script>gauge_temp_3('gauge_L2_phases_cr','L2_phase_cr','A');</script>
+                <script>gauge_temp_3('gauge_L2_phases_cr','L2_phase_cr');</script>
     
                     
                 <div class="gauges"   >
-                    <canvas id="gauge_L3_phases_cr"></canvas>
+                    <div id="gauge_L3_phases_cr"></div>
                     <p class="infogauge">Current L3</p>
                 </div>
-                <script>gauge_temp_3('gauge_L3_phases_cr','L3_phase_cr','A');</script>
+                <script>gauge_temp_3('gauge_L3_phases_cr','L3_phase_cr');</script>
             </div>
 
 
          </div>
+
          <div class="container_chart-gauges">
+
+            <div id="chart_line_voltage" class="content_chat"></div>
+
             <div class="content_chat"></div>
+
             <div class="content_chat"></div>
-            <div class="content_chat"></div>
+            
          </div>
     </div>
 </body>
