@@ -1,0 +1,34 @@
+*{
+    padding: 0;
+    border: none;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container_gauges
+{
+   width: 41%;
+   height: 100%;
+   margin-top: 40px;
+}
+.container_chart-gauges {
+    flex: 1;
+    height:  90%;
+    background-color: #173752;
+    margin-top: 75px;
+    margin-left: 8px;
+    margin-right: 8px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+
+.content_chat{
+    width: 100%;
+    background-color: #fff;
+    height: calc(100% / 3);
+}
+.content_chat:not(:first-child){
+    margin-top: 10px;
+}

@@ -29,10 +29,12 @@
  .row1
  {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    background-color: #173752;
+    padding-bottom: 15px;
+    margin-left: 8px;
+    margin-right: 8px;
  }
-
  .row2
  {
     display: flex;
@@ -94,7 +96,7 @@
  #table_info  { border-collapse: collapse; width: 100%; }
  #table_info th, td { padding: 8px 12px;   border:1px solid #a3855f; }
  #table_info th     { background:#183853; color: #2bb892; width: 70px;}
- #table_info td  { background:#03243f; color: #fff; width: 70px;}
+ #table_info td  { background:#03243f; color:#4b657b; width: 70px;}
 
   /*//////////////TRƯỜNG TÌM KIẾM DỮ LIỆU/////////////////*/
  
@@ -210,7 +212,7 @@
 }
 
 .title{
-color: rgb(19, 23, 241);
+color: #0bdedf;
 text-align: center;
 width: 100%;
     }

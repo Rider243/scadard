@@ -91,6 +91,7 @@
     width: 100%;
     background-color: #03243f;
     height: calc(100vh - var(--height-header));
+    display: flex;
 }
 
 .sub_menu{

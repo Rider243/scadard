@@ -144,9 +144,11 @@ function myTimer()
          fontValueSize: 50,
          animatedValue: true, 
          barWidth:10,
-         barShadow: 10
+         barShadow: 10,
+        
  
      });  
+      
    }
 
    function  gauge_temp_2(id,data_pre,name)

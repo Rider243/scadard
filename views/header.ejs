@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="sub_menu">
-        <a href="#">Đồng hồ giám sát</a>
+        <a href="http://localhost:8080/giamsat">Đồng hồ giám sát</a>
         <a href="http://localhost:8080/export">Trích xuất</a>
         <a href="#">Điện năng tiêu thụ</a>
     </div>
@@ -54,5 +54,12 @@
         noti_time.innerHTML = `Thời gian: ${h}h:${p}p:${s}`;
     }
     setInterval(updateTime, 1000);
+    const url = window.location.pathname; // lấy đường dẫn đầy đủ
+		const tachchuoi = url.split('/'); // tách đường dẫn thành các đoạn
+		const value = tachchuoi[1]; // lấy giá trị ở đoạn thứ 2
+        const title = document.querySelector('.header_content-title');
+        if(value == "giamsat"){
+            title.innerHTML = "Đồng hồ giám sát"
+        }
 </script>
 </html>
