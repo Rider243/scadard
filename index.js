@@ -83,6 +83,7 @@ app.get("/energy", function(req, res){
 
 
 var dataArrip = [];
+var dataArrip2 = [];
 
 // create an empty modbus client
 const Modbus2 = require('modbus-serial');
@@ -115,7 +116,7 @@ setInterval(() => {
 
 function run() {
     // read the 4 registers starting at address 5
-    client2.readHoldingRegisters(4020,20)
+    client2.readHoldingRegisters(4020,27)
         .then(function(d) {
             console.log("Receive:", d.data);
            var datad =d.data;
@@ -139,6 +140,32 @@ function run() {
             console.log(e.message);
         })
         // .then(close);
+
+        client2.readHoldingRegisters(4001,3)
+        .then(function(d) {
+            console.log("Receive:", d.data);
+           var datad =d.data;
+
+           for(var i=0;i<datad.length;i++)
+           {
+
+            if (i%3!=0) {
+                dataArrip2[i]=datad[i]+datad[i-1]*65535; 
+                
+            }
+            else
+            {
+                dataArrip2[i]=datad[i];
+            }
+
+           }
+           console.log(dataArrip2);
+
+
+        })
+        .catch(function(e) {
+            console.log(e.message);
+        })
 }
 
 function close() {
@@ -217,7 +244,13 @@ function close() {
         socket.emit("L1_phase_cr",dataArrip[1]*0.001);
         socket.emit("L2_phase_cr",dataArrip[3]*0.001);
         socket.emit("L3_phase_cr",dataArrip[5]*0.001);
-        console.log("giá trị la:" +dataArrip);      
+        socket.emit("L1_power",dataArrip[21]);
+        socket.emit("L2_power",dataArrip[23]);
+        socket.emit("L3_power",dataArrip[25]);
+        socket.emit("Total_Energy",dataArrip2[2]);
+        var a =dataArrip[21]+dataArrip[23]+dataArrip[25];
+        socket.emit("Total_power",a);
+        console.log("giá trị la:" +a);      
 });});
 
 
@@ -246,6 +279,11 @@ var L3_phase = 0;
 var L1_phase_cr = 0;
 var L2_phase_cr = 0;
 var L3_phase_cr = 0;
+var L1_power = 0;
+var L2_power = 0;
+var L3_power = 0;
+var Total_power=0
+var Total_Energy=0
 
 function fn_sql_insert(){
 
@@ -265,7 +303,12 @@ function fn_sql_insert(){
     L1_phase_cr = dataArrip[1] * 0.001;
     L2_phase_cr = dataArrip[3] * 0.001;
     L3_phase_cr = dataArrip[5] * 0.001;
-
+    L1_power = dataArrip[21];
+    L2_power = dataArrip[23];
+    L3_power = dataArrip[25];
+    Total_Energy=dataArrip2[2];
+    Total_power = L1_power+L2_power+L3_power;
+ 
     // Lấy thời gian hiện tại
     var tzoffset = (new Date()).getTimezoneOffset() * 60000; //Vùng Việt Nam (GMT7+)
     var temp_datenow = new Date();
@@ -282,10 +325,15 @@ function fn_sql_insert(){
     var L3_phase_sql = "'" + L3_phase + "',";
     var L1_phase_cr_sql = "'" + L1_phase_cr + "',";
     var L2_phase_cr_sql = "'" + L2_phase_cr + "',";
-    var L3_phase_cr_sql = "'" + L3_phase_cr + "'";
+    var L3_phase_cr_sql = "'" + L3_phase_cr + "',";
+    var L1_power_sql = "'" + L1_power + "',";
+    var L2_power_sql = "'" + L2_power + "',";
+    var L3_power_sql = "'" + L3_power + "',";
+    var Total_power_sql = "'" + Total_power +  "',";
+    var Total_Energy_sql = "'" + Total_Energy + "'";
     // Ghi dữ liệu vào SQL
    
-        var sql_write_str11 = "INSERT INTO " + sqltable_Name + " (date_time, L1_line, L2_line, L3_line, L1_phase,L2_phase, L3_phase, L1_phase_cr,L2_phase_cr, L3_phase_cr) VALUES (";
+        var sql_write_str11 = "INSERT INTO " + sqltable_Name + " (date_time, L1_line, L2_line, L3_line, L1_phase,L2_phase, L3_phase, L1_phase_cr,L2_phase_cr, L3_phase_cr,L1_power,L2_power,L3_power,Total_power,Total_Energy) VALUES (";
         var sql_write_str12 = timeNow_toSQL 
                             + L1_line_sql 
                             + L2_line_sql
@@ -296,6 +344,11 @@ function fn_sql_insert(){
                             + L1_phase_cr_sql
                             + L2_phase_cr_sql
                             + L3_phase_cr_sql
+                            + L1_power_sql
+                            + L2_power_sql
+                            + L3_power_sql
+                            + Total_power_sql
+                            +Total_Energy
                             ;
         var sql_write_str1 = sql_write_str11 + sql_write_str12 + ");";
         // Thực hiện ghi dữ liệu vào SQL
