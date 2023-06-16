@@ -17,14 +17,15 @@
     <script src = "js/jquery-ui.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script> -->
     <script src = "js/FileSaver.min.js"></script>
-    <script src = "js/energy.js"></script>
+  
 
     <script src = "js/code.jscharting.com_latest_jscharting.js"></script>
     <script type="text/javascript" src="https://code.jscharting.com/latest/modules/types.js"></script>
 
     <script src = "js/plotly-latest.min.js"></script>
-    
+
     <script src="/js/canvasjs.min.js"></script>
+    <script src = "js/energy.js"></script>
 
     <link rel="stylesheet"   href="/css/energy.css">
 
@@ -32,7 +33,9 @@
 var socket = io(document.location.host)  
 </script>
 </head>
-<body>
+<body onload="
+chart_power('energy_power_chart','L1_power','L2_power','L3_power','Total_power','L1_power','L2_power','L3_power','Total_power');
+">
     <%- include('header.ejs'); -%>
     <div class="main">
         <div class="energy_content">
@@ -66,7 +69,7 @@ var socket = io(document.location.host)
                 <script>gauge_power_total('gauge_Total_power','Total_power');</script>
             </div>
             </div>
-            <div  class="energy_content-chart">Biểu đồ
+            <div id="energy_power_chart" class="energy_content-chart">Biểu đồ
 
             </div>
         </div>

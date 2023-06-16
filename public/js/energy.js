@@ -281,7 +281,7 @@ function gauge_power(idg,data_pre) {
   }
 
 
-  function chart_realtime(id,data1,data2,data3,data4,name1,name2,name3,name4)
+  function chart_power(id,data1,data2,data3,data4,name1,name2,name3,name4)
 {
     var dataPoints1 = [];
     var dataPoints2 = [];
@@ -315,29 +315,38 @@ function gauge_power(idg,data_pre) {
             { 
             type: "line",
             xValueType: "dateTime",
-            yValueFormatString: "$####.00",
+            yValueFormatString: "####.00",
             xValueFormatString: "hh:mm:ss TT",
             showInLegend: true,
-            name: "Min",
+            name: name1,
             dataPoints: dataPoints1,
             interpolationType: "smooth" // Loại hiệu ứng mượt
             },
             {				
                 type: "line",
                 xValueType: "dateTime",
-                yValueFormatString: "$####.00",
+                yValueFormatString: "####.00",
                 showInLegend: true,
-                name: "Max" ,
+                name: name2 ,
                 dataPoints: dataPoints2,
                 interpolationType: "smooth" // Loại hiệu ứng mượt
             },
             {				
                 type: "line",
                 xValueType: "dateTime",
-                yValueFormatString: "$####.00",
+                yValueFormatString: "####.00",
                 showInLegend: true,
-                name: "Tốc độ" ,
+                name: name3 ,
                 dataPoints: dataPoints3,
+                interpolationType: "smooth" // Loại hiệu ứng mượt
+            },
+            {				
+                type: "line",
+                xValueType: "dateTime",
+                yValueFormatString: "####.00",
+                showInLegend: true,
+                name: name4 ,
+                dataPoints: dataPoints4,
                 interpolationType: "smooth" // Loại hiệu ứng mượt
             }
             
@@ -362,9 +371,7 @@ function gauge_power(idg,data_pre) {
 
 
   
-    console.log(yValue1);
-    console.log(data1);
-    
+
  
     function updateChart( ) {
 
@@ -404,6 +411,10 @@ function gauge_power(idg,data_pre) {
      
      
     });
+
+    console.log(yValue1);
+    console.log(data1);
+    
 
         var time = new Date;
         // starting at 9.30 am
