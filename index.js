@@ -348,7 +348,7 @@ function fn_sql_insert(){
                             + L2_power_sql
                             + L3_power_sql
                             + Total_power_sql
-                            +Total_Energy
+                            + Total_Energy_sql
                             ;
         var sql_write_str1 = sql_write_str11 + sql_write_str12 + ");";
         // Thực hiện ghi dữ liệu vào SQL
