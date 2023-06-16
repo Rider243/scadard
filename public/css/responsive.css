@@ -54,6 +54,9 @@
     .container_gauges{
         width: 100%;
     }
+    .row1:nth-child(2){
+        margin: 10px 8px;
+    }
     /* end giam sat */
 
     /* export */
@@ -64,7 +67,40 @@
         width: 100%;
     }
     /* end export */
+
+    /* energy */
+    .energy_content{
+        width: 100%;
+        margin-left: 0;
+    }
+    .energy_container{
+        width: 100%;
+        margin-left: 0;
+    }
+    .energy_content-gauges{
+        flex-wrap: wrap;
+    }
+    .energy_content-item{
+        width: 50%;
+    }
+    .energy_content-item:not(:first-child){
+        margin: 0;
+    }
+    .energy_content-item:nth-child(1){
+        border-radius: 0 0 10px 0;
+    }
+    .energy_content-item:nth-child(2){
+        border-radius: 0 0 0 10px;
+    }
+    .energy_content-item:nth-child(3){
+        border-radius: 0 10px 0 0;
+    }
+    .energy_content-item:nth-child(4){
+        border-radius: 10px 0 0 0;
+    }
+    /* end energy */
 }
+
 
 /* >= Tablet */
 @media (min-width: 740px) and (max-width:1113px) {

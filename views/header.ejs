@@ -27,7 +27,7 @@
             </div>
             <div class="header_content-item">
                 <h2 class="header_content-vol">
-                Tổng điện tiêu thụ : 123456
+                Tổng điện tiêu thụ : 9,999,999
                 </h2>
             </div>
         </div>
@@ -54,7 +54,7 @@
         const p = new Date().getMinutes();
         const s = new Date().getSeconds();
         noti.innerHTML = `Số liệu ngày: ${d}/${m}/${y}`;
-        noti_time.innerHTML = `Thời gian: ${h}h:${p}p:${s}`;
+        noti_time.innerHTML = `Thời gian: ${h}h:${p}p:${s}s`;
     }
     setInterval(updateTime, 1000);
     const url = window.location.pathname; // lấy đường dẫn đầy đủ

@@ -196,7 +196,8 @@
 }
 .content{
     width: 50%;
-    max-height: 800px;
+    max-height: 750px;
+    min-height: 700px;
     margin-top: 70px;
     margin-left: 8px;
     margin-right: 8px;
