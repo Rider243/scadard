@@ -68,9 +68,11 @@
     /* energy */
     .energy_content{
         width: 100%;
+        margin-left: 0;
     }
     .energy_container{
         width: 100%;
+        margin-left: 0;
     }
     .energy_content-gauges{
         flex-wrap: wrap;
@@ -81,6 +83,7 @@
     .energy_content-item:not(:first-child){
         margin: 0;
     }
+    
     /* end energy */
 }
 

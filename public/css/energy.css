@@ -41,6 +41,7 @@
     height: 70%;
     margin-top: 16px;
     border-radius: 10px;
+    min-height: 300px;
     background-color: #03243f;
     border: 1px solid #2bb892;
 }
@@ -73,4 +74,5 @@
     background-color: #03243f;
     margin-top: 16px;
     border: 1px solid #2bb892;
+    min-height: 300px;
 }
