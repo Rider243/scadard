@@ -210,7 +210,7 @@ function gauge_power(idg,data_pre) {
           {
             id: 'ax1',
             defaultTick: { padding: 10, enabled: false },
-            customTicks: [1000000, 1500000, 2000000, 2500000],
+            customTicks: [0, 3000,6000,9000,12000],
       
             line: {
               width: 5,
@@ -219,7 +219,7 @@ function gauge_power(idg,data_pre) {
               /*Palette is defined at series level with an ID referenced here.*/
               color: 'smartPalette:pal1'
             },
-            scale_range: [1000000, 2500000]
+            scale_range: [0, 12000]
           },
         ],
         
@@ -249,7 +249,7 @@ function gauge_power(idg,data_pre) {
               pointValue: '%yValue',
               ranges: [
   
-                { value: [1000000, 2500000], color: '#21D683' }
+                { value:  [0, 12000], color: '#21D683' }
               ]
             },
           },
@@ -269,10 +269,10 @@ function gauge_power(idg,data_pre) {
                 pointValue: '%yValue',
                 ranges: [
   
-                    { value: [1000000, 2500000], color: '#21D683' }
+                    { value:  [0, 12000], color: '#21D683' }
                   ]
               },
-              points: [['x', [1000000, value_gauge]]]
+              points: [['x', [0, value_gauge]]]
             },
           ]
           }); 

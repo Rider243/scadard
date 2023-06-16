@@ -247,7 +247,7 @@ function close() {
         socket.emit("L1_power",dataArrip[21]);
         socket.emit("L2_power",dataArrip[23]);
         socket.emit("L3_power",dataArrip[25]);
-        socket.emit("Total_Energy",dataArrip2[2]);
+        socket.emit("Total_Energy",dataArrip2[2]*0.001);
         var a =dataArrip[21]+dataArrip[23]+dataArrip[25];
         socket.emit("Total_power",a);
         console.log("giá trị la:" +a);      
@@ -306,7 +306,7 @@ function fn_sql_insert(){
     L1_power = dataArrip[21];
     L2_power = dataArrip[23];
     L3_power = dataArrip[25];
-    Total_Energy=dataArrip2[2];
+    Total_Energy=dataArrip2[2]*0.001;
     Total_power = L1_power+L2_power+L3_power;
  
     // Lấy thời gian hiện tại
@@ -492,10 +492,6 @@ function fn_SQLSearch_bytime()
                 } else {
                     // const objectifyRawPacket = row => ({...row});
                     // const convertedResponse = results.map(objectifyRawPacket);
-
-
-
-                   
                     const convertedResponse = results.map(row => ({
                         date_time: row.date_time.toLocaleString(),
                         L1_line: row.L1_line,
@@ -526,6 +522,100 @@ function fn_SQLSearch_bytime()
         });
     });
 }
+
+
+function fn_SQLSearch_bytime()
+{
+    io.on("connection", function(socket){
+        socket.on("msg_SQL_ByTime", function(data)
+        {
+            var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset time Việt Nam (GMT7+)
+            // Lấy thời gian tìm kiếm từ date time piker
+            var timeS = new Date(data[0]); // Thời gian bắt đầu
+            var timeE = new Date(data[1]); // Thời gian kết thúc
+            // Quy đổi thời gian ra định dạng cua MySQL
+            
+
+ if (timeS == "Invalid Date"||timeE == "Invalid Date") 
+ {
+    var sqltable_Name = "dpm680_data";
+    var queryy1 = "SELECT * FROM " + sqltable_Name  + ";"
+    sqlcon.query(queryy1, function(err, results, fields) {
+        if (err) {
+            console.log(err);
+        } else {
+            // const objectifyRawPacket = row => ({...row });
+            // const convertedResponse = results.map(objectifyRawPacket);
+            const convertedResponse = results.map(row => ({
+                date_time: row.date_time.toLocaleString(),
+                L1_line: row.L1_line,
+                L2_line: row.L2_line,
+                L3_line: row.L3_line,
+                L1_phase: row.L1_phase,
+                L2_phase: row.L2_phase,
+                L3_phase: row.L3_phase,
+                L1_phase_cr: row.L1_phase_cr,
+                L2_phase_cr: row.L2_phase_cr,
+                L3_phase_cr: row.L3_phase_cr,
+                // Các cột khác
+              }));
+
+            SQL_Excel = convertedResponse; // Xuất báo cáo Excel
+            socket.emit('SQL_ByTime', convertedResponse);
+            // console.log(convertedResponse);
+        }
+            });
+            }
+
+    else
+    {
+            var Query1;
+
+            var timeS1 = "'" + (new Date(timeS - tzoffset)).toISOString().slice(0, -1).replace("T"," ")	+ "'";
+            var timeE1 = "'" + (new Date(timeE - tzoffset)).toISOString().slice(0, -1).replace("T"," ") + "'";
+            var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
+ 
+            var sqltable_Name = "dpm680_data"; // Tên bảng
+            var dt_col_Name = "date_time";  // Tên cột thời gian+
+            var Query1 = "SELECT * FROM " + sqltable_Name + " WHERE "+ dt_col_Name + " BETWEEN ";
+            var Query = Query1 + timeR + ";";
+            
+            sqlcon.query(Query, function(err, results, fields) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    // const objectifyRawPacket = row => ({...row});
+                    // const convertedResponse = results.map(objectifyRawPacket);
+                    const convertedResponse = results.map(row => ({
+                        date_time: row.date_time.toLocaleString(),
+                        L1_line: row.L1_line,
+                        L2_line: row.L2_line,
+                        L3_line: row.L3_line,
+                        L1_phase: row.L1_phase,
+                        L2_phase: row.L2_phase,
+                        L3_phase: row.L3_phase,
+                        L1_phase_cr: row.L1_phase_cr,
+                        L2_phase_cr: row.L2_phase_cr,
+                        L3_phase_cr: row.L3_phase_cr,
+                        // Các cột khác
+                      }));
+        
+                      SQL_Excel = convertedResponse; // Xuất báo cáo Excel
+                  
+                    // console.log(convertedResponse);
+
+                    socket.emit('SQL_ByTime', convertedResponse);
+
+                } 
+            });
+
+    }
+
+
+
+        });
+    });
+ 
 
 
 
