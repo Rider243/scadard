@@ -6,12 +6,12 @@ function myTimer()
 }
 
  // Chương trình con đọc dữ liệu lên IO Field
- function fn_IOFieldDataShow(tag, IOField, tofix){
+ function fn_IOFieldDataShow(tag, IOField, tofix,content,unit){
     socket.on(tag,function(data){
         if(tofix == 0){
-            document.getElementById(IOField).value = data;
+            document.getElementById(IOField).innerText = data;
         } else{
-        document.getElementById(IOField).innerText  = data.toFixed(tofix);
+        document.getElementById(IOField).innerText  = content+data.toFixed(tofix)+unit;
         }
     });
 }
@@ -310,7 +310,7 @@ function chart_realtime(id,data1,data2,data3,name1,name2,name3)
     
     var chart = new CanvasJS.Chart(id,
     {
-        zoomEnabled: true,
+        zoomEnabled: true,theme: "dark1",
 
         toolTip: {
             shared: true
@@ -595,12 +595,7 @@ function Draw_Chart_detail()
         // Generate values
 
         var x1Values = [];
-        // var x2Values = [];
-        // var x3Values = [];
-        // var x4Values = [];
-        // var x5Values = [];
-        // var x6Values = [];
-        // var x7Values = [];
+
 
         var y1Values = [];
         var y2Values = [];
@@ -612,20 +607,8 @@ function Draw_Chart_detail()
         var y8Values = [];
         var y9Values = [];
         var y10Values = [];
-      
-
-
-      
-            
-
 
         x1Values.push(...date_time_detail);
-        // x2Values.push(...date_time_lifter_1_detail);
-        // x3Values.push(...date_time_lifter_1_detail);
-        // x4Values.push(...date_time_lifter_1_detail);
-        // x5Values.push(...date_time_lifter_1_detail);
-        // x6Values.push(...date_time_lifter_1_detail);
-        // x7Values.push(...date_time_lifter_1_detail);
 
 
         y1Values.push(...info_l1_line);
@@ -637,14 +620,7 @@ function Draw_Chart_detail()
         y7Values.push(...info_l1_phase_cr);
         y8Values.push(...info_l2_phase_cr);
         y9Values.push(...info_l3_phase_cr);
-      
-
-
-        
-     
-        
-        
-       
+ 
 
         // Define Data
         var data = [

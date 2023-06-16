@@ -35,6 +35,13 @@ var socket = io(document.location.host)
 </head>
 <body onload="
 chart_power('energy_power_chart','L1_power','L2_power','L3_power','Total_power','L1_power','L2_power','L3_power','Total_power');
+
+fn_SQL_By_Time_energy();
+ 
+
+
+
+ 
 ">
     <%- include('header.ejs'); -%>
     <div class="main">
@@ -43,47 +50,58 @@ chart_power('energy_power_chart','L1_power','L2_power','L3_power','Total_power',
                 <div class="energy_content-item">
                     <div class="gauges"     >
                         <div id="gauge_energy1"></div>
-                        <p class="infogauge">Power L1</p>
+                        <p class="infogauge">Power L1 (KW)</p>
                     </div>
                     <script>gauge_power('gauge_energy1','L1_power');</script>
                 </div>
                 <div class="energy_content-item">
                     <div class="gauges"     >
                         <div id="gauge_energy2" ></div>
-                        <p class="infogauge">Power L2</p>
+                        <p class="infogauge">Power L2 (KW)</p>
                     </div>
                     <script>gauge_power('gauge_energy2','L2_power');</script>
                 </div>
                 <div class="energy_content-item">
                     <div class="gauges"     >
                         <div id="gauge_energy3"></div>
-                        <p class="infogauge">Power L3</p>
+                        <p class="infogauge">Power L3 (KW)</p>
                     </div>
                     <script>gauge_power('gauge_energy3','L3_power');</script>
                 </div>
                       <div class="energy_content-item">
                 <div class="gauges">
                     <div id="gauge_Total_power"></div>
-                    <p class="infogauge">Total power real time</p>
+                    <p class="infogauge">Total power (KW)</p>
                 </div>
                 <script>gauge_power_total('gauge_Total_power','Total_power');</script>
             </div>
             </div>
+
             <div  class="energy_content-chart">
                 <div class="energy_content-chart--item">
                     <div id="energy_power_chart"></div>
                 </div>
             </div>
+
         </div>
+        
         <div class="energy_container">
             <div class="energy_container-gauges">
                 <div class="gauges"     >
                     <div id="gauge_Total_energy"></div>
-                    <p class="infogauge">Total power real time</p>
+                    <p class="infogauge">Total energy (KWh)</p>
                 </div>
                 <script>gauge_energy_total('gauge_Total_energy','Total_Energy');</script>
             </div>
-            <div class="energy_container-chart">Biểu đồ tổng</div>
+            <div id="energy_container-chart" style="max-width: 700px;height: 530px;"></div>
+                 <script>
+                    setTimeout(() => {
+                        Draw_Chart_detail_energy();
+                    fn_SQL_By_Time_display_energy();
+                    }, 1000);
+                   
+
+                </script>
         </div>
     </div>
 </body>

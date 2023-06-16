@@ -247,7 +247,7 @@ function close() {
         socket.emit("L1_power",dataArrip[21]);
         socket.emit("L2_power",dataArrip[23]);
         socket.emit("L3_power",dataArrip[25]);
-        socket.emit("Total_Energy",dataArrip2[2]);
+        socket.emit("Total_Energy",dataArrip2[2]*0.001);
         var a =dataArrip[21]+dataArrip[23]+dataArrip[25];
         socket.emit("Total_power",a);
         console.log("giá trị la:" +a);      
@@ -306,7 +306,7 @@ function fn_sql_insert(){
     L1_power = dataArrip[21];
     L2_power = dataArrip[23];
     L3_power = dataArrip[25];
-    Total_Energy=dataArrip2[2];
+    Total_Energy=dataArrip2[2]*0.001;
     Total_power = L1_power+L2_power+L3_power;
  
     // Lấy thời gian hiện tại
@@ -388,11 +388,20 @@ function fn_sql_read(){
 
 
     // Đọc dữ liệu từ SQL
-function fn_SQLSearch() {
+function fn_SQLSearch_energy() {
     io.on("connection", function(socket) {
-        socket.once("msg_SQL_Show", function(data) {
+        socket.on("msg_SQL_ByTime_energy", function(data) {
+
+            var date = new Date();
+            var year = date.getFullYear();
+            console.log(year);
+            
             var sqltable_Name = "dpm680_data";
-            var queryy1 = "SELECT * FROM " + sqltable_Name  + ";"
+            
+            var queryy1 = "SELECT Month(date_time) AS Month, MAX(Total_Energy) AS Max_Total_Energy FROM dpm680_data WHERE YEAR(date_time) ="+year+" GROUP BY MONTH(date_time) ORDER BY MONTH(date_time);"
+
+
+
             sqlcon.query(queryy1, function(err, results, fields) {
                 if (err) {
                     console.log(err);
@@ -400,21 +409,14 @@ function fn_SQLSearch() {
                     // const objectifyRawPacket = row => ({...row });
                     // const convertedResponse = results.map(objectifyRawPacket);
                     const convertedResponse = results.map(row => ({
-                        date_time: row.date_time.toLocaleString(),
-                        L1_line: row.L1_line,
-                        L2_line: row.L2_line,
-                        L3_line: row.L3_line,
-                        L1_phase: row.L1_phase,
-                        L2_phase: row.L2_phase,
-                        L3_phase: row.L3_phase,
-                        L1_phase_cr: row.L1_phase_cr,
-                        L2_phase_cr: row.L2_phase_cr,
-                        L3_phase_cr: row.L3_phase_cr,
+                        date_time: row.Month.toLocaleString(),
+                        Total_Energy: row.Max_Total_Energy,
+ 
                         // Các cột khác
                       }));
 
 
-                    socket.emit('SQL_Show', convertedResponse);
+                    socket.emit('SQL_ByTime_energy', convertedResponse);
                     // console.log(convertedResponse);
                 }
             });
@@ -424,7 +426,7 @@ function fn_SQLSearch() {
 
 
 setTimeout(() => {
-    // fn_SQLSearch() ;
+    fn_SQLSearch_energy() ;
     fn_SQLSearch_bytime() ;
     fn_Require_ExcelExport();
 }, 1000);
@@ -492,10 +494,6 @@ function fn_SQLSearch_bytime()
                 } else {
                     // const objectifyRawPacket = row => ({...row});
                     // const convertedResponse = results.map(objectifyRawPacket);
-
-
-
-                   
                     const convertedResponse = results.map(row => ({
                         date_time: row.date_time.toLocaleString(),
                         L1_line: row.L1_line,

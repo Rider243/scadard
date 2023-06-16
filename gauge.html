@@ -10,6 +10,8 @@
 
     <script type="text/javascript" src="https://code.jscharting.com/latest/modules/types.js"></script>
 
+    <script type="text/javascript" src="https://code.jscharting.com/latest/modules/toolbar.js"></script>
+
     
 
     <link rel="stylesheet" type="text/css" href="gauge.css" />
@@ -22,94 +24,39 @@
   <body>
     <div id="chartDiv" style="max-width: 740px;height: 400px;margin: 0px auto;"></div>
 
-    <script type="text/javascript">
-      /*
-Modify axis orientation in real-time.
-Learn how to:
+ 
+  </body>
+  <script>
 
-  - Position the axis on top or to the right.
-*/
-      // JS
-      var chart = JSC.chart('chartDiv', {
+    var chart = JSC.chart('chartDiv', {
         debug: true,
-        type: 'column',
-        title_visible: false,
-        legend_position: 'top',
-        xAxis_orientation: 'top',
-        yAxis_orientation: 'right',
-        toolbar_margin: 3,
-        toolbar_items: {
-          yAxis: {
-            type: 'option',
-            position: 'inside left',
-            label_text: 'Y Axis Orientation',
-            boxVisible: true,
-            value: true,
-            icon: {
-              name: 'system/default/zoom/arrow-right',
-              fill: '#cbc8c5',
-              outline_color: '#717370'
-            },
-            states_select_icon_name: 'system/default/zoom/arrow-left',
-            events_change: function(val) {
-              orient('y', val);
-            }
-          },
-          xAxis: {
-            type: 'option',
-            position: 'inside top',
-            label_text: 'X Axis Orientation',
-            boxVisible: true,
-            value: true,
-            icon: {
-              name: 'system/default/zoom/arrow-up',
-              fill: '#cbc8c5',
-              outline_color: '#717370'
-            },
-            states_select_icon_name: 'system/default/zoom/arrow-down',
-            events_change: function(val) {
-              orient('x', val);
-            }
+        type: 'Area Spline',
+        title_label_text: 'Biểu đồ điện năng',
+        legend_visible: false,
+        defaultSeries: {
+          shape_opacity: 0.7,
+          color: '#00EE00',
+          defaultPoint_marker: {
+            size: 10,
+            outline: { color: 'white', width: 2 }
           }
         },
-        yAxis: { label_text: 'Units Sold' },
-        xAxis: { label_text: 'Quarter' },
-        title_label_text: 'Acme Tool Sales',
+         
+        xAxis: { scale_type: 'time' },
         series: [
           {
-            name: 'Saw',
-            id: 's1',
+            name: 'Purchases',
             points: [
-              ['Q1', 230],
-              ['Q2', 240],
-              ['Q3', 267],
-              ['Q4', 238]
+              ['1/1/2020', 29.9],
+              ['1/2/2020', 71.5],
+              ['1/3/2020', 106.4],
+              ['1/6/2020', 129.2],
+              ['1/7/2020', 144.0],
+              ['1/8/2020', 176.0]
             ]
-          },
-          {
-            name: 'Hammer',
-            points: [
-              ['Q1', 325],
-              ['Q2', 347],
-              ['Q3', 392],
-              ['Q4', 371]
-            ]
-          },
-          {
-            name: 'Grinder',
-            points: [
-              ['Q1', 285],
-              ['Q2', 292],
-              ['Q3', 327],
-              ['Q4', 158]
-            ]
-          },
+          }
         ]
       });
-
-      function orient(ax, val) {
-        chart && chart.axes(ax).options({ orientation: val ? 'right' : 'left' });
-      }
-    </script>
-  </body>
+      
+  </script>
 </html>
