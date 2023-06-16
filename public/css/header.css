@@ -82,7 +82,7 @@
 .header_title h2{
     width: 100%;
     font-size: 30px;
-    background: -webkit-linear-gradient(#2ea8db,#a3855f,#2bb892,#2ea8db,#cf6e67);
+    background: -webkit-linear-gradient(#2bb892,#2ea8db,#cf6e67,#2bb892,#2ea8db,#cf6e67);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-align: center;
