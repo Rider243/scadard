@@ -36,6 +36,9 @@
 .energy_content-item:not(:first-child){
     margin-left: 16px;
 }
+.energy_content-item .gauges{
+    padding: 20px;
+}
 .energy_content-chart{
     width: 100%;
     height: 70%;

@@ -130,3 +130,19 @@
 .active{
     background-color: #2eb9d4 !important;
 }
+
+#checkbox_sub-menu{
+    display: none;
+}
+.checkbox_icon{
+    display: none;
+    position: fixed;
+    color: #828282;
+    font-size: 30px;
+    margin-left: 10px;
+    z-index: 1;
+}
+
+#checkbox_sub-menu:checked ~ .sub_menu{
+    display: flex;
+}
