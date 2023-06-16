@@ -13,6 +13,9 @@
    flex-direction: column;
    justify-content: space-around;
 }
+.row1 .gauges{
+    padding: 15px;
+}
 .container_chart-gauges {
     flex: 1;
     background-color: #173752;

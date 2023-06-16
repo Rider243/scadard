@@ -65,6 +65,9 @@
     .row1:nth-child(2){
         margin: 10px 8px;
     }
+    .row1 .gauges{
+        padding: 0;
+    }
     /* end giam sat */
 
     /* export */
