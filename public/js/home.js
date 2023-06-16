@@ -27,7 +27,7 @@ function gauge_temp_1(idg,data_pre) {
         value_gauge=data;  
       
        var a =value_gauge.toFixed(1);
-      //  value_gauge=parseFloat(a);
+       value_gauge=parseFloat(a);
        
 
       });
@@ -129,7 +129,7 @@ function gauge_temp_2(idg,data_pre) {
         value_gauge=data;  
       
        var a =value_gauge.toFixed(1);
-      //  value_gauge=parseFloat(a);
+       value_gauge=parseFloat(a);
        
 
       });
@@ -219,7 +219,7 @@ function gauge_temp_3(idg,data_pre) {
       
        var a =value_gauge.toFixed(1);
        value_gauge=parseFloat(a);
-      //  console.log(value_gauge);
+       console.log(value_gauge);
        
 
       });
@@ -326,28 +326,28 @@ function chart_realtime(id,data1,data2,data3,name1,name2,name3)
             { 
             type: "line",
             xValueType: "dateTime",
-            yValueFormatString: "$####.00",
+            yValueFormatString: "####.00",
             xValueFormatString: "hh:mm:ss TT",
             showInLegend: true,
-            name: "Min",
+            name: name1,
             dataPoints: dataPoints1,
             interpolationType: "smooth" // Loại hiệu ứng mượt
             },
             {				
                 type: "line",
                 xValueType: "dateTime",
-                yValueFormatString: "$####.00",
+                yValueFormatString: "####.00",
                 showInLegend: true,
-                name: "Max" ,
+                name: name2 ,
                 dataPoints: dataPoints2,
                 interpolationType: "smooth" // Loại hiệu ứng mượt
             },
             {				
                 type: "line",
                 xValueType: "dateTime",
-                yValueFormatString: "$####.00",
+                yValueFormatString: "####.00",
                 showInLegend: true,
-                name: "Tốc độ" ,
+                name: name3 ,
                 dataPoints: dataPoints3,
                 interpolationType: "smooth" // Loại hiệu ứng mượt
             }
