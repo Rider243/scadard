@@ -388,11 +388,20 @@ function fn_sql_read(){
 
 
     // Đọc dữ liệu từ SQL
-function fn_SQLSearch() {
+function fn_SQLSearch_energy() {
     io.on("connection", function(socket) {
-        socket.once("msg_SQL_Show", function(data) {
+        socket.on("msg_SQL_ByTime_energy", function(data) {
+
+            var date = new Date();
+            var year = date.getFullYear();
+            console.log(year);
+            
             var sqltable_Name = "dpm680_data";
-            var queryy1 = "SELECT * FROM " + sqltable_Name  + ";"
+            
+            var queryy1 = "SELECT Month(date_time) AS Month, MAX(Total_Energy) AS Max_Total_Energy FROM dpm680_data WHERE YEAR(date_time) ="+year+" GROUP BY MONTH(date_time) ORDER BY MONTH(date_time);"
+
+
+
             sqlcon.query(queryy1, function(err, results, fields) {
                 if (err) {
                     console.log(err);
@@ -400,21 +409,14 @@ function fn_SQLSearch() {
                     // const objectifyRawPacket = row => ({...row });
                     // const convertedResponse = results.map(objectifyRawPacket);
                     const convertedResponse = results.map(row => ({
-                        date_time: row.date_time.toLocaleString(),
-                        L1_line: row.L1_line,
-                        L2_line: row.L2_line,
-                        L3_line: row.L3_line,
-                        L1_phase: row.L1_phase,
-                        L2_phase: row.L2_phase,
-                        L3_phase: row.L3_phase,
-                        L1_phase_cr: row.L1_phase_cr,
-                        L2_phase_cr: row.L2_phase_cr,
-                        L3_phase_cr: row.L3_phase_cr,
+                        date_time: row.Month.toLocaleString(),
+                        Total_Energy: row.Max_Total_Energy,
+ 
                         // Các cột khác
                       }));
 
 
-                    socket.emit('SQL_Show', convertedResponse);
+                    socket.emit('SQL_ByTime_energy', convertedResponse);
                     // console.log(convertedResponse);
                 }
             });
@@ -424,7 +426,7 @@ function fn_SQLSearch() {
 
 
 setTimeout(() => {
-    // fn_SQLSearch() ;
+    fn_SQLSearch_energy() ;
     fn_SQLSearch_bytime() ;
     fn_Require_ExcelExport();
 }, 1000);
@@ -522,100 +524,6 @@ function fn_SQLSearch_bytime()
         });
     });
 }
-
-
-function fn_SQLSearch_bytime()
-{
-    io.on("connection", function(socket){
-        socket.on("msg_SQL_ByTime", function(data)
-        {
-            var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset time Việt Nam (GMT7+)
-            // Lấy thời gian tìm kiếm từ date time piker
-            var timeS = new Date(data[0]); // Thời gian bắt đầu
-            var timeE = new Date(data[1]); // Thời gian kết thúc
-            // Quy đổi thời gian ra định dạng cua MySQL
-            
-
- if (timeS == "Invalid Date"||timeE == "Invalid Date") 
- {
-    var sqltable_Name = "dpm680_data";
-    var queryy1 = "SELECT * FROM " + sqltable_Name  + ";"
-    sqlcon.query(queryy1, function(err, results, fields) {
-        if (err) {
-            console.log(err);
-        } else {
-            // const objectifyRawPacket = row => ({...row });
-            // const convertedResponse = results.map(objectifyRawPacket);
-            const convertedResponse = results.map(row => ({
-                date_time: row.date_time.toLocaleString(),
-                L1_line: row.L1_line,
-                L2_line: row.L2_line,
-                L3_line: row.L3_line,
-                L1_phase: row.L1_phase,
-                L2_phase: row.L2_phase,
-                L3_phase: row.L3_phase,
-                L1_phase_cr: row.L1_phase_cr,
-                L2_phase_cr: row.L2_phase_cr,
-                L3_phase_cr: row.L3_phase_cr,
-                // Các cột khác
-              }));
-
-            SQL_Excel = convertedResponse; // Xuất báo cáo Excel
-            socket.emit('SQL_ByTime', convertedResponse);
-            // console.log(convertedResponse);
-        }
-            });
-            }
-
-    else
-    {
-            var Query1;
-
-            var timeS1 = "'" + (new Date(timeS - tzoffset)).toISOString().slice(0, -1).replace("T"," ")	+ "'";
-            var timeE1 = "'" + (new Date(timeE - tzoffset)).toISOString().slice(0, -1).replace("T"," ") + "'";
-            var timeR = timeS1 + "AND" + timeE1; // Khoảng thời gian tìm kiếm (Time Range)
- 
-            var sqltable_Name = "dpm680_data"; // Tên bảng
-            var dt_col_Name = "date_time";  // Tên cột thời gian+
-            var Query1 = "SELECT * FROM " + sqltable_Name + " WHERE "+ dt_col_Name + " BETWEEN ";
-            var Query = Query1 + timeR + ";";
-            
-            sqlcon.query(Query, function(err, results, fields) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    // const objectifyRawPacket = row => ({...row});
-                    // const convertedResponse = results.map(objectifyRawPacket);
-                    const convertedResponse = results.map(row => ({
-                        date_time: row.date_time.toLocaleString(),
-                        L1_line: row.L1_line,
-                        L2_line: row.L2_line,
-                        L3_line: row.L3_line,
-                        L1_phase: row.L1_phase,
-                        L2_phase: row.L2_phase,
-                        L3_phase: row.L3_phase,
-                        L1_phase_cr: row.L1_phase_cr,
-                        L2_phase_cr: row.L2_phase_cr,
-                        L3_phase_cr: row.L3_phase_cr,
-                        // Các cột khác
-                      }));
-        
-                      SQL_Excel = convertedResponse; // Xuất báo cáo Excel
-                  
-                    // console.log(convertedResponse);
-
-                    socket.emit('SQL_ByTime', convertedResponse);
-
-                } 
-            });
-
-    }
-
-
-
-        });
-    });
- 
 
 
 
