@@ -98,12 +98,13 @@
 
 .sub_menu{
     width: 100%;
-    top: calc(var(--height-header) + 20px);
+    top: calc(var(--height-header) + 25px);
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     z-index: 1;
+    padding-left: 45px;
 }
 .sub_menu a{
     text-transform: uppercase;
@@ -140,7 +141,9 @@
     color: #828282;
     font-size: 30px;
     margin-left: 10px;
-    z-index: 1;
+    z-index: 2;
+    top: calc(var(--height-header));
+    left: 0;
 }
 
 #checkbox_sub-menu:checked ~ .sub_menu{

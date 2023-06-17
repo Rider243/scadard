@@ -15,6 +15,9 @@
         <div class="header_img">
             <img src="/images/logo/cropped-logo-thaco-industries.png" alt="logo thaco" >
         </div>
+        <div class="checkbox_icon">
+            <label class="fa-solid fa-bars" for="checkbox_sub-menu"></label>
+        </div>
         <div class="header_content">
             <div class="header_content-item">
                 <div class="time">
@@ -30,9 +33,7 @@
                 <h2 id="header_content-vol">
                  
                 </h2>
-                <script>fn_IOFieldDataShow('Total_Energy','header_content-vol',1,'Tổng điện tiêu thụ: ',"KWh");
-                // setInterval(fn_IOFieldDataShow(),1000)
-                </script>
+                <script>fn_IOFieldDataShow('Total_Energy','header_content-vol',1,'Tổng điện tiêu thụ: ',"KWh");</script>
             </div>
         </div>
         <div class="header_title">
@@ -40,13 +41,10 @@
         </div>
     </div>
     <input type="checkbox" name="" id="checkbox_sub-menu">
-    <div class="checkbox_icon">
-        <label class="fa-solid fa-bars" for="checkbox_sub-menu"></label>
-    </div>
     <div class="sub_menu">
-        <a href="http://localhost:3000/">Đồng hồ giám sát</a>
-        <a href="http://localhost:3000/export">Trích xuất</a>
-        <a href="http://localhost:3000/energy">Điện năng tiêu thụ</a>
+        <a href="http://10.14.12.116:8080/">Đồng hồ giám sát</a>
+        <a href="http://10.14.12.116:8080/export">Trích xuất</a>
+        <a href="http://10.14.12.116:8080/energy">Điện năng tiêu thụ</a>
     </div>
 </body>
 

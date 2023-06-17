@@ -42,6 +42,7 @@
     background-color: #173752;
     border: 1px solid #2bb892;
     border-radius: 10px;
+    min-height: 215px;
  }
  .row2
  {
