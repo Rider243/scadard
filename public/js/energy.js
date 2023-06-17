@@ -297,7 +297,9 @@ function gauge_power(idg,data_pre) {
     
     var chart = new CanvasJS.Chart(id,
     {
-        zoomEnabled: true,theme: "dark1",theme: "dark1",
+        zoomEnabled: true,backgroundColor: "#163853",
+
+        
         
         toolTip: {
             shared: true
@@ -536,23 +538,19 @@ function fn_table_energy(data){
   date_time_detail.length=0;
  
    if(data){
-       $("#table_info tbody").empty(); 
+  
        var len = data.length;
        var count = 0;
-       var txt = "<tbody>";
+ 
  
        console.log(len);
        if(len > 0){
          for (var i =  0; i <len && count < 10000; i++)
-         {
+                   {
                   count++;
                    date_time_detail.push(data[i].date_time);
                    info_l1_line.push(data[i].Total_Energy);
                    }
-           if(txt != ""){
-           txt +="</tbody>"; 
-           $("#table_info").append(txt);
-           }
        }
        console.log(info_l1_line);
    }   
@@ -560,53 +558,48 @@ function fn_table_energy(data){
    Draw_Chart_detail_energy() ;
  }
 
- function Draw_Chart_detail_energy()
-{
+ function Draw_Chart_detail_energy() {
+  var x1Values = [];
+  var y1Values = [];
+  x1Values.push(...date_time_detail);
+  y1Values.push(...info_l1_line);
 
-        // console.log("lần 1");
-      
-     
-        // Generate values
+  var data = [
+    {
+      x: x1Values,
+      y: y1Values,
+      type: 'bar',
+      name: 'Current L3',
+      hoverinfo: 'x+y',
+      text: y1Values.map(String), // Hiển thị giá trị trên đầu của cột
+      textposition: 'auto',
+      marker: {
+        color: 'rgb(255, 255, 102)', // Màu của cột
+        width: 0.5 // Giảm kích thước của cột
+      }
+    }
+  ];
 
-        var x1Values = [];
-
-
-        var y1Values = [];
-        x1Values.push(...date_time_detail);
-        y1Values.push(...info_l1_line);
-        // Define Data
-        var data = [
-        {x: x1Values, y: y1Values, mode:"lines+markers",type: 'scatter', name: 'Current L3',hoverinfo:'x+y', nticks: 10,fixedrange: true}
-        ];
-
-        //Define Layout
-       // var layout = {title: "Biểu đồ thông số quạt"};
-
-       var layout = {
-        title: "Biểu đồ hệ thống điện RD",
-        paper_bgcolor : 'rgb(22, 56, 83)',
-        plot_bgcolor: 'rgb(22, 56, 83)',
-        borderRadius: '10px',
-        type: 'scatter',
-        font: {
-          color: 'white' // Màu chữ trên biểu đồ
-        },
-        yaxis:
-     {
-       ygrid: true ,// Bật lưới trên trục y
-       
-        // showline: true,
-        // fixedrange: true,
-
-        // range: [0, 10000],
-        autotick: false,
-        tick0: 0,
-        dtick:1000,
+  var layout = {
+    title: "Điện tiêu thụ theo tháng",
+    paper_bgcolor: 'rgb(22, 56, 83)',
+    plot_bgcolor: 'rgb(22, 56, 83)',
+    borderRadius: '10px',
+    type: 'bar',
+    font: {
+      color: 'white'
     },
-      };
-
-        // Display using Plotly
-        Plotly.newPlot("energy_container-chart", data, layout);
-        // console.log(x1Values);            
+    yaxis: {
+      
+      autotick: false,
+      showgrid: true, // Bật lưới trên trục y
+      tick0: 0,
+      dtick: 1000
+    }
+  };
+  width: 0.5 // Giảm kích thước của cột
+  Plotly.newPlot("energy_container-chart", data, layout);
 }
+
+
  

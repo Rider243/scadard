@@ -517,6 +517,11 @@ function fn_table(data){
                       +"</td><td>"+data[i].L1_phase_cr
                       +"</td><td>"+data[i].L2_phase_cr
                       +"</td><td>"+data[i].L3_phase_cr
+                      +"</td><td>"+data[i].L1_power
+                      +"</td><td>"+data[i].L2_power
+                      +"</td><td>"+data[i].L3_power
+                      +"</td><td>"+data[i].Total_power
+                      +"</td><td>"+data[i].Total_Energy
                       +"</td></tr>";
 
 
