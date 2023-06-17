@@ -278,7 +278,7 @@ function gauge_power(idg,data_pre) {
   
   }
 
-
+//chart line
   function chart_power(id,data1,data2,data3,data4,name1,name2,name3,name4)
 {
     var dataPoints1 = [];
@@ -294,13 +294,22 @@ function gauge_power(idg,data_pre) {
     var yValue3  ;
     var yValue4  ;
 
+  //   var axisY2 = {
+  //   titleFontColor: "white",
+  //   lineColor: "white",
+  //   tickColor: "white",
+  //   labelFontColor: "white",
+  //   titleFontSize: 16,
+  //   margin: 20,
+  //   // reversed: true // Đảo ngược trục y
+  // };
+
+ 
     
     var chart = new CanvasJS.Chart(id,
     {
-        zoomEnabled: true,backgroundColor: "#163853",
-
-        
-        
+        zoomEnabled: true,
+        backgroundColor: "#163853",     
         toolTip: {
             shared: true
         },
@@ -315,6 +324,7 @@ function gauge_power(idg,data_pre) {
             { 
             type: "line",
             xValueType: "dateTime",
+            axisYType: "secondary",
             yValueFormatString: "####.00",
             xValueFormatString: "hh:mm:ss TT",
             showInLegend: true,
@@ -325,6 +335,7 @@ function gauge_power(idg,data_pre) {
             {				
                 type: "line",
                 xValueType: "dateTime",
+                axisYType: "secondary",
                 yValueFormatString: "####.00",
                 showInLegend: true,
                 name: name2 ,
@@ -334,6 +345,7 @@ function gauge_power(idg,data_pre) {
             {				
                 type: "line",
                 xValueType: "dateTime",
+                axisYType: "secondary",
                 yValueFormatString: "####.00",
                 showInLegend: true,
                 name: name3 ,
@@ -343,6 +355,7 @@ function gauge_power(idg,data_pre) {
             {				
                 type: "line",
                 xValueType: "dateTime",
+                axisYType: "secondary",
                 yValueFormatString: "####.00",
                 showInLegend: true,
                 name: name4 ,
@@ -350,7 +363,25 @@ function gauge_power(idg,data_pre) {
                 interpolationType: "smooth" // Loại hiệu ứng mượt
             }
             
-        ]
+        ],
+        axisY2: axisY2 = {
+          titleFontColor: "white",
+          lineColor: "white",
+          tickColor: "white",
+          labelFontColor: "white",
+          titleFontSize: 16,
+          margin: 20,
+          // reversed: true // Đảo ngược trục y
+        },
+        axisX: axisX = {
+          titleFontColor: "white",
+          lineColor: "white",
+          tickColor: "white",
+          labelFontColor: "white",
+          titleFontSize: 16,
+          margin: 20,
+          // reversed: true // Đảo ngược trục y
+        }
     });
 
      
@@ -477,44 +508,46 @@ function gauge_power(idg,data_pre) {
     setInterval(function(){updateChart()}, updateInterval);
     
 }
-function chart_sql()
-{
-  console.log('123');
-  var chart = JSC.chart('energy_container-chart', {
-    debug: true,
-    type: 'Area Spline',
-    legend_visible: false,
-    defaultSeries: {
-      shape_opacity: 0.7,
-      color: '#00EE00',
-      defaultPoint_marker: {
-        size: 10,
-        outline: { color: 'white', width: 2 }
-      }
-    },
+
+// ///chart bar
+// function chart_sql()
+// {
+//   console.log('123');
+//   var chart = JSC.chart('energy_container-chart', {
+//     debug: true,
+//     type: 'Area Spline',
+//     legend_visible: false,
+//     defaultSeries: {
+//       shape_opacity: 0.7,
+//       color: '#00EE00',
+//       defaultPoint_marker: {
+//         size: 10,
+//         outline: { color: 'white', width: 2 }
+//       }
+//     },
      
-    xAxis: { scale_type: 'time' },
-    series: [
-      {
-        name: 'Purchases',
-        points: [
-          ['1/1/2020', 29.9],
-          ['1/2/2020', 71.5],
-          ['1/3/2020', 106.4],
-          ['1/4/2020', 129.2],
-          ['1/5/2020', 144.0],
-          ['1/6/2020', 176.0],
-          ['1/7/2020', 106.4],
-          ['1/8/2020', 129.2],
-          ['1/9/2020', 144.0],
-          ['1/10/2020', 176.0],
-          ['1/11/2020', 144.0],
-          ['1/12/2020', 176.0]
-        ]
-      }
-    ]
-  });
-}
+//     xAxis: { scale_type: 'time' },
+//     series: [
+//       {
+//         name: 'Purchases',
+//         points: [
+//           ['1/1/2020', 29.9],
+//           ['1/2/2020', 71.5],
+//           ['1/3/2020', 106.4],
+//           ['1/4/2020', 129.2],
+//           ['1/5/2020', 144.0],
+//           ['1/6/2020', 176.0],
+//           ['1/7/2020', 106.4],
+//           ['1/8/2020', 129.2],
+//           ['1/9/2020', 144.0],
+//           ['1/10/2020', 176.0],
+//           ['1/11/2020', 144.0],
+//           ['1/12/2020', 176.0]
+//         ]
+//       }
+//     ]
+//   });
+// }
 
 
 function fn_SQL_By_Time_energy()
@@ -558,47 +591,99 @@ function fn_table_energy(data){
    Draw_Chart_detail_energy() ;
  }
 
+///chart bar
+
  function Draw_Chart_detail_energy() {
   var x1Values = [];
   var y1Values = [];
   x1Values.push(...date_time_detail);
   y1Values.push(...info_l1_line);
 
-  var data = [
-    {
-      x: x1Values,
-      y: y1Values,
-      type: 'bar',
-      name: 'Current L3',
-      hoverinfo: 'x+y',
-      text: y1Values.map(String), // Hiển thị giá trị trên đầu của cột
-      textposition: 'auto',
-      marker: {
-        color: 'rgb(255, 255, 102)', // Màu của cột
-        width: 0.5 // Giảm kích thước của cột
-      }
-    }
-  ];
+  var trace1 = {
+    type: 'bar',
+    x: x1Values,
+    y: y1Values,
 
-  var layout = {
-    title: "Điện tiêu thụ theo tháng",
+    
+    // x: [1, 2, 3, 4,5,6,7,8,9,10,11,12],
+    // y: [5, 10, 2, 8,5,6,7,8,9,12,11,15],
+
+ 
+    marker: {
+        color: '#99FFFF',
+        line: {
+            width: 2.5
+        }
+    }
+  };
+ 
+  
+  var data = [ trace1 ];
+  
+  var layout = { 
+    title: 'Điện tiêu thụ theo tháng',
+    bargap: 0.6,
+  
+    font: {size: 13,color: 'white'},
     paper_bgcolor: 'rgb(22, 56, 83)',
     plot_bgcolor: 'rgb(22, 56, 83)',
     borderRadius: '10px',
-    type: 'bar',
-    font: {
-      color: 'white'
-    },
-    yaxis: {
-      
-      autotick: false,
-      showgrid: true, // Bật lưới trên trục y
-      tick0: 0,
-      dtick: 1000
-    }
+    
+      color: 'white',
+      yaxis:{
+        showgrid: true,
+        gridcolor: 'white',
+        
+      } ,
+
+      xaxis: {
+        
+        tickangle: 90,  // Góc xoay của các tick (để tránh chồng chéo)
+ 
+      }
+  
+    
   };
-  width: 0.5 // Giảm kích thước của cột
-  Plotly.newPlot("energy_container-chart", data, layout);
+  
+  var config = {responsive: false}
+  
+  Plotly.newPlot('energy_container-chart', data, layout, config );
+
+  // var data = [
+  //   {
+  //     x: x1Values,
+  //     y: y1Values,
+  //     type: 'bar',
+  //     name: 'Current L3',
+  //     hoverinfo: 'x+y',
+  //     text: y1Values.map(String), // Hiển thị giá trị trên đầu của cột
+  //     textposition: 'auto',
+  //     marker: {
+  //       color: 'rgb(255, 255, 102)', // Màu của cột
+  //       width: 0.5 // Giảm kích thước của cột
+  //     }
+  //   }
+  // ];
+
+  // var layout = {
+  //   title: "Điện tiêu thụ theo tháng",
+  //   paper_bgcolor: 'rgb(22, 56, 83)',
+  //   plot_bgcolor: 'rgb(22, 56, 83)',
+  //   borderRadius: '10px',
+  //   type: 'bar',
+  //   font: {
+  //     color: 'white'
+  //   },
+  //   yaxis: {
+      
+  //     autotick: false,
+  //     showgrid: true, // Bật lưới trên trục y
+  //     tick0: 0,
+  //     dtick: 1000
+  //   }
+  // };
+ 
+  // Plotly.newPlot("energy_container-chart", data, layout);
 }
 
 

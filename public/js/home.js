@@ -291,179 +291,147 @@ function gauge_temp_3(idg,data_pre) {
         ]
         }); 
       }, 500);  
-
 }
 
+function chart_realtime(id, data1, data2, data3, name1, name2, name3) {
+  var dataPoints1 = [];
+  var dataPoints2 = [];
+  var dataPoints3 = [];
+  var yValue1;
+  var yValue2;
+  var yValue3;
 
-function chart_realtime(id,data1,data2,data3,name1,name2,name3)
-{
-    var dataPoints1 = [];
-    var dataPoints2 = [];
-    var dataPoints3 = [];
-    var data1;
-    var data2;
-    var data3;
-    var yValue1 ; 
-    var yValue2  ;
-    var yValue3  ;
-
-    
-    var chart = new CanvasJS.Chart(id,
-    {
-        zoomEnabled: true,theme: "dark1",
-
-        toolTip: {
-            shared: true
-        },
-        legend: {
-            cursor:"pointer",
-            verticalAlign: "top",
-            fontSize: 22,
-            fontColor: "dimGrey",
-            itemclick : toggleDataSeries
-        },
-        data: [
-            { 
-            type: "line",
-            xValueType: "dateTime",
-            yValueFormatString: "####.00",
-            xValueFormatString: "hh:mm:ss TT",
-            showInLegend: true,
-            name: name1,
-            dataPoints: dataPoints1,
-            interpolationType: "smooth" // Loại hiệu ứng mượt
-            },
-            {				
-                type: "line",
-                xValueType: "dateTime",
-                yValueFormatString: "####.00",
-                showInLegend: true,
-                name: name2 ,
-                dataPoints: dataPoints2,
-                interpolationType: "smooth" // Loại hiệu ứng mượt
-            },
-            {				
-                type: "line",
-                xValueType: "dateTime",
-                yValueFormatString: "####.00",
-                showInLegend: true,
-                name: name3 ,
-                dataPoints: dataPoints3,
-                interpolationType: "smooth" // Loại hiệu ứng mượt
-            }
-            
-        ]
-    });
-
-     
-    
-    function toggleDataSeries(e) {
-        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-            e.dataSeries.visible = false;
-        }
-        else {
-            e.dataSeries.visible = true;
-        }
-        chart.render();
+  var chart = new CanvasJS.Chart(id, {
+    zoomEnabled: true,
+    theme: "dark1",
+    toolTip: {
+      shared: true
+    },
+    legend: {
+      cursor: "pointer",
+      verticalAlign: "top",
+      fontSize: 22,
+      fontColor: "dimGrey",
+      itemclick: toggleDataSeries
+    },
+    data: [
+      {
+        type: "line",
+        axisYType: "secondary",
+        xValueType: "dateTime",
+        yValueFormatString: "####.00",
+        xValueFormatString: "hh:mm:ss TT",
+        showInLegend: true,
+        name: name1,
+        dataPoints: dataPoints1,
+        interpolationType: "smooth"
+      },
+      {
+        type: "line",
+        axisYType: "secondary",
+        xValueType: "dateTime",
+        yValueFormatString: "####.00",
+        showInLegend: true,
+        name: name2,
+        dataPoints: dataPoints2,
+        interpolationType: "smooth"
+      },
+      {
+        type: "line",
+        axisYType: "secondary",
+        xValueType: "dateTime",
+        yValueFormatString: "####.00",
+        showInLegend: true,
+        name: name3,
+        dataPoints: dataPoints3,
+        interpolationType: "smooth"
+      }
+    ],
+    axisY2: axisY2 = {
+      titleFontColor: "white",
+      lineColor: "white",
+      tickColor: "white",
+      labelFontColor: "white",
+      titleFontSize: 16,
+      margin: 20,
+      // reversed: true // Đảo ngược trục y
+    },
+    axisX: axisX = {
+      titleFontColor: "white",
+      lineColor: "white",
+      tickColor: "white",
+      labelFontColor: "white",
+      titleFontSize: 16,
+      margin: 20,
+      // reversed: true // Đảo ngược trục y
     }
-    
-    var updateInterval = 1000
-    // initial value
- 
+  });
 
-
-  
-    console.log(yValue1);
-    console.log(data1);
-    
-  
-    
- 
-    function updateChart( ) {
-
-      
-    socket.on(data1, function (data)
-    { 
-
-      yValue1=data;  
- 
-     
-
-    });
-
-    socket.on(data2, function (data)
-    { 
-
-      yValue2=data;  
- 
-     
-
-    });
-
-    socket.on(data3, function (data)
-    { 
-
-      yValue3=data;  
- 
-     
-    console.log('789');
-    });
-
-        var time = new Date;
-        // starting at 9.30 am
-        
-        time.getHours();
-        time.getMinutes();
-        time.getSeconds();
-        time.getMilliseconds();
-         
-        time.setTime(time.getTime());
-     
-    
-        // adding random value and rounding it to two digits. 
-   
-    
-        // pushing the new values
-        dataPoints1.push({
-            x: time.getTime(),
-            y: yValue1
-        });
-        dataPoints2.push({
-            x: time.getTime(),
-            y: yValue2
-        });
-        
-        dataPoints3.push({
-            x: time.getTime(),
-            y: yValue3
-        });
-        
-        
-        
-         if (dataPoints1.length >= 200) 
-            {
-                for (var i = 0; i < 1; i++) 
-                {                    
-                    dataPoints1.shift();
-                    dataPoints2.shift();
-                    dataPoints3.shift();
-                }
-            }
-         
-         
-       
-    
-        // updating legend text with  updated with y Value 
-        chart.options.data[0].legendText = name1 ;
-        chart.options.data[1].legendText =name2 ; 
-        chart.options.data[2].legendText = name3  ; 
-        chart.render();
+  function toggleDataSeries(e) {
+    if (typeof e.dataSeries.visible === "undefined" || e.dataSeries.visible) {
+      e.dataSeries.visible = false;
+    } else {
+      e.dataSeries.visible = true;
     }
-    // generates first set of dataPoints 
-    updateChart(100);	
-    setInterval(function(){updateChart()}, updateInterval);
-    
+    chart.render();
+  }
+
+  var updateInterval = 1000;
+
+  function updateChart() {
+    // Cập nhật dữ liệu
+    socket.on(data1, function (data) {
+      yValue1 = data;
+    });
+
+    socket.on(data2, function (data) {
+      yValue2 = data;
+    });
+
+    socket.on(data3, function (data) {
+      yValue3 = data;
+    });
+
+    var time = new Date();
+    time.setTime(time.getTime());
+
+    // Thêm các giá trị mới vào mảng dataPoints
+    dataPoints1.push({
+      x: time.getTime(),
+      y: yValue1
+    });
+    dataPoints2.push({
+      x: time.getTime(),
+      y: yValue2
+    });
+    dataPoints3.push({
+      x: time.getTime(),
+      y: yValue3
+    });
+
+    // Giới hạn số lượng điểm dữ liệu hiển thị
+    if (dataPoints1.length >= 200) {
+      for (var i = 0; i < 1; i++) {
+        dataPoints1.shift();
+        dataPoints2.shift();
+        dataPoints3.shift();
+      }
+    }
+
+    // Cập nhật chú thích
+    chart.options.data[0].legendText = name1;
+    chart.options.data[1].legendText = name2;
+    chart.options.data[2].legendText = name3;
+    chart.render();
+  }
+
+  // Khởi tạo biểu đồ
+  updateChart(100);
+  setInterval(function () {
+    updateChart();
+  }, updateInterval);
 }
+
 
  
  

@@ -398,7 +398,7 @@ function fn_SQLSearch_energy() {
             
             var sqltable_Name = "dpm680_data";
             
-            var queryy1 = "SELECT Month(date_time) AS Month, MAX(Total_Energy) AS Max_Total_Energy FROM dpm680_data WHERE YEAR(date_time) ="+year+" GROUP BY MONTH(date_time) ORDER BY MONTH(date_time);"
+            var queryy1 = "SELECT date(date_time) AS Month, MAX(Total_Energy) AS Max_Total_Energy FROM dpm680_data WHERE YEAR(date_time) ="+year+" GROUP BY MONTH(date_time) ORDER BY MONTH(date_time);"
 
 
 
@@ -409,7 +409,7 @@ function fn_SQLSearch_energy() {
                     // const objectifyRawPacket = row => ({...row });
                     // const convertedResponse = results.map(objectifyRawPacket);
                     const convertedResponse = results.map(row => ({
-                        date_time: row.Month.toLocaleString(),
+                        date_time: row.Month,
                         Total_Energy: row.Max_Total_Energy,
  
                         // Các cột khác
