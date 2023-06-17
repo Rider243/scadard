@@ -29,7 +29,6 @@
     max-width: 200px;
     height: 200px;
     margin: 0px auto;
-
  }
 
  .row1
@@ -43,6 +42,7 @@
     background-color: #173752;
     border: 1px solid #2bb892;
     border-radius: 10px;
+    min-height: 215px;
  }
  .row2
  {

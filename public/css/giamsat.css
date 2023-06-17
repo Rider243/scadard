@@ -13,6 +13,23 @@
    flex-direction: column;
    justify-content: space-around;
 }
+.gauges{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.gauges div{
+    position: absolute;
+    width: 90%;
+    height: 90%;
+}
+.gauges p{
+    position: absolute;
+    left: 50%;
+    top: 90%;
+    transform: translateX(-60%);
+    width: 100%;
+}
 .container_chart-gauges {
     flex: 1;
     background-color: #173752;

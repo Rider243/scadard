@@ -8,7 +8,7 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-server.listen(3000);
+server.listen(8080);
 // Home calling
 app.get("/home", function(req, res){
     res.render("home")
