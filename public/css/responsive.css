@@ -66,6 +66,9 @@
     .row1 .gauges{
         padding: 0;
     }
+    .row1{
+        flex-wrap: wrap;
+    }
     /* end giam sat */
 
     /* export */

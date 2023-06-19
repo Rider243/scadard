@@ -74,8 +74,9 @@
     top: 10%; 
     left: 40%;
     width: 100%;
+    max-width: 800px;
     text-align: center;
-    overflow-y: scroll;
+    overflow: scroll;
     text-align:center;
     border:1px solid #a3855f;
  }
