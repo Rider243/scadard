@@ -80,9 +80,9 @@
     text-align:center;
     border:1px solid #a3855f;
  }
- #div_table_info::-webkit-scrollbar{
+ /* #div_table_info::-webkit-scrollbar{
     display: none;
- }
+ } */
  /*Table*/
  #table_info {
      border: 1px  ; 
