@@ -348,7 +348,7 @@ function fn_sql_insert(){
                             + L2_power_sql
                             + L3_power_sql
                             + Total_power_sql
-                            +Total_Energy
+                            + Total_Energy_sql
                             ;
         var sql_write_str1 = sql_write_str11 + sql_write_str12 + ");";
         // Thực hiện ghi dữ liệu vào SQL
@@ -398,7 +398,7 @@ function fn_SQLSearch_energy() {
             
             var sqltable_Name = "dpm680_data";
             
-            var queryy1 = "SELECT Month(date_time) AS Month, MAX(Total_Energy) AS Max_Total_Energy FROM dpm680_data WHERE YEAR(date_time) ="+year+" GROUP BY MONTH(date_time) ORDER BY MONTH(date_time);"
+            var queryy1 = "SELECT date(date_time) AS Month, MAX(Total_Energy) AS Max_Total_Energy FROM dpm680_data WHERE YEAR(date_time) ="+year+" GROUP BY MONTH(date_time) ORDER BY MONTH(date_time);"
 
 
 
@@ -409,7 +409,7 @@ function fn_SQLSearch_energy() {
                     // const objectifyRawPacket = row => ({...row });
                     // const convertedResponse = results.map(objectifyRawPacket);
                     const convertedResponse = results.map(row => ({
-                        date_time: row.Month.toLocaleString(),
+                        date_time: row.Month,
                         Total_Energy: row.Max_Total_Energy,
  
                         // Các cột khác
@@ -465,6 +465,11 @@ function fn_SQLSearch_bytime()
                 L1_phase_cr: row.L1_phase_cr,
                 L2_phase_cr: row.L2_phase_cr,
                 L3_phase_cr: row.L3_phase_cr,
+                L1_power: row.L1_power,
+                L2_power: row.L2_power,
+                L3_power: row.L3_power,
+                Total_power: row.Total_power,
+                Total_Energy: row.Total_Energy,
                 // Các cột khác
               }));
 
@@ -505,6 +510,11 @@ function fn_SQLSearch_bytime()
                         L1_phase_cr: row.L1_phase_cr,
                         L2_phase_cr: row.L2_phase_cr,
                         L3_phase_cr: row.L3_phase_cr,
+                        L1_power: row.L1_power,
+                        L2_power: row.L2_power,
+                        L3_power: row.L3_power,
+                        Total_power: row.Total_power,
+                        Total_Energy: row.Total_Energy,
                         // Các cột khác
                       }));
         
@@ -592,7 +602,7 @@ function fn_excelExport(){
      
     // Tên nhãn các cột
     var rowpos = 7;
-    var collumName = ["STT","Thời gian", "L1-L2", "L2-L3", "L3-L1", "Phase L1-N", "Phase L2-N", "Phase L3-N","Current L1","Current L2","Current L3"]
+    var collumName = ["STT","Thời gian", "L1-L2", "L2-L3", "L3-L1", "Phase L1-N", "Phase L2-N", "Phase L3-N","Current L1","Current L2","Current L3","Power L1","Power L2","Power L3","Total power","Total energy"]
     worksheet.spliceRows(rowpos, 1, collumName);
      
     // =====================XUẤT DỮ LIỆU EXCEL SQL=====================
@@ -613,7 +623,12 @@ function fn_excelExport(){
           {key: 'L3_phase'},
           {key: 'L1_phase_cr'},
           {key: 'L2_phase_cr'},
-          {key: 'L3_phase_cr'}
+          {key: 'L3_phase_cr'},
+          {key: 'L1_power'},
+          {key: 'L2_power'},
+          {key: 'L3_power'},
+          {key: 'Total_power'},
+          {key: 'Total_Energy'}
         ]
     worksheet.addRow({
           STT: {
@@ -644,7 +659,7 @@ function fn_excelExport(){
      
     // =====================STYLE CHO CÁC CỘT/HÀNG=====================
     // Style các cột nhãn
-    const HeaderStyle = ['A','B', 'C', 'D', 'E','F','G','H','I','J','K']
+    const HeaderStyle = ['A','B', 'C', 'D', 'E','F','G','H','I','J','K','L','M','N','O','P']
     HeaderStyle.forEach((v) => {
         worksheet.getCell(`${v}${rowpos}`).style = { font:{bold: true},alignment: {horizontal:'center',vertical: 'middle',wrapText: true}} ;
         worksheet.getCell(`${v}${rowpos}`).border = {
@@ -669,7 +684,7 @@ function fn_excelExport(){
       var rowindex = rowNumber + datastartrow;
       const rowlength = datastartrow + SQL_Excel.length
       if(rowindex >= rowlength+1){rowindex = rowlength+1}
-      const insideColumns = ['A','B', 'C', 'D', 'E','F','G','H','I','J','K']
+      const insideColumns = ['A','B', 'C', 'D', 'E','F','G','H','I','J','K','L','M','N','O','P']
     // Tạo border
       insideColumns.forEach((v) => {
           // Border
