@@ -79,6 +79,9 @@
     overflow: scroll;
     text-align:center;
     border:1px solid #a3855f;
+    overflow-x: auto; /* Hiển thị thanh cuộn ngang khi nội dung vượt quá kích thước của bảng */
+
+    
  }
  #div_table_info::-webkit-scrollbar{
     display: none;
