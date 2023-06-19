@@ -510,6 +510,8 @@ function fn_table(data){
           txt +="</tbody>"; 
           $("#table_info").append(txt);
           }
+
+          console.log(data);
       }
   }   
 
