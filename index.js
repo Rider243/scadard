@@ -108,6 +108,7 @@ function setClient() {
 
     // run program
     run();
+    
 }
 
 setInterval(() => {
@@ -153,7 +154,7 @@ function run() {
                 dataArrip2[i]=datad[i];
            }
 
-           data_total_4byte=dataArrip2[3]+dataArrip2[2]*65535+dataArrip2[1]*(65536^2-1)+dataArrip2[0]*(65536^3-1);
+           data_total_4byte=dataArrip2[3]+dataArrip2[2]*(65535);//(2^16-1)//+dataArrip2[1]*(65536^2-1)+dataArrip2[0]*(65536^2-1);
 
            console.log(data_total_4byte);
 
