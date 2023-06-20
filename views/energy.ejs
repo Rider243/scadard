@@ -7,7 +7,7 @@
     <link rel="stylesheet"   href="/css/giamsat.css">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/header.css">
-    <script src = "js/home.js"></script>
+   
     <script src = "socket.io/socket.io.js"></script>
     <!-- <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.7/all/gauge.min.js"></script> -->
     <script src = "js/gauge.min.js"></script>
@@ -26,6 +26,7 @@
 
     <script src="/js/canvasjs.min.js"></script>
     <script src = "js/energy.js"></script>
+    <script src = "js/home.js"></script>
 
     <link rel="stylesheet"   href="/css/energy.css">
 
@@ -94,14 +95,13 @@ fn_SQL_By_Time_energy();
                 <script>gauge_energy_total('gauge_Total_energy','Total_Energy');</script>
             </div>
             <div id="energy_container-chart" style="max-width: 700px;height: 530px;"></div>
-                 <script>
-                    setTimeout(() => {
-                        Draw_Chart_detail_energy();
-                    fn_SQL_By_Time_display_energy();
-                    }, 1000);
-                   
-
-                </script>
+            <script>
+                setTimeout(() => {
+                    Draw_Chart_detail_energy();
+          
+                }, 1000);
+               
+            </script>
         </div>
     </div>
 </body>
