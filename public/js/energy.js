@@ -588,8 +588,9 @@ function fn_table_energy(data){
        console.log(info_l1_line);
    }   
  
-   Draw_Chart_detail_energy() ;
+   Draw_Chart_detail_energy();
  }
+
 
 ///chart bar
 

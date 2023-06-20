@@ -84,6 +84,7 @@ app.get("/energy", function(req, res){
 
 var dataArrip = [];
 var dataArrip2 = [];
+var data_total_4byte;
 
 // create an empty modbus client
 const Modbus2 = require('modbus-serial');
@@ -107,6 +108,7 @@ function setClient() {
 
     // run program
     run();
+    
 }
 
 setInterval(() => {
@@ -141,25 +143,20 @@ function run() {
         })
         // .then(close);
 
-        client2.readHoldingRegisters(4001,3)
+        client2.readHoldingRegisters(4000,4)
         .then(function(d) {
             console.log("Receive:", d.data);
            var datad =d.data;
+       
 
            for(var i=0;i<datad.length;i++)
            {
-
-            if (i%3!=0) {
-                dataArrip2[i]=datad[i]+datad[i-1]*65535; 
-                
-            }
-            else
-            {
                 dataArrip2[i]=datad[i];
-            }
-
            }
-           console.log(dataArrip2);
+
+           data_total_4byte=dataArrip2[3]+dataArrip2[2]*(65535);//(2^16-1)//+dataArrip2[1]*(65536^2-1)+dataArrip2[0]*(65536^2-1);
+
+           console.log(data_total_4byte);
 
 
         })
@@ -234,7 +231,7 @@ function close() {
 
  
  io.on("connection", function(socket){
-    socket.on("Client-send-data", function(data){
+        socket.on("Client-send-data", function(data){
         socket.emit("L1_line",dataArrip[9]*0.1);
         socket.emit("L2_line",dataArrip[11]*0.1);
         socket.emit("L3_line",dataArrip[13]*0.1);
@@ -247,10 +244,10 @@ function close() {
         socket.emit("L1_power",dataArrip[21]);
         socket.emit("L2_power",dataArrip[23]);
         socket.emit("L3_power",dataArrip[25]);
-        socket.emit("Total_Energy",dataArrip2[2]*0.001);
+        socket.emit("Total_Energy",data_total_4byte*0.001);
         var a =dataArrip[21]+dataArrip[23]+dataArrip[25];
         socket.emit("Total_power",a);
-        console.log("giá trị la:" +a);      
+        console.log("giá trị la:" +data);      
 });});
 
 
@@ -306,7 +303,7 @@ function fn_sql_insert(){
     L1_power = dataArrip[21];
     L2_power = dataArrip[23];
     L3_power = dataArrip[25];
-    Total_Energy=dataArrip2[2]*0.001;
+    Total_Energy=data_total_4byte*0.001;
     Total_power = L1_power+L2_power+L3_power;
  
     // Lấy thời gian hiện tại
@@ -397,7 +394,7 @@ function fn_SQLSearch_energy() {
             console.log(year);
             
             var sqltable_Name = "dpm680_data";
-            
+            //học các kiến thức liên quan tới mysql
             var queryy1 = "SELECT date(date_time) AS Month, MAX(Total_Energy) AS Max_Total_Energy FROM dpm680_data WHERE YEAR(date_time) ="+year+" GROUP BY MONTH(date_time) ORDER BY MONTH(date_time);"
 
 
