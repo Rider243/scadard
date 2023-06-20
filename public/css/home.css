@@ -76,10 +76,9 @@
     width: 100%;
     max-width: 800px;
     text-align: center;
-    overflow: scroll;
     text-align:center;
     border:1px solid #a3855f;
-    overflow-x: auto; /* Hiển thị thanh cuộn ngang khi nội dung vượt quá kích thước của bảng */
+    overflow-x: scroll; /* Hiển thị thanh cuộn ngang khi nội dung vượt quá kích thước của bảng */
  }
  /* #div_table_info::-webkit-scrollbar{
     display: none;
