@@ -530,8 +530,11 @@ function fn_SQL_By_Time()
 function fn_SQL_By_Time_display()
 {
     socket.on('SQL_ByTime', function(data){
-        fn_table(data); // Show sdata
+        fn_table(data);
+         // Show sdata
         // console.log(data);
+        var addClassTable = document.getElementById("div_table_info")
+        addClassTable.classList.add('scroll')
     });
 }
 

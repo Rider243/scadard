@@ -72,6 +72,9 @@
     /* end giam sat */
 
     /* export */
+    .scroll#div_table_info::-webkit-scrollbar{
+        display: none;
+    }
     #chart_detail{
         width: 100%;
     }

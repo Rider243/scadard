@@ -64,6 +64,7 @@
     display: flex;
     margin-bottom: 10px;
     align-items: center;
+
 }
  
 /*//////////////Hiển thị dữ liệu bảng 1 - Start/////////////////*/
@@ -74,10 +75,11 @@
     top: 10%; 
     left: 40%;
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     text-align: center;
     text-align:center;
     border:1px solid #a3855f;
+<<<<<<< HEAD
  
     overflow-x: auto; /* Hiển thị thanh cuộn ngang khi nội dung vượt quá kích thước của bảng */
  
@@ -86,6 +88,17 @@
  } 
  
  /*Table
+=======
+    overflow-x: scroll; /* Hiển thị thanh cuộn ngang khi nội dung vượt quá kích thước của bảng */
+ }
+#div_table_info::-webkit-scrollbar{
+    display: none;
+}
+.scroll#div_table_info::-webkit-scrollbar{
+    display: block;
+ }
+ /*Table*/
+>>>>>>> 2e3fe12565977f1464dc29271321fdf9bc0ac9cd
  #table_info {
      border: 1px  ; 
      background-color:  lavender;
@@ -98,13 +111,12 @@
      cursor: pointer;
  }
  #table_info tr:hover{background-color: #ddd;}
- #table_info   { overflow: auto; }
  #table_info thead th { position: sticky; top: 0;  }
  /* Just common table stuff. Really. */
  #table_info  { border-collapse: collapse; width: 100%; }
- #table_info th, td { padding: 8px 12px;   border:1px solid #a3855f; }
- #table_info th     { background:#183853; color: #2bb892; width: 70px;}
- #table_info td  { background:#03243f; color:#4b657b; width: 70px;}
+ #table_info th, td { padding: 8px 2px}
+ #table_info th     { background:#183853; color: #2bb892; width: 70px; border:1px solid #a3855f;}
+ #table_info td  { background:#03243f; color:#4b657b; width: 70px; border:1px solid #a3855f;}
 
   /*//////////////TRƯỜNG TÌM KIẾM DỮ LIỆU/////////////////*/
  
