@@ -247,7 +247,7 @@ function close() {
         socket.emit("Total_Energy",data_total_4byte*0.001);
         var a =dataArrip[21]+dataArrip[23]+dataArrip[25];
         socket.emit("Total_power",a);
-        console.log("giá trị la:" +a);      
+        console.log("giá trị la:" +data);      
 });});
 
 
@@ -394,7 +394,7 @@ function fn_SQLSearch_energy() {
             console.log(year);
             
             var sqltable_Name = "dpm680_data";
-            
+            //học các kiến thức liên quan tới mysql
             var queryy1 = "SELECT date(date_time) AS Month, MAX(Total_Energy) AS Max_Total_Energy FROM dpm680_data WHERE YEAR(date_time) ="+year+" GROUP BY MONTH(date_time) ORDER BY MONTH(date_time);"
 
 

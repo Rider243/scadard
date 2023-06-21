@@ -169,4 +169,7 @@
     top: calc(var(--height-header) + 20px);
     display: none;
 }
+#Baocao{
+    overflow-x: scroll;
+}
 }
