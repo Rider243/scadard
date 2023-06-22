@@ -78,9 +78,20 @@
     text-align: center;
     text-align:center;
     border:1px solid #a3855f;
+<<<<<<< HEAD
+ 
+    overflow-x: auto; /* Hiển thị thanh cuộn ngang khi nội dung vượt quá kích thước của bảng */
+ 
+ #div_table_info::-webkit-scrollbar{
+    display: none;
+ } 
+ 
+ /*Table
+=======
     overflow-x: scroll; /* Hiển thị thanh cuộn ngang khi nội dung vượt quá kích thước của bảng */
  }
  /*Table*/
+>>>>>>> 2e3fe12565977f1464dc29271321fdf9bc0ac9cd
  #table_info {
      border: 1px  ; 
      background-color:  lavender;
