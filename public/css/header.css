@@ -106,6 +106,9 @@
     z-index: 1;
     padding-left: 45px;
 }
+.screen_none.sub_menu{
+    display: flex !important;
+}
 .sub_menu a{
     text-transform: uppercase;
     font-weight: 700;
@@ -149,3 +152,4 @@
 #checkbox_sub-menu:checked ~ .sub_menu{
     display: none;
 }
+

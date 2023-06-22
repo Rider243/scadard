@@ -105,6 +105,17 @@
         //     });
         // }
         //  setInterval(myTimer, 100);
-
+        const screen = () =>{
+            const screenWidth = document.documentElement.clientWidth;
+            if(screenWidth >= 1755){
+                const sub_menu = document.querySelector('.sub_menu')
+                sub_menu.classList.add("screen_none");
+            }
+            else if(screenWidth <= 1754){
+                const sub_menu = document.querySelector('.sub_menu')
+                sub_menu.classList.remove("screen_none");
+            }
+    }
+        setInterval(screen,100)
 </script>
 </html>
