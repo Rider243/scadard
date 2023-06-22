@@ -27,6 +27,7 @@ app.get("/energy", function(req, res){
 });
 
 
+
 // const ModbusRTU = require('modbus-serial');
 // const client = new ModbusRTU();
 // const serialPort = 'COM6'; // Cổng COM RS485
@@ -165,11 +166,6 @@ function run() {
         })
 }
 
-function close() {
-    client2.close();
-}
-
-
 
 ////////////////////////////////////////
 // const Modbus = require('jsmodbus');
@@ -245,6 +241,7 @@ function close() {
         socket.emit("L2_power",dataArrip[23]);
         socket.emit("L3_power",dataArrip[25]);
         socket.emit("Total_Energy",data_total_4byte*0.001);
+        // socket.emit("change Link", 1);
         var a =dataArrip[21]+dataArrip[23]+dataArrip[25];
         socket.emit("Total_power",a);
         console.log("giá trị la:" +data);      
@@ -542,6 +539,7 @@ const Excel = require('exceljs');
 
 
 const { CONNREFUSED } = require('dns');
+const { get } = require("https");
 function fn_excelExport(){
     console.log('2'); 
 

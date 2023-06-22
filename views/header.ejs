@@ -8,7 +8,12 @@
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/responsive.css">
+    <script src = "socket.io/socket.io.js"></script>
     <script src="https://kit.fontawesome.com/4cc492911d.js" crossorigin="anonymous"></script>
+    <script>
+        var socket = io(document.location.host)
+    </script>
+    
 </head>
 <body>
     <div class="header">
@@ -79,5 +84,27 @@
             title.innerHTML = "Điện năng tiêu thụ"
             href[2].classList.add('active')
         }
+        const link = (data) =>{
+            const link_text = document.querySelectorAll('.sub_menu a')
+            if (data === 1){
+                link_text[0].href = "http://10.14.12.116:8080"
+                link_text[1].href = "http://10.14.12.116:8080/export"
+                link_text[2].href = "http://10.14.12.116:8080/energy"
+            }
+            else{
+                console.log(false)
+            }
+        }
+        // function myTimer()
+        // {
+        //     socket.on("change Link", function(data){
+        //         if(data == 1){
+        //             link(data)
+        //             // console.log(data)
+        //         }
+        //     });
+        // }
+        //  setInterval(myTimer, 100);
+
 </script>
 </html>

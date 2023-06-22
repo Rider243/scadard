@@ -147,5 +147,5 @@
 }
 
 #checkbox_sub-menu:checked ~ .sub_menu{
-    display: flex;
+    display: none;
 }

@@ -91,9 +91,6 @@ function gauge_temp_1(idg,data_pre) {
         },
       ]
     });
-
-    
-    
     var  INTERVAL_ID = setInterval(function() { 
       chart.options({ 
      
@@ -219,7 +216,7 @@ function gauge_temp_3(idg,data_pre) {
       
        var a =value_gauge.toFixed(1);
        value_gauge=parseFloat(a);
-       console.log(value_gauge);
+      //  console.log(value_gauge);
        
 
       });
