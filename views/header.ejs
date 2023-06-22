@@ -108,8 +108,10 @@
         const screen = () =>{
             const screenWidth = document.documentElement.clientWidth;
             if(screenWidth >= 1755){
-                const sub_menu = document.querySelector('.sub_menu')
-                sub_menu.classList.add("screen_none");
+                // const sub_menu = document.querySelector('.sub_menu')
+                // sub_menu.classList.add("screen_none");
+                const checkbox = document.getElementById('checkbox_sub-menu');
+                checkbox.checked = false
             }
             else if(screenWidth <= 1754){
                 const sub_menu = document.querySelector('.sub_menu')
