@@ -41,9 +41,6 @@
     .checkbox_icon{
         display: block;   
     }
-    .sub_menu{
-        display: none;
-    }
     /* end header  */
 
     /* giam sat */
@@ -120,9 +117,6 @@
     }
 
     /* end energy */
-    #checkbox_sub-menu:checked ~ .sub_menu{
-        display: flex;
-    }
 }
 
 
@@ -153,9 +147,6 @@
     }
     .sub_menu{
         top: calc(var(--height-header) + 20px);
-        display: flex;
-    }
-    #checkbox_sub-menu:checked ~ .sub_menu{
         display: flex;
     }
 }

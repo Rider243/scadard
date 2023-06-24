@@ -79,6 +79,7 @@
     text-align:center;
     border:1px solid #a3855f;
     overflow-x: scroll; /* Hiển thị thanh cuộn ngang khi nội dung vượt quá kích thước của bảng */
+    max-height: 600px;
  }
  /*Table*/
  #table_info {
